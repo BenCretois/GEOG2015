@@ -1,0 +1,239 @@
+---
+title: "Get started with R! 1 / 3"
+knit: (function(input_file, encoding) {
+  out_dir <- '';
+  rmarkdown::render(input_file,
+ encoding=encoding,
+ output_file=file.path(dirname(input_file), out_dir, 'IntroR.html'))})
+author: "Benjamin Cretois"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    theme: united
+    number_sections: yes
+    self_contained: no
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Welcome to __GEOG3006__: Quantitative methods, a course where you will learn how to use R, wrangle (yes I already begin with some technical terms ;) ) and analyse your data!
+
+I must say this document is heavily inspired from: **Introduction to R** by Claudia A Engel, I am just simplifying a little bit more.
+
+> What you will learn:
+>
+> * How to install R and RStudio 
+> * The advantages of R over other programming languages
+> * How to navigate in RStudio
+> * How to create a tidy project folder
+> * How to run your firsts lines of code in R
+
+Before I continue my explanations I would like you to install R and Rstdio ...
+
+# Set up instructions
+***
+
+First of all, R and RStudio are two different programs. R is the underlying statistical computing environment, but using R alone is no fun (it is very ugly!). RStudio is a graphical integrated development environment (IDE) that makes using R much easier and more interactive. You need to install R before you install RStudio.
+
+## Install R
+
+I assume that some of you have Mac OS while others have windows (some of you may have Linux). No problem in both cases!
+
+for MAC download the R-3.6.1.pkg from this [website](https://cran.r-project.org/bin/macosx/) 
+for Windows download R from [here](http://cran.r-project.org/bin/windows/base/release.htm)
+If you have Linux I'm sure you can easily find a way to install R ;)
+
+Now you can open R, see how ugly it is! To make the visual better let's install Rstdio!
+
+## Install Rstdio
+
+Download and install the version 1.1.463 from the [Rstudio website](https://support.rstudio.com/hc/en-us/articles/206569407-Older-Versions-of-RStudio). Make sure you download Mac OS X if you are using a Mac and Windows if you are using ... Windows.
+
+
+# R and Rstudio
+***
+Okay, I have been a little bit fast with my explanations about R and R studio. In this section I will go more in details.
+
+## What is R? What is RStudio?
+
+The term “R” is used to refer to both the programming language to write scripts and the software (“environment”) that interprets the scripts written in R. It is an alternative to other statistical packages such as SPSS (what was used for this course before), Stata or Matlab. R lets you perform a wide variety of things: data vizualisation, statistics, GIS and a whole lot more! In fact, this document is written in R :)
+
+R studio is an interface which allows you to interact with R in a much funnier way. You can write your scripts, open projects and make your programming life easier.
+
+## Why should I learn R?
+
+The learning curve might be steeper than with other software (see the figure), but with R, the results of your analysis does not rely on remembering a succession of pointing and clicking, but instead on a series of written commands, and that’s a good thing! So, if you want to redo your analysis because you collected more data, you don’t have to remember which button you clicked in which order to obtain your results, you just have to run your script again.
+
+```{r, echo = FALSE}
+
+library(ggplot2)
+
+df <- data.frame(
+  x = 1:10,
+  y = 1:10)
+
+ggplot(df, aes(x,y)) + 
+  geom_line() +
+  xlab('time spent working in R') + 
+  ylab('your programming proficiency') +
+  theme_classic()
+
+```
+
+Even though it sounds fastiduous at the beginning working with scripts makes the steps you used in your analysis clear and reproducible. Also, sharing your script with another R-fellow will help you spot unforeseen mistakes or even to improve your coding skills.
+
+Working with scripts forces you to have a deeper understanding of what you are doing, and facilitates your learning and comprehension of the methods you use.
+
+## R is one of the most used programming language
+
+Thousands of people use R daily! The R community is extremely active and whenever you will encounter a problem you can easily find a solution on [StackOverFlow](https://stackoverflow.com/) or [GitHub](https://github.com/) - let's face it, at EVERY level a programmer experience problems, that's part of the fun!
+
+Moreover, R is used in all disciplines! Statistical sciences, ecology, sociology, psychology, political sciences etc. make extensive use of this programming language. 
+
+## R is free and open source
+
+Anyone can inspect the source code to see how R works. Because of this transparency, there is less chance for mistakes, and if you (or someone else) find some, you can report and fix bugs.
+
+This means that everyone can contribute to improving R! All the work done in R and the help provided is done primarily by volunteers!
+
+## R produces high quality graphics 
+
+You can make beautiful graphs in only a few lines of codes! You want the proof? Okay, let's do it. 
+
+````{r}
+#I open the libraries I need - don't worry about it now
+library(ggplot2)
+library(viridis)
+
+#Here I simulate a dataset, let's say it represents the number of vulgar words per day for each sex
+data <- data.frame(n.insult = c(rnorm(60, mean=10,sd=2), rnorm(40, mean=20, sd=4)),
+                 Sex = c(rep('women', 60), rep('men', 40)))
+
+#And now the graphic (just 4 lines of code)
+
+ggplot(data, aes(x=Sex, y=n.insult, col=Sex)) +
+  geom_boxplot() +
+  theme_classic() +
+  xlab('Sex') + ylab('number of vulgar words per day')
+
+#It seems that women are less vulgar than men ...
+
+```
+
+I hope I managed to share my enthusiasm for R and that you are more curious about this programming language!
+
+Okay, now that I have convinced you of the usefulness of R let's get a bit more familiar with RStudio before moving to the really fun stuff!
+
+# Knowing your way around RStudio
+***
+
+Let’s start by learning about RStudio, which is once again an Integrated Development Environment (IDE) for working with R. The RStudio IDE is an open source product and is free. 
+
+During this course - and hopefully after this course - you will use RStudio IDE to write code, navigate the files on our computer, inspect the variables we are going to create, and visualize the plots we will generate.
+
+RStudio is divided into 4 “Panes”:
+
+  * the Source for your scripts and documents (top-left, in the default layout),
+  * the R Console (bottom-left),
+  * your Environment/History (top-right), and
+  * your Files/Plots/Packages/Help/Viewer (bottom-right).
+  
+Note that the placement of these panes and their content can be customized (see main Menu, Tools -> Global Options -> Pane Layout). I must say that I like it as it is but feel free to modify it!
+
+## Start an R project
+
+Okay, now I would like you to stay focus. This part is from my experience very important, otherwise you are likely to have files, folders and scripts in messy places. 
+
+It is good practice to keep a set of related data, analyses, and text self-contained in a single folder. When working with R and RStudio you typically want that single top folder to be the folder you are working in.  In order to tell R this, you will want to set that folder as your **working directory**. Whenever you refer to other scripts or data or directories contained within the **working directory** you can then use **relative paths** to files that indicate where inside the project a file is located. (That is opposed to absolute paths, which point to where a file is on a specific computer). Having everything contained in a single directory makes it a lot easier to move your project around on your computer and share it with others without worrying about whether or not the underlying scripts will still work.
+
+Sounds confusing? Don't worry, it's very simple, stay still for a bit longer! Let's start an R project for the course step by step :)
+
+* First start RStudio (let's start simple ;) )
+* Under the `File` menu, click on `New project`, choose `New directory` and `Empty project`
+* As directory name enter `GEOG3006` and `Create project`
+* Under the `Files` tab on the right of the screen, click on `New Folder` and create a folder named `data` (see Figure 1.2)
+* On the main menu go to `Files` > `New File` > `R script` to open a new script
+
+Congrats, you've done the most difficult! It wasn't so difficult? I told you ;)
+
+Now, just below `New Folder` it should be written something like `StudentName > Desktop > GEOG3006`. This is your *Working directory*
+
+It's possible to change your working directory within the command line with. For example if I want to set my new directory in the folder you first need to click right on your folder > `properties` and copy the `location`. This gives more or less something like this:
+
+```{r eval=FALSE}
+setwd('StudentName/Desktop/GEOG_whatever') 
+```
+
+Is that clear? If it's not, do not worry we will see that a bit more in detail during the Labs!
+
+You can also check in which working directory you are by writting:
+
+```{r eval=FALSE}
+getwd()
+```
+
+Wow, this was hard work! If you are still unsure about the notions of projects and working directory try to read a bit more about it on [google](www.google.com).
+
+## Organizing your working directory
+
+Using a consistent folder structure across your projects will **heavily** impact your productivity. In a word, try to stay organized! This is especially useful when you are working on multiple projects. From my experience and what I see, the best way to organize your project is to have a folder for your **data** (that is the one you have already created), one for the **scripts**, one for the **figues** and another for the **documents** (your master thesis for instance).
+
+# Working with R
+***
+The fun is soon to begin, just keep going! Here are some explanations about how R functions!
+
+The basis of programming is that we write down instructions for the computer to follow, and then we tell the computer to follow those instructions. We write, or **code**, instructions in R because it is a common language that both the computer and we can understand. We call the instructions **commands** and we tell the computer to follow the instructions by **executing** (also called running) those commands.
+
+There are two main ways of interacting with R: by using the console or by using script files (plain text files that contain your code).
+
+## RStudio console and Command Prompt
+
+The **console pane** in RStudio (left-down) is the place where commands written in the R language can be typed and executed immediately by the computer. It is also where the results will be shown for commands that have been executed. You can type commands directly into the console and press `Enter` to execute those commands, but they will be forgotten when you close the session.
+
+If R is ready to accept commands, the R console by default shows a `>` prompt. If it receives a command (by typing `Enter`), R will try to execute it, and when ready, will show the results and come back with a new > prompt to wait for new commands.
+
+If R is still waiting for you to enter more data because it isn’t complete yet, the console will show a `+` prompt. It means that you haven’t finished entering a complete command. It is very likely that you forgot a parenthesis (that happens to me a lot)
+
+When this happens, and you thought you finished typing your command, click inside the console window and press Esc; this will cancel the incomplete command and return you to the `>` prompt.
+
+Now, **writing your code in the Console is a VERY, VERY bad habit and you should ALWAYS write your code in a script!**
+
+## RStudio Script Editor
+
+Because we want to keep our code and workflow, it is better to type the commands we want in the script editor, and save the script. This way, there is a complete record of what we did, and anyone (including our future selves!) can easily replicate the results on their computer.
+
+The most important aspects of making your code comprehensible for others and your future self is adding comments about why you did something. You can write comments directly in your script, and tell R not no execute those words simply by putting a hashtag `#` before you start typing the comment.
+
+For instance like this:
+
+```{r eval=FALSE} 
+#I comment by adding a hashtag
+getwd() #I can directly comment a line of code like this
+
+```
+
+Now that you have written your code you need to run it. You have two option, you first need to select the lines of code you want to run. You can do that by highlighting the lines with your mose. Then
+  * Either you click on `Run` located on the upper left of the 'Source' pane
+  * Or if you are a bit lazy you can just use `Ctrl` + `Enter` (Note that on Mac the shortcut is `Cmd` + `Enter`)
+
+# Wait a minute, I have some questions!
+***
+
+Before continuing take few minutes answering these questions:
+
+  * What is the difference between R and RStudio?
+  * What are the advantages of R over other programming languages?
+  * What are the four panes in RStudio?
+  * How should you structure your project folder?
+  * Why is it a bad idea to write your code in the Console?
+  
+Okay, we have finished this introduction! Now let's the fun begin! You will create for firsts R objects and get to know the most important R structure: **The data frame**!
+
+
+```{r, include=FALSE}
+options(tinytex.verbose = TRUE)
+```

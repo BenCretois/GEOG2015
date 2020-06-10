@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Benjamin Cretois" />
+
+
+<title>Get started with R! 1 / 3</title>
+
+<script src="IntroR_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="IntroR_files/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="IntroR_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="IntroR_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="IntroR_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="IntroR_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="IntroR_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="IntroR_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="IntroR_files/navigation-1.1/tabsets.js"></script>
+<link href="IntroR_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="IntroR_files/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Get started with R! 1 / 3</h1>
+<h4 class="author">Benjamin Cretois</h4>
+
+</div>
+
+
+<p>Welcome to <strong>GEOG3006</strong>: Quantitative methods, a course where you will learn how to use R, wrangle (yes I already begin with some technical terms ;) ) and analyse your data!</p>
+<p>I must say this document is heavily inspired from: <strong>Introduction to R</strong> by Claudia A Engel, I am just simplifying a little bit more.</p>
+<blockquote>
+<p>What you will learn:</p>
+<ul>
+<li>How to install R and RStudio</li>
+<li>The advantages of R over other programming languages</li>
+<li>How to navigate in RStudio</li>
+<li>How to create a tidy project folder</li>
+<li>How to run your firsts lines of code in R</li>
+</ul>
+</blockquote>
+<p>Before I continue my explanations I would like you to install R and Rstdio …</p>
+<div id="set-up-instructions" class="section level1">
+<h1><span class="header-section-number">1</span> Set up instructions</h1>
+<hr />
+<p>First of all, R and RStudio are two different programs. R is the underlying statistical computing environment, but using R alone is no fun (it is very ugly!). RStudio is a graphical integrated development environment (IDE) that makes using R much easier and more interactive. You need to install R before you install RStudio.</p>
+<div id="install-r" class="section level2">
+<h2><span class="header-section-number">1.1</span> Install R</h2>
+<p>I assume that some of you have Mac OS while others have windows (some of you may have Linux). No problem in both cases!</p>
+<p>for MAC download the R-3.6.1.pkg from this <a href="https://cran.r-project.org/bin/macosx/">website</a> for Windows download R from <a href="http://cran.r-project.org/bin/windows/base/release.htm">here</a> If you have Linux I’m sure you can easily find a way to install R ;)</p>
+<p>Now you can open R, see how ugly it is! To make the visual better let’s install Rstdio!</p>
+</div>
+<div id="install-rstdio" class="section level2">
+<h2><span class="header-section-number">1.2</span> Install Rstdio</h2>
+<p>Download and install the version 1.1.463 from the <a href="https://support.rstudio.com/hc/en-us/articles/206569407-Older-Versions-of-RStudio">Rstudio website</a>. Make sure you download Mac OS X if you are using a Mac and Windows if you are using … Windows.</p>
+</div>
+</div>
+<div id="r-and-rstudio" class="section level1">
+<h1><span class="header-section-number">2</span> R and Rstudio</h1>
+<hr />
+<p>Okay, I have been a little bit fast with my explanations about R and R studio. In this section I will go more in details.</p>
+<div id="what-is-r-what-is-rstudio" class="section level2">
+<h2><span class="header-section-number">2.1</span> What is R? What is RStudio?</h2>
+<p>The term “R” is used to refer to both the programming language to write scripts and the software (“environment”) that interprets the scripts written in R. It is an alternative to other statistical packages such as SPSS (what was used for this course before), Stata or Matlab. R lets you perform a wide variety of things: data vizualisation, statistics, GIS and a whole lot more! In fact, this document is written in R :)</p>
+<p>R studio is an interface which allows you to interact with R in a much funnier way. You can write your scripts, open projects and make your programming life easier.</p>
+</div>
+<div id="why-should-i-learn-r" class="section level2">
+<h2><span class="header-section-number">2.2</span> Why should I learn R?</h2>
+<p>The learning curve might be steeper than with other software (see the figure), but with R, the results of your analysis does not rely on remembering a succession of pointing and clicking, but instead on a series of written commands, and that’s a good thing! So, if you want to redo your analysis because you collected more data, you don’t have to remember which button you clicked in which order to obtain your results, you just have to run your script again.</p>
+<p><img src="IntroR_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>Even though it sounds fastiduous at the beginning working with scripts makes the steps you used in your analysis clear and reproducible. Also, sharing your script with another R-fellow will help you spot unforeseen mistakes or even to improve your coding skills.</p>
+<p>Working with scripts forces you to have a deeper understanding of what you are doing, and facilitates your learning and comprehension of the methods you use.</p>
+</div>
+<div id="r-is-one-of-the-most-used-programming-language" class="section level2">
+<h2><span class="header-section-number">2.3</span> R is one of the most used programming language</h2>
+<p>Thousands of people use R daily! The R community is extremely active and whenever you will encounter a problem you can easily find a solution on <a href="https://stackoverflow.com/">StackOverFlow</a> or <a href="https://github.com/">GitHub</a> - let’s face it, at EVERY level a programmer experience problems, that’s part of the fun!</p>
+<p>Moreover, R is used in all disciplines! Statistical sciences, ecology, sociology, psychology, political sciences etc. make extensive use of this programming language.</p>
+</div>
+<div id="r-is-free-and-open-source" class="section level2">
+<h2><span class="header-section-number">2.4</span> R is free and open source</h2>
+<p>Anyone can inspect the source code to see how R works. Because of this transparency, there is less chance for mistakes, and if you (or someone else) find some, you can report and fix bugs.</p>
+<p>This means that everyone can contribute to improving R! All the work done in R and the help provided is done primarily by volunteers!</p>
+</div>
+<div id="r-produces-high-quality-graphics" class="section level2">
+<h2><span class="header-section-number">2.5</span> R produces high quality graphics</h2>
+<p>You can make beautiful graphs in only a few lines of codes! You want the proof? Okay, let’s do it.</p>
+<pre class="r"><code>#I open the libraries I need - don&#39;t worry about it now
+library(ggplot2)
+library(viridis)</code></pre>
+<pre><code>## Loading required package: viridisLite</code></pre>
+<pre class="r"><code>#Here I simulate a dataset, let&#39;s say it represents the number of vulgar words per day for each sex
+data &lt;- data.frame(n.insult = c(rnorm(60, mean=10,sd=2), rnorm(40, mean=20, sd=4)),
+                 Sex = c(rep(&#39;women&#39;, 60), rep(&#39;men&#39;, 40)))
+
+#And now the graphic (just 4 lines of code)
+
+ggplot(data, aes(x=Sex, y=n.insult, col=Sex)) +
+  geom_boxplot() +
+  theme_classic() +
+  xlab(&#39;Sex&#39;) + ylab(&#39;number of vulgar words per day&#39;)</code></pre>
+<p><img src="IntroR_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code>#It seems that women are less vulgar than men ...</code></pre>
+<p>I hope I managed to share my enthusiasm for R and that you are more curious about this programming language!</p>
+<p>Okay, now that I have convinced you of the usefulness of R let’s get a bit more familiar with RStudio before moving to the really fun stuff!</p>
+</div>
+</div>
+<div id="knowing-your-way-around-rstudio" class="section level1">
+<h1><span class="header-section-number">3</span> Knowing your way around RStudio</h1>
+<hr />
+<p>Let’s start by learning about RStudio, which is once again an Integrated Development Environment (IDE) for working with R. The RStudio IDE is an open source product and is free.</p>
+<p>During this course - and hopefully after this course - you will use RStudio IDE to write code, navigate the files on our computer, inspect the variables we are going to create, and visualize the plots we will generate.</p>
+<p>RStudio is divided into 4 “Panes”:</p>
+<ul>
+<li>the Source for your scripts and documents (top-left, in the default layout),</li>
+<li>the R Console (bottom-left),</li>
+<li>your Environment/History (top-right), and</li>
+<li>your Files/Plots/Packages/Help/Viewer (bottom-right).</li>
+</ul>
+<p>Note that the placement of these panes and their content can be customized (see main Menu, Tools -&gt; Global Options -&gt; Pane Layout). I must say that I like it as it is but feel free to modify it!</p>
+<div id="start-an-r-project" class="section level2">
+<h2><span class="header-section-number">3.1</span> Start an R project</h2>
+<p>Okay, now I would like you to stay focus. This part is from my experience very important, otherwise you are likely to have files, folders and scripts in messy places.</p>
+<p>It is good practice to keep a set of related data, analyses, and text self-contained in a single folder. When working with R and RStudio you typically want that single top folder to be the folder you are working in. In order to tell R this, you will want to set that folder as your <strong>working directory</strong>. Whenever you refer to other scripts or data or directories contained within the <strong>working directory</strong> you can then use <strong>relative paths</strong> to files that indicate where inside the project a file is located. (That is opposed to absolute paths, which point to where a file is on a specific computer). Having everything contained in a single directory makes it a lot easier to move your project around on your computer and share it with others without worrying about whether or not the underlying scripts will still work.</p>
+<p>Sounds confusing? Don’t worry, it’s very simple, stay still for a bit longer! Let’s start an R project for the course step by step :)</p>
+<ul>
+<li>First start RStudio (let’s start simple ;) )</li>
+<li>Under the <code>File</code> menu, click on <code>New project</code>, choose <code>New directory</code> and <code>Empty project</code></li>
+<li>As directory name enter <code>GEOG3006</code> and <code>Create project</code></li>
+<li>Under the <code>Files</code> tab on the right of the screen, click on <code>New Folder</code> and create a folder named <code>data</code> (see Figure 1.2)</li>
+<li>On the main menu go to <code>Files</code> &gt; <code>New File</code> &gt; <code>R script</code> to open a new script</li>
+</ul>
+<p>Congrats, you’ve done the most difficult! It wasn’t so difficult? I told you ;)</p>
+<p>Now, just below <code>New Folder</code> it should be written something like <code>StudentName &gt; Desktop &gt; GEOG3006</code>. This is your <em>Working directory</em></p>
+<p>It’s possible to change your working directory within the command line with. For example if I want to set my new directory in the folder you first need to click right on your folder &gt; <code>properties</code> and copy the <code>location</code>. This gives more or less something like this:</p>
+<pre class="r"><code>setwd(&#39;StudentName/Desktop/GEOG_whatever&#39;) </code></pre>
+<p>Is that clear? If it’s not, do not worry we will see that a bit more in detail during the Labs!</p>
+<p>You can also check in which working directory you are by writting:</p>
+<pre class="r"><code>getwd()</code></pre>
+<p>Wow, this was hard work! If you are still unsure about the notions of projects and working directory try to read a bit more about it on <a href="www.google.com">google</a>.</p>
+</div>
+<div id="organizing-your-working-directory" class="section level2">
+<h2><span class="header-section-number">3.2</span> Organizing your working directory</h2>
+<p>Using a consistent folder structure across your projects will <strong>heavily</strong> impact your productivity. In a word, try to stay organized! This is especially useful when you are working on multiple projects. From my experience and what I see, the best way to organize your project is to have a folder for your <strong>data</strong> (that is the one you have already created), one for the <strong>scripts</strong>, one for the <strong>figues</strong> and another for the <strong>documents</strong> (your master thesis for instance).</p>
+</div>
+</div>
+<div id="working-with-r" class="section level1">
+<h1><span class="header-section-number">4</span> Working with R</h1>
+<hr />
+<p>The fun is soon to begin, just keep going! Here are some explanations about how R functions!</p>
+<p>The basis of programming is that we write down instructions for the computer to follow, and then we tell the computer to follow those instructions. We write, or <strong>code</strong>, instructions in R because it is a common language that both the computer and we can understand. We call the instructions <strong>commands</strong> and we tell the computer to follow the instructions by <strong>executing</strong> (also called running) those commands.</p>
+<p>There are two main ways of interacting with R: by using the console or by using script files (plain text files that contain your code).</p>
+<div id="rstudio-console-and-command-prompt" class="section level2">
+<h2><span class="header-section-number">4.1</span> RStudio console and Command Prompt</h2>
+<p>The <strong>console pane</strong> in RStudio (left-down) is the place where commands written in the R language can be typed and executed immediately by the computer. It is also where the results will be shown for commands that have been executed. You can type commands directly into the console and press <code>Enter</code> to execute those commands, but they will be forgotten when you close the session.</p>
+<p>If R is ready to accept commands, the R console by default shows a <code>&gt;</code> prompt. If it receives a command (by typing <code>Enter</code>), R will try to execute it, and when ready, will show the results and come back with a new &gt; prompt to wait for new commands.</p>
+<p>If R is still waiting for you to enter more data because it isn’t complete yet, the console will show a <code>+</code> prompt. It means that you haven’t finished entering a complete command. It is very likely that you forgot a parenthesis (that happens to me a lot)</p>
+<p>When this happens, and you thought you finished typing your command, click inside the console window and press Esc; this will cancel the incomplete command and return you to the <code>&gt;</code> prompt.</p>
+<p>Now, <strong>writing your code in the Console is a VERY, VERY bad habit and you should ALWAYS write your code in a script!</strong></p>
+</div>
+<div id="rstudio-script-editor" class="section level2">
+<h2><span class="header-section-number">4.2</span> RStudio Script Editor</h2>
+<p>Because we want to keep our code and workflow, it is better to type the commands we want in the script editor, and save the script. This way, there is a complete record of what we did, and anyone (including our future selves!) can easily replicate the results on their computer.</p>
+<p>The most important aspects of making your code comprehensible for others and your future self is adding comments about why you did something. You can write comments directly in your script, and tell R not no execute those words simply by putting a hashtag <code>#</code> before you start typing the comment.</p>
+<p>For instance like this:</p>
+<pre class="r"><code>#I comment by adding a hashtag
+getwd() #I can directly comment a line of code like this</code></pre>
+<p>Now that you have written your code you need to run it. You have two option, you first need to select the lines of code you want to run. You can do that by highlighting the lines with your mose. Then * Either you click on <code>Run</code> located on the upper left of the ‘Source’ pane * Or if you are a bit lazy you can just use <code>Ctrl</code> + <code>Enter</code> (Note that on Mac the shortcut is <code>Cmd</code> + <code>Enter</code>)</p>
+</div>
+</div>
+<div id="wait-a-minute-i-have-some-questions" class="section level1">
+<h1><span class="header-section-number">5</span> Wait a minute, I have some questions!</h1>
+<hr />
+<p>Before continuing take few minutes answering these questions:</p>
+<ul>
+<li>What is the difference between R and RStudio?</li>
+<li>What are the advantages of R over other programming languages?</li>
+<li>What are the four panes in RStudio?</li>
+<li>How should you structure your project folder?</li>
+<li>Why is it a bad idea to write your code in the Console?</li>
+</ul>
+<p>Okay, we have finished this introduction! Now let’s the fun begin! You will create for firsts R objects and get to know the most important R structure: <strong>The data frame</strong>!</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

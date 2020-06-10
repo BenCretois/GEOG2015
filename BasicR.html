@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Benjamin Cretois" />
+
+
+<title>Get started with R! 2 / 3</title>
+
+<script src="BasicR_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="BasicR_files/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="BasicR_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="BasicR_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="BasicR_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="BasicR_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="BasicR_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="BasicR_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="BasicR_files/navigation-1.1/tabsets.js"></script>
+<link href="BasicR_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="BasicR_files/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Get started with R! 2 / 3</h1>
+<h4 class="author">Benjamin Cretois</h4>
+
+</div>
+
+
+<p>Welcome back to this introduction to R! In this lesson you will have more applied work and I promise it will be fun! This lesson is important as it lays the fundation for literally everything else, so stay focus :) What you will learn:</p>
+<p>• Create R objects • Do some simple math using R objects • Call functions with arguments • Download, install and load R packages • Learn where to find the good information when you face a problem</p>
+<div id="creating-objects-in-r" class="section level1">
+<h1><span class="header-section-number">1</span> Creating objects in R</h1>
+<p>To do things in R we need to assign values to objects. To do so, we write a name followed by the assignement operator &lt;- or = and the value we want to give it:</p>
+<pre class="r"><code>my_age &lt;- 23
+
+# Or
+
+my_age = 23</code></pre>
+<p>We can read this line of code as 23 goes into the object temperature. Then you need to run the line of code (with either Run or Ctrl + Enter). Once you have executed the code you will see your object in the global environment (the upper right window) with its value. Now, there is some very important rules as of how to name objects in R:</p>
+<p>• Objects names are explicits and shorts • They cannot start with a number such as 2pac • They cannot include space, if you need place an underscore _. Don’t write my age but my_age • R is <strong>case sensitive</strong>. For R, My_age is different from my_age Now that R has my_age in memory you can do some math with it. For instance, you know that your aunt is two times your age:</p>
+<pre class="r"><code>my_age*2</code></pre>
+<pre><code>## [1] 46</code></pre>
+<p>You can even create a new object:</p>
+<pre class="r"><code>aunt_age &lt;- my_age*2</code></pre>
+<p>Note that you can change the value of an object. Let’s suppose I made a mistake and I wanted to write 27 instead of 23 for my_age. I only need to reassign the value:</p>
+<pre class="r"><code>my_age &lt;- 27</code></pre>
+<p>If you want to check that my_age has the good value you can force R to print the value by typing the object name. The value will appear in the console (down left)</p>
+<pre class="r"><code>my_age</code></pre>
+<pre><code>## [1] 27</code></pre>
+<div id="functions" class="section level2">
+<h2><span class="header-section-number">1.1</span> Functions</h2>
+<p>A function is a block of code which you can use whenever you need and wherever you required to avoid repeated code blocks. The function takes arguments to produce a result. For instance, let’s assume you have coffee beans that you want to grind. You will put your beans in the grinder and will get the grinded coffee as a result. Well, your coffee beans are the arguments, the grinding process the function and the grinded coffee the result. Many functions are predifined and you only need to call (or excecute) them. For instance you can square root my_age with the function sqrt():</p>
+<pre class="r"><code>sqrt(my_age)</code></pre>
+<pre><code>## [1] 5.196152</code></pre>
+<p>In R, there is function for everything, and if there is no function for what you want to do you can still create it (but we will not learn that here). Arguments can take a wide range of forms and can be numeric (such as my_age) or can even be entire files!</p>
+</div>
+<div id="comments" class="section level2">
+<h2><span class="header-section-number">1.2</span> Comments</h2>
+<p>As I stated in the previous lesson, you can comment your code with the hasthtag #. I repeat it because I would like you to use it extensively in your code, <strong>commenting your code is always good!</strong>. For instance to keep track of the units of your variables:</p>
+<pre class="r"><code>my_age &lt;- 27 # In years
+bottle_weight &lt;- 1 # Kilogram
+distance &lt;- 100 # Meters</code></pre>
+</div>
+<div id="objects-vs-variables" class="section level2">
+<h2><span class="header-section-number">1.3</span> Objects vs variables</h2>
+<p>What are known as objects in R are also called variables in many other programming languages. Depending on the context, object and variable can have drastically different meanings but for this course we will use these two words synonymously.</p>
+</div>
+</div>
+<div id="vectors-and-data-types" class="section level1">
+<h1><span class="header-section-number">2</span> Vectors and data types</h1>
+<p>A <strong>vector</strong>| is the most basic data type in R. A vector is composed by a serie of values, which can be either numbers of characters. Now, this is <strong>very important</strong> to note that a vector is composed of only <strong>one type of data</strong>. Either your vector is fully made of numbers or of characters (include letters or words). You can assign a series of values to a vector using the <code>concatenate</code> function. For instance let’s create a vector of age and assign it to the object <code>group_age</code>:</p>
+<pre class="r"><code>group_age &lt;- c(18,21,22,31,28,32,50, 42,38 ) # create the vector and assign it to group_age
+group_age # I check if my object has been created and if it has the good values</code></pre>
+<pre><code>## [1] 18 21 22 31 28 32 50 42 38</code></pre>
+<p>There is some important functions that are used to inspect your vector. We can for instance check the length of the vector using the function `length()``.</p>
+<pre class="r"><code>length(group_age)</code></pre>
+<pre><code>## [1] 9</code></pre>
+<p>You can also get an overview of your vector with the function <code>str()</code>:</p>
+<pre class="r"><code>str(group_age)</code></pre>
+<pre><code>##  num [1:9] 18 21 22 31 28 32 50 42 38</code></pre>
+<p>You can check the class (or the type) of your vector with <code>class()</code>:</p>
+<p>Now for comparison let’s write a vector composed of words, let’s say 5 vegetables:</p>
+<pre class="r"><code>vegetables &lt;- c(&quot;tomatoes&quot;, &quot;eggplant&quot;, &quot;carrots&quot;, &quot;salad&quot;, &quot;onion&quot;)
+class(vegetables)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>Note that to specify a word or a letter you need to quote it "", otherwise R will think you are writing an object. Are you still following me? I hope you’re not lost yet! :) Okay just to check if you understood the notions of vectors and functions try to answer the following questions:</p>
+<p>Can you create a vector called <code>family</code> composed of the names of your parents, sisters and brothers? Can you inspect its length and class?</p>
+</div>
+<div id="manipulating-vectors" class="section level1">
+<h1><span class="header-section-number">3</span> Manipulating vectors</h1>
+<p>Sometimes, we want to extract one or several values from a vector. For example, I want to know what is the second vegetable of my vector:</p>
+<pre class="r"><code>vegetables[2]</code></pre>
+<pre><code>## [1] &quot;eggplant&quot;</code></pre>
+<p>You need to specify the position of what you want to know in the brackets [] If I want to know what are the 2nd and 3rd vegetables:</p>
+<pre class="r"><code>vegetables[c(2,3)] #  I need to concatenate as my input is multiple values</code></pre>
+<pre><code>## [1] &quot;eggplant&quot; &quot;carrots&quot;</code></pre>
+<p>You can also excludes some elements of your vector. Some people say that tomatoes is not a vegetables <code>tomatoes</code> need to exclude tomatoes from my vector of vegetables:</p>
+<pre class="r"><code>vegetables[-1] #I don&#39;t have tomatoes anymore!</code></pre>
+<pre><code>## [1] &quot;eggplant&quot; &quot;carrots&quot;  &quot;salad&quot;    &quot;onion&quot;</code></pre>
+<p>Now that you know the basics for subsetting vectors, let’s see something even more useful!</p>
+</div>
+<div id="conditional-subsetting" class="section level1">
+<h1><span class="header-section-number">4</span> Conditional subsetting</h1>
+<p>Another common way of subsetting is by searching for certain words (or strings in the programming language). We can use OR (at least one of the condition is true) with the operator | to test for equality to multiple values:</p>
+<pre class="r"><code>vegetables[vegetables == &quot;eggplant&quot; | vegetables == &quot;cucumber&quot;]</code></pre>
+<pre><code>## [1] &quot;eggplant&quot;</code></pre>
+<p>Equivalently, if you have a numeric vector you can subset with the operators <code>&lt;</code> (less than), <code>&gt;</code> (more than) or <code>=</code> (equal). For instance, using the vector group_age I want to create a new vector with ages below 30:</p>
+<pre class="r"><code>group_age &lt; 30 #I check if there is numbers below 30</code></pre>
+<pre><code>## [1]  TRUE  TRUE  TRUE FALSE  TRUE FALSE FALSE FALSE FALSE</code></pre>
+<pre class="r"><code>inf_30 &lt;- group_age[group_age &lt; 30] # I create a new vector composed of ages below 30
+inf_30 #I check if my object has been created</code></pre>
+<pre><code>## [1] 18 21 22 28</code></pre>
+<p>You can combine multiple tests using &amp; (AND, both conditions are true) or |. For instance, I want to create a dataset with ages below 30 OR over 40:</p>
+<pre class="r"><code>new_age &lt;- group_age[group_age &lt; 30 | group_age &gt; 40 ]
+new_age</code></pre>
+<pre><code>## [1] 18 21 22 28 50 42</code></pre>
+<p>If I want to create a dataset with ages over 30 AND below 40:</p>
+<pre class="r"><code>new_age2 &lt;- group_age[group_age &gt; 30 &amp; group_age &lt; 40]
+new_age2</code></pre>
+<pre><code>## [1] 31 32 38</code></pre>
+<p>Subsetting is not an easy topic and require a lot of practices, so make sure you train! If you still struggle with subsetting read <a href="https://www.statmethods.net/management/subset.html">this</a></p>
+</div>
+<div id="missing-data" class="section level1">
+<h1><span class="header-section-number">5</span> Missing data</h1>
+<p>As R was designed to analyze datasets, it includes the concept of missing data (which is uncommon in other programming languages). Missing data are represented in vectors as NA. When doing operations on numbers, most functions will return NA if the data you are working with include missing values:</p>
+<pre class="r"><code>heights &lt;- c(1,3,5,3,2,1,NA,3,NA,4,5) # I assign a vector to &quot;heights&quot;
+max(heights) # will return NA</code></pre>
+<pre><code>## [1] NA</code></pre>
+<p>You can add the arguent na.rm = TRUE to calculate the result while ignoring the missing values:</p>
+<pre class="r"><code>max(heights, na.rm = TRUE) # will do the operation</code></pre>
+<pre><code>## [1] 5</code></pre>
+<p>Any real world dataset contains missing values and you will need to become familiar with some of the functions to deal with it! Don’t worry it’s not as scary as it sounds and we will do that in the exercises.</p>
+</div>
+<div id="common-data-structures" class="section level1">
+<h1><span class="header-section-number">6</span> Common data structures</h1>
+<p>Even though understanding how vectors work is fundamental, R uses a lot of other data structures. The most importants are, without any doubts, the matrices, the data frames and the lists (but we will not study the lists here). Now there is a good news and a bad news . . . The bad news is that you need to know how these 3 data structures work and how to manipulate them, good news is that you only need to know 4 data structures and it’s not so complicated to manipulate them ;)</p>
+<div id="matrix" class="section level2">
+<h2><span class="header-section-number">6.1</span> Matrix</h2>
+<p>If we arrange data elements of a vector in a two-dimensional rectangular layout we have a matrix. To construct a matrix, we use a function conveniently called <code>matrix()</code>.</p>
+<pre class="r"><code>my_matrix &lt;- matrix(1:20, nrow=5, ncol=4) # Create a 5 x 4 numeric matrix</code></pre>
+<p>You can subset a matrix with [ row , column ]:</p>
+<pre class="r"><code>my_matrix[ , 4] # I subset the 4th column of the matrix</code></pre>
+<pre><code>## [1] 16 17 18 19 20</code></pre>
+<pre class="r"><code>my_matrix[3 , ] # I subset the 3rd row of the matrix</code></pre>
+<pre><code>## [1]  3  8 13 18</code></pre>
+<pre class="r"><code>my_matrix[2:4 , 1:3] # I subset rows 2,3,4 and column 1,2,3 of the matrix</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    2    7   12
+## [2,]    3    8   13
+## [3,]    4    9   14</code></pre>
+</div>
+<div id="data-frame" class="section level2">
+<h2><span class="header-section-number">6.2</span> Data frame</h2>
+<p>While matrix can only take numeric values, data.frame can contain any type of elements. The only rule is that all elements must have the same length. A data frame is the most common way of storing tabular data in R and something you will likely deal with a lot. You can really think of a data frame as a table or an excell spreadsheet. For instance, let’s build a dataframe using the <code>data.frame()</code> function:</p>
+<pre class="r"><code>group_df &lt;- data.frame(Student = c(&quot;Kjersti&quot;, &quot;Bjorn&quot;, &quot;Patrick&quot;, &quot;Karine&quot;, &quot;Kristine&quot;),
+Eyes = c(&quot;blue&quot;, &quot;green&quot;, &quot;borwn&quot;, &quot;blue&quot;, &quot;brown&quot;),
+Height = c(1.88,1.56,1.78,1.98,1.75),
+ScoreStat = c(&quot;B&quot;, &quot;C&quot;, &quot;B&quot;, &quot;A&quot;, &quot;B&quot;),
+StudentNumber = c(13,14,11,16,18))
+
+group_df</code></pre>
+<pre><code>##    Student  Eyes Height ScoreStat StudentNumber
+## 1  Kjersti  blue   1.88         B            13
+## 2    Bjorn green   1.56         C            14
+## 3  Patrick borwn   1.78         B            11
+## 4   Karine  blue   1.98         A            16
+## 5 Kristine brown   1.75         B            18</code></pre>
+<p>You will know more about the data frame in the next lesson but for now try to do this small exercise:</p>
+<p>Create a dataframe that holds the following information:</p>
+<p>• Names of 5 of your family members (including you) • Their favorite colour • Their weights • Their heights</p>
+</div>
+</div>
+<div id="extending-r-base-functionality" class="section level1">
+<h1><span class="header-section-number">7</span> Extending R base functionality</h1>
+<p>R comes with a base system and some contributed core packages. This is what you downloaded and installed previously. The functionality of R can be significantly extended by using additional contributed packages.</p>
+<p>Those packages typically contain commands (functions) for more specialized tasks. For instance, you can turn R into a “Geographical Information System - GIS” using the packages “Raster” or do text mining in R with the package “tm”.</p>
+</div>
+<div id="downloading-and-installing-additional-r-packages" class="section level1">
+<h1><span class="header-section-number">8</span> Downloading and installing additional R packages</h1>
+<p>To install packages there is two main options:</p>
+<p>1.You can use RStudio interface: In the menu at the top of your window: Tools &gt; Install packages 2.You can install the package from the R console like this:</p>
+<pre class="r"><code>install.packages(&quot;dplyr&quot;) #to install the package &quot;dplyr&quot;</code></pre>
+<p>The second method is the method I would recommand as you can customize the function call by adding some arguments.</p>
+</div>
+<div id="using-the-installed-packages" class="section level1">
+<h1><span class="header-section-number">9</span> Using the installed packages</h1>
+<p>Downloading the packages is not enough, you need to tell R that you want to use them! To access the functions of your newly downloaded package you need to specify:</p>
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<p>A small advice . . . All packages in R have a description, if you want to see what are the possibilities of a package you can google it. For instance, if you google “dplyr + pdf” you will find this, which is a complete description of the dplyr package.</p>
+</div>
+<div id="i-need-some-help" class="section level1">
+<h1><span class="header-section-number">10</span> I need some help!</h1>
+<p>If you are stuck with your script <strong>don’t stay passive and look for help</strong>.</p>
+<p>As I stated in the previous lesson, every single programmer will need help at some point. I must say, the most important skill for a programmer is not to know every function, or know perfectly how to program but it is to know how to look for help. Looking for help is the single most important skill you need to know !</p>
+<div id="use-the-built-in-rstudio-help-interface" class="section level2">
+<h2><span class="header-section-number">10.1</span> Use the built-in RStudio help interface</h2>
+<p>This is the most direct way to seek help! You can use the button “Help” from the down-right window and write the function you are looking for in the small area where I wrote “mean”. This will give me all the help I need to make sense of the <code>mean()</code> function!</p>
+<pre class="r"><code>knitr::include_graphics(&#39;imgs_tuto/Help.PNG&#39;)</code></pre>
+<p><img src="imgs_tuto/Help.PNG" width="388" /></p>
+<p>Instead of writing the name of the function in this small area you can directly ask for help by typing in the Console:</p>
+<pre class="r"><code>?mean</code></pre>
+</div>
+<div id="you-are-stuck-you-get-an-error-message-and-you-want-to-break-your-computer" class="section level2">
+<h2><span class="header-section-number">10.2</span> You are stuck, you get an error message and you want to break your computer</h2>
+<p>Yes, I get this feeling quite often. When I reach this point the best is to look for help on Google! Google is your friend as they say, but in the programming world google is your best friend. You can start by copy and paste your error message on google and look at the firsts few lines. In general that work and someone else alreay got the problem you are facing. Most of the time, the first matches from your google search will redirect you to the website stackoverflow.</p>
+<p>Stackoverflow has the answer in 99% of the cases.</p>
+</div>
+<div id="where-else-can-i-ask-for-help" class="section level2">
+<h2><span class="header-section-number">10.3</span> Where else can I ask for help?</h2>
+<p>Ask your classmates! Every one has a different eye and if you cannot find your mistake maybe your classmates can! Or send your question on the blackboard forum! I / or a classmate will try to answer as fast as I can (if I’m not stuck with my script too, that happens a lot ;) )</p>
+</div>
+</div>
+<div id="some-questions" class="section level1">
+<h1><span class="header-section-number">11</span> Some questions</h1>
+<ul>
+<li>Exercise 1: Create 2 numerical vectors, one for height and one for weight. Make sure they have the same length (you can use length function). Create a third object which is the result of the addition of height and weight.</li>
+<li>Exercise 2: create a vector price_houses made of the values 100, 200, 50, 400, 60, 600, 200, 300, 40, 70. Now create a vector cheap_houses by subsetting the values below or equal to 100. Create another vector moderate_houses by selecting values between 100 and 300.</li>
+</ul>
+<p>Answer the following questions:</p>
+<ul>
+<li>What are the basic rules you need to follow to give a name to a variable?</li>
+<li>What are the fundamental differences between a vector, a matrix and a dataframe?</li>
+<li>What is the function head() made for?</li>
+</ul>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
