@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Benjamin Cretois" />
+
+
+<title>Get started with R! 2 / 3</title>
+
+<script src="DFmanip_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="DFmanip_files/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="DFmanip_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="DFmanip_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="DFmanip_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="DFmanip_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="DFmanip_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="DFmanip_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="DFmanip_files/navigation-1.1/tabsets.js"></script>
+<link href="DFmanip_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="DFmanip_files/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Get started with R! 2 / 3</h1>
+<h4 class="author">Benjamin Cretois</h4>
+
+</div>
+
+
+<p>This lesson is the last of this small introduction to R! Here there will be even more practice as we will be manipulating a real dataset and you will learn some of the basic functions to inspect a dataset! For this lesson I expext you to get a good understanding of what a data frame is :)</p>
+<p>You will learn:</p>
+<ul>
+<li>Load CSV data</li>
+<li>Inspect the basic properties of a data frame such as its size, class and type of data it contains</li>
+<li>Generate summary statistics for a dataframe</li>
+<li>Use indexing to select rows and columns</li>
+<li>Add columns and rows to the data frame</li>
+</ul>
+<div id="loading-the-data-frame" class="section level1">
+<h1><span class="header-section-number">1</span> Loading the data frame</h1>
+<p>R can read a wide range of data format including xlsx documents (your excell spreadsheet). One of the most common format is the XLS file. It is basically the excell document.</p>
+<p>First, you will download the dataset available on blackboard: <code>worldbank_df.xls</code>. Save it in the relevant folder (remember the first lesson). For instance my main folder is GEOG2015 and I save in the subfolder <code>data</code>:</p>
+<pre class="r"><code>knitr::include_graphics(&#39;imgs_tuto/setwd.PNG&#39;)</code></pre>
+<p><img src="imgs_tuto/setwd.PNG" width="449" /></p>
+<p>Now that your csv file is saved in the right folder you are almost ready to read the file! Remember the first lesson about projects and working directories? If not read the section again because it is important at this very moment!</p>
+<p>If you have made a R project (as you should have) the working directory is already set and you just need to load your data.</p>
+<p>Otherwise you need to set the working directory with setwd. To do so click right on <code>WorldView.csv &gt; properties &gt; copy paste the location in setwd()</code> as follow:</p>
+<pre class="r"><code>setwd(&quot;PATH/THAT/IS/WRITTEN&quot;)</code></pre>
+<p>Make sure you replace  (that R do not understand) by /!</p>
+<p>Now is time to open your data! For that we need to use the function <code>read.xlsx()</code> from the library xlsx. First you need to install the library <code>xlsx</code>:</p>
+<pre class="r"><code>install.packages(&#39;xlsx&#39;)</code></pre>
+<p>And then load the library:</p>
+<pre class="r"><code>library(xlsx)</code></pre>
+<p>Now you can open your document with the function described above.</p>
+<p>If you are in the project write:</p>
+<pre class="r"><code>data &lt;- read.xlsx(&quot;data/worldbank_df.xlsx&quot;, sheetIndex = 1)</code></pre>
+<p>If you are not in a project write (with your own path):</p>
+<pre class="r"><code>setwd(&#39;//home.ansatt.ntnu.no/benjamcr/Desktop/Teaching/GEOG2015&#39;)
+data &lt;- read.xlsx(&#39;data/worldbank_df.xlsx&#39;, sheetIndex = 1)</code></pre>
+<p>Now, this line of code doesn’t produce any output in the console because, as you might recall, <strong>assignments don’t display anything</strong>. If we want to check that our data has been loaded, we can print the variable’s value by running data. If you do that you have your whole dataset printed in your console! That is not very handy and we need to find other strategies to inspect the data frame reasonably . . . We can for instance use the function head() to inspect the firsts 6 lines:</p>
+<pre class="r"><code>head(data)</code></pre>
+<pre><code>##   NA.                 name iso_a2   HDI urban_pop unemployment pop_growth
+## 1   1          Afghanistan     AF    NA   8609463           NA  3.1832015
+## 2   2               Angola     AO 0.504  11649562           NA  3.4854125
+## 3   3              Albania     AL    NA   1629715        17.49 -0.2070470
+## 4   4 United Arab Emirates     AE    NA   7734365           NA  0.7147625
+## 5   5            Argentina     AR    NA  39372787         7.27  1.0327093
+## 6   6              Armenia     AM    NA   1825455        17.50  0.4383315
+##   literacy
+## 1       NA
+## 2 66.03011
+## 3       NA
+## 4       NA
+## 5       NA
+## 6       NA</code></pre>
+<p>Much better! Like this we get a good overview of the dataset without being overwhelmed by too much data!</p>
+</div>
+<div id="a-bit-more-about-our-training-dataset" class="section level1">
+<h1><span class="header-section-number">2</span> A bit more about our training dataset</h1>
+<p>The dataset is composed of 7 columns:</p>
+<ul>
+<li>name: name of the countries present in the dataset</li>
+<li>iso_a2: a 2 letter code identifying the country</li>
+<li>HDI: the Human Development Index</li>
+<li>urban_pop: Urban population number within the countries</li>
+<li>unemployment: unemployment rate</li>
+<li>pop_growth: growth rate of the population within the country</li>
+<li>literacy: the percentage of population which is litterate</li>
+</ul>
+</div>
+<div id="inspecting-dataframe-objects" class="section level1">
+<h1><span class="header-section-number">3</span> Inspecting dataframe objects</h1>
+<p>Remember how we defined a data frame in the previous lesson? Okay just a quick reminder: a data frame is a <strong>representation of data where the columns are vectors that all have the same length</strong>. Because the columns are vectors, they all contain the same type of data (e.g. numeric, characters). But the type of data can vary BETWEEN vectors!</p>
+<p>You can inspect the structure of a data frame with the function str():</p>
+<pre class="r"><code>str(data)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    177 obs. of  8 variables:
+##  $ NA.         : Factor w/ 177 levels &quot;1&quot;,&quot;10&quot;,&quot;100&quot;,..: 1 90 101 112 123 134 145 156 167 2 ...
+##  $ name        : Factor w/ 177 levels &quot;Afghanistan&quot;,..: 1 4 2 166 6 7 5 56 8 9 ...
+##  $ iso_a2      : Factor w/ 174 levels &quot;AE&quot;,&quot;AF&quot;,&quot;AL&quot;,..: 2 5 3 1 7 4 6 152 9 8 ...
+##  $ HDI         : num  NA 0.504 NA NA NA NA NA NA NA NA ...
+##  $ urban_pop   : num  8609463 11649562 1629715 7734365 39372787 ...
+##  $ unemployment: num  NA NA 17.49 NA 7.27 ...
+##  $ pop_growth  : num  3.183 3.485 -0.207 0.715 1.033 ...
+##  $ literacy    : num  NA 66 NA NA NA ...</code></pre>
+<p>As you can see, the column <code>name</code> is a factor (we will se what is a factor a bit later in this lesson) while <code>urban_pop</code> is numeric, does that make sense?</p>
+<p>So we already learned how to use str() and head() but there is much much more functions to inspect a dataframe! I would like you to play around with them! :)</p>
+<p>To inspect size:</p>
+<ul>
+<li>dim()</li>
+<li>nrow()</li>
+<li>ncol()</li>
+<li>length()</li>
+</ul>
+<p>To inspect names of rows and columns:</p>
+<ul>
+<li>colnames()</li>
+<li>rownames()</li>
+</ul>
+<p>To summarize the data frame:</p>
+<ul>
+<li>summary()</li>
+<li>str()</li>
+</ul>
+<p>Now this is a non-exhaustive list and there is more! However in my experience these are the most useful you need to know!</p>
+<p>Small exercise: play with the functions and try to figure out what they do exactly! You can use the help from R ?</p>
+</div>
+<div id="indexing-and-subsetting-dataframes" class="section level1">
+<h1><span class="header-section-number">4</span> Indexing and subsetting dataframes</h1>
+<p>The <code>worldbank_df</code> dataset has two dimensions (rows and columns) and if we want to extract some specific information from it we need to specify the coordinates we want from it. It is like subsetting a matrix (remember the previous lesson!): rows come first and it is followed by column number:</p>
+<pre class="r"><code>data[ 1 , 1 ] #First element in the first column
+data[ 1 , 3 ] #First element in the third column
+data[ , 1 ] #First column
+data[ 4 , ] #Fourth row
+data[ 1:10 , 1 ] #Rows 1 to 10 from the first column
+#And so forth and so on ... Just try to play with that!</code></pre>
+<p>You can also subset the columns of a data frame using their names:</p>
+<pre class="r"><code>data[ , &quot;name&quot; ] # I subset the column name -&gt; the result will be a vector!
+data[ , c(&quot;name&quot;, &quot;unemployment&quot;) ] # I subset the columns name and unemployment -&gt; #the result will be a dataframe</code></pre>
+<p>Another way for subsetting columns of a data frame is using <code>$</code></p>
+<pre class="r"><code>data$name # It is equivalent to data[ , &quot;name&quot; ]</code></pre>
+<pre><code>##   [1] Afghanistan                         Angola                             
+##   [3] Albania                             United Arab Emirates               
+##   [5] Argentina                           Armenia                            
+##   [7] Antarctica                          French Southern and Antarctic Lands
+##   [9] Australia                           Austria                            
+##  [11] Azerbaijan                          Burundi                            
+##  [13] Belgium                             Benin                              
+##  [15] Burkina Faso                        Bangladesh                         
+##  [17] Bulgaria                            Bahamas                            
+##  [19] Bosnia and Herzegovina              Belarus                            
+##  [21] Belize                              Bolivia                            
+##  [23] Brazil                              Brunei Darussalam                  
+##  [25] Bhutan                              Botswana                           
+##  [27] Central African Republic            Canada                             
+##  [29] Switzerland                         Chile                              
+##  [31] China                               Cote d&#39;Ivoire                      
+##  [33] Cameroon                            Democratic Republic of the Congo   
+##  [35] Republic of Congo                   Colombia                           
+##  [37] Costa Rica                          Cuba                               
+##  [39] Northern Cyprus                     Cyprus                             
+##  [41] Czech Republic                      Germany                            
+##  [43] Djibouti                            Denmark                            
+##  [45] Dominican Republic                  Algeria                            
+##  [47] Ecuador                             Egypt                              
+##  [49] Eritrea                             Spain                              
+##  [51] Estonia                             Ethiopia                           
+##  [53] Finland                             Fiji                               
+##  [55] Falkland Islands                    France                             
+##  [57] Gabon                               United Kingdom                     
+##  [59] Georgia                             Ghana                              
+##  [61] Guinea                              The Gambia                         
+##  [63] Guinea-Bissau                       Equatorial Guinea                  
+##  [65] Greece                              Greenland                          
+##  [67] Guatemala                           Guyana                             
+##  [69] Honduras                            Croatia                            
+##  [71] Haiti                               Hungary                            
+##  [73] Indonesia                           India                              
+##  [75] Ireland                             Iran                               
+##  [77] Iraq                                Iceland                            
+##  [79] Israel                              Italy                              
+##  [81] Jamaica                             Jordan                             
+##  [83] Japan                               Kazakhstan                         
+##  [85] Kenya                               Kyrgyzstan                         
+##  [87] Cambodia                            Republic of Korea                  
+##  [89] Kosovo                              Kuwait                             
+##  [91] Lao PDR                             Lebanon                            
+##  [93] Liberia                             Libya                              
+##  [95] Sri Lanka                           Lesotho                            
+##  [97] Lithuania                           Luxembourg                         
+##  [99] Latvia                              Morocco                            
+## [101] Moldova                             Madagascar                         
+## [103] Mexico                              Macedonia                          
+## [105] Mali                                Myanmar                            
+## [107] Montenegro                          Mongolia                           
+## [109] Mozambique                          Mauritania                         
+## [111] Malawi                              Malaysia                           
+## [113] Namibia                             New Caledonia                      
+## [115] Niger                               Nigeria                            
+## [117] Nicaragua                           Netherlands                        
+## [119] Norway                              Nepal                              
+## [121] New Zealand                         Oman                               
+## [123] Pakistan                            Panama                             
+## [125] Peru                                Philippines                        
+## [127] Papua New Guinea                    Poland                             
+## [129] Puerto Rico                         Dem. Rep. Korea                    
+## [131] Portugal                            Paraguay                           
+## [133] Palestine                           Qatar                              
+## [135] Romania                             Russian Federation                 
+## [137] Rwanda                              Western Sahara                     
+## [139] Saudi Arabia                        Sudan                              
+## [141] South Sudan                         Senegal                            
+## [143] Solomon Islands                     Sierra Leone                       
+## [145] El Salvador                         Somaliland                         
+## [147] Somalia                             Serbia                             
+## [149] Suriname                            Slovakia                           
+## [151] Slovenia                            Sweden                             
+## [153] Swaziland                           Syria                              
+## [155] Chad                                Togo                               
+## [157] Thailand                            Tajikistan                         
+## [159] Turkmenistan                        Timor-Leste                        
+## [161] Trinidad and Tobago                 Tunisia                            
+## [163] Turkey                              Taiwan                             
+## [165] Tanzania                            Uganda                             
+## [167] Ukraine                             Uruguay                            
+## [169] United States                       Uzbekistan                         
+## [171] Venezuela                           Vietnam                            
+## [173] Vanuatu                             Yemen                              
+## [175] South Africa                        Zambia                             
+## [177] Zimbabwe                           
+## 177 Levels: Afghanistan Albania Algeria Angola Antarctica Argentina ... Zimbabwe</code></pre>
+<p>Exercise: create a data frame <code>country_pop</code> by subsetting <code>name</code>, <code>urban_pop</code> and <code>pop_growth</code>. Inspect this new dataframe using the functions we learned.</p>
+</div>
+<div id="conditional-subsetting" class="section level1">
+<h1><span class="header-section-number">5</span> Conditional subsetting</h1>
+<p>Often, we need to extract a subset of a data frame based on certain conditions. For instance, if I want to have a look at some specific countries . . . let’s say Norway:</p>
+<pre class="r"><code>data[data$name == &quot;Norway&quot; , ] # This line of code tells R to subset the row in which &quot;name&quot; equal Norway</code></pre>
+<pre><code>##     NA.   name iso_a2 HDI urban_pop unemployment pop_growth literacy
+## 119 119 Norway     NO  NA   4120471         3.48   1.127737       NA</code></pre>
+<p>Now if I want to create a new dataset by subsetting only France and Norway I would do like this:</p>
+<pre class="r"><code>NOR_FRA &lt;- data[data$name == &quot;Norway&quot; | data$name == &quot;France&quot;, ]
+NOR_FRA</code></pre>
+<pre><code>##     NA.   name iso_a2 HDI urban_pop unemployment pop_growth literacy
+## 56   56 France     FR  NA  52593947        10.30  0.5038689       NA
+## 119 119 Norway     NO  NA   4120471         3.48  1.1277367       NA</code></pre>
+<p>I must admit there is a much simpler way but this require a bit more knowledge about R. However doing as describe above will give you a better understanding of how the R structures work. For those who are intereseted have a look at the function <code>filter()</code> from the <code>dplyr</code> package.</p>
+</div>
+<div id="adding-and-removing-rows-and-columns" class="section level1">
+<h1><span class="header-section-number">6</span> Adding and removing rows and columns</h1>
+<p>I can add columns to a data frame using the cbind() function. For instance, let’s say I want to create a column “ID” which assigns a number to each country. I first create the vector and add it to the dataframe:</p>
+<pre class="r"><code>ID &lt;- 1:nrow(data) #A vector going from 1 to 160 (which is the length of my data frame)
+cbind(data, ID)</code></pre>
+<pre><code>##     NA.                                name iso_a2   HDI urban_pop unemployment
+## 1     1                         Afghanistan     AF    NA   8609463           NA
+## 2     2                              Angola     AO 0.504  11649562           NA
+## 3     3                             Albania     AL    NA   1629715        17.49
+## 4     4                United Arab Emirates     AE    NA   7734365           NA
+## 5     5                           Argentina     AR    NA  39372787         7.27
+## 6     6                             Armenia     AM    NA   1825455        17.50
+## 7     7                          Antarctica     AQ    NA        NA           NA
+## 8     8 French Southern and Antarctic Lands     TF    NA        NA           NA
+## 9     9                           Australia     AU    NA  20986610         6.08
+## 10   10                             Austria     AT    NA   5630521         5.62
+## 11   11                          Azerbaijan     AZ    NA   5182792         4.91
+## 12   12                             Burundi     BI 0.352   1163373         1.57
+## 13   13                             Belgium     BE    NA  10964475         8.52
+## 14   14                               Benin     BJ 0.434   4476160           NA
+## 15   15                        Burkina Faso     BF 0.340   5104154         6.50
+## 16   16                          Bangladesh     BD    NA  53426273           NA
+## 17   17                            Bulgaria     BG    NA   5318697        11.42
+## 18   18                             Bahamas     BS    NA    316440           NA
+## 19   19              Bosnia and Herzegovina     BA    NA   1412707        27.52
+## 20   20                             Belarus     BY    NA   7226873         0.50
+## 21   21                              Belize     BZ    NA    155181        11.57
+## 22   22                             Bolivia     BO    NA   7193570         2.01
+## 23   23                              Brazil     BR    NA 174465406         6.85
+## 24   24                   Brunei Darussalam     BN    NA    316547         6.97
+## 25   25                              Bhutan     BT    NA    294258         2.63
+## 26   26                            Botswana     BW 0.634   1240142           NA
+## 27   27            Central African Republic     CF 0.348   1795275           NA
+## 28   28                              Canada     CA    NA  29014612         6.91
+## 29   29                         Switzerland     CH    NA   6046826         4.83
+## 30   30                               Chile     CL    NA  15738985         6.66
+## 31   31                               China     CN    NA 742299307         4.10
+## 32   32                       Cote d&#39;Ivoire     CI 0.426  12049541           NA
+## 33   33                            Cameroon     CM 0.492  11969294         4.32
+## 34   34    Democratic Republic of the Congo     CD 0.299  30945908           NA
+## 35   35                   Republic of Congo     CG 0.531   3164121           NA
+## 36   36                            Colombia     CO    NA  36398797         8.58
+## 37   37                          Costa Rica     CR    NA   3611713         9.06
+## 38   38                                Cuba     CU    NA   8805189         2.70
+## 39   39                     Northern Cyprus   &lt;NA&gt;    NA        NA           NA
+## 40   40                              Cyprus     CY    NA    772266        16.09
+## 41   41                      Czech Republic     CZ    NA   7685503         6.11
+## 42   42                             Germany     DE    NA  60812999         4.98
+## 43   43                            Djibouti     DJ 0.442    704756           NA
+## 44   44                             Denmark     DK    NA   4938153         6.59
+## 45   45                  Dominican Republic     DO    NA   8122906         6.40
+## 46   46                             Algeria     DZ 0.711  27429775        10.60
+## 47   47                             Ecuador     EC    NA  10101021         3.48
+## 48   48                               Egypt     EG 0.661  39542754        13.10
+## 49   49                             Eritrea     ER 0.346        NA           NA
+## 50   50                               Spain     ES    NA  36884904        24.44
+## 51   51                             Estonia     EE    NA    888922         7.35
+## 52   52                            Ethiopia     ET 0.392  18526950        17.64
+## 53   53                             Finland     FI    NA   4592367         8.66
+## 54   54                                Fiji     FJ    NA    472613         6.17
+## 55   55                    Falkland Islands     FK    NA        NA           NA
+## 56   56                              France     FR    NA  52593947        10.30
+## 57   57                               Gabon     GA 0.679   1630370           NA
+## 58   58                      United Kingdom     GB    NA  53205707         6.11
+## 59   59                             Georgia     GE    NA   1992752        12.35
+## 60   60                               Ghana     GH 0.553  14395852           NA
+## 61   61                              Guinea     GN 0.352   4330261           NA
+## 62   62                          The Gambia     GM 0.440   1131820           NA
+## 63   63                       Guinea-Bissau     GW 0.364    837849           NA
+## 64   64                   Equatorial Guinea     GQ 0.551    449014           NA
+## 65   65                              Greece     GR    NA   8461009        26.49
+## 66   66                           Greenland     GL    NA     48439        10.30
+## 67   67                           Guatemala     GT    NA   8139327         2.91
+## 68   68                              Guyana     GY    NA    217254           NA
+## 69   69                            Honduras     HN    NA   4769045         5.49
+## 70   70                             Croatia     HR    NA   2486069        17.29
+## 71   71                               Haiti     HT    NA   6072402           NA
+## 72   72                             Hungary     HU    NA   6982598         7.73
+## 73   73                           Indonesia     ID    NA 135227145         4.05
+## 74   74                               India     IN    NA 418770499           NA
+## 75   75                             Ireland     IE    NA   2906635        11.26
+## 76   76                                Iran     IR    NA  57126401        10.57
+## 77   77                                Iraq     IQ    NA  24280567           NA
+## 78   78                             Iceland     IS    NA    307880         4.90
+## 79   79                              Israel     IL    NA   7564688         5.89
+## 80   80                               Italy     IT    NA  41835694        12.68
+## 81   81                             Jamaica     JM    NA   1561440        13.74
+## 82   82                              Jordan     JO    NA   7351102        11.90
+## 83   83                               Japan     JP    NA 118393408         3.58
+## 84   84                          Kazakhstan     KZ    NA   9213427         5.06
+## 85   85                               Kenya     KE 0.515  11596730           NA
+## 86   86                          Kyrgyzstan     KG    NA   2076563         8.05
+## 87   87                            Cambodia     KH    NA   3132650         0.18
+## 88   88                   Republic of Korea     KR    NA  41794948         3.53
+## 89   89                              Kosovo   &lt;NA&gt;    NA        NA           NA
+## 90   90                              Kuwait     KW    NA   3719132           NA
+## 91   91                             Lao PDR     LA    NA   2469503           NA
+## 92   92                             Lebanon     LB    NA   4912395           NA
+## 93   93                             Liberia     LR 0.381   2164985           NA
+## 94   94                               Libya     LY 0.725   4861477           NA
+## 95   95                           Sri Lanka     LK    NA   3805247         4.40
+## 96   96                             Lesotho     LS 0.456    574834           NA
+## 97   97                           Lithuania     LT    NA   1950669        10.70
+## 98   98                          Luxembourg     LU    NA    499975         5.85
+## 99   99                              Latvia     LV    NA   1344228        10.85
+## 100 100                             Morocco     MA 0.589  20487552         9.70
+## 101 101                             Moldova     MD    NA   1597711         3.86
+## 102 102                          Madagascar     MG 0.483   8130933           NA
+## 103 103                              Mexico     MX    NA  98099040         4.81
+## 104 104                           Macedonia     MK    NA   1184775        28.03
+## 105 105                                Mali     ML 0.347   6639767         6.38
+## 106 106                             Myanmar     MM    NA  17421082           NA
+## 107 107                          Montenegro     ME    NA    396914        18.00
+## 108 108                            Mongolia     MN    NA   2082457         4.80
+## 109 109                          Mozambique     MZ 0.322   8690002        25.30
+## 110 110                          Mauritania     MR 0.464   2408076           NA
+## 111 111                              Malawi     MW 0.415   2748424           NA
+## 112 112                            Malaysia     MY    NA  22371755         2.88
+## 113 113                             Namibia     NA 0.606   1083022        18.52
+## 114 114                       New Caledonia     NC    NA    186697        14.59
+## 115 115                               Niger     NE 0.297   3536485           NA
+## 116 116                             Nigeria     NG 0.467  82834089         4.56
+## 117 117                           Nicaragua     NI    NA   3515723         4.52
+## 118 118                         Netherlands     NL    NA  15163329         7.42
+## 119 119                              Norway     NO    NA   4120471         3.48
+## 120 120                               Nepal     NP    NA   5167009         3.00
+## 121 121                         New Zealand     NZ    NA   3889661         5.38
+## 122 122                                Oman     OM    NA   3056963           NA
+## 123 123                            Pakistan     PK    NA  71069783         1.83
+## 124 124                              Panama     PA    NA   2588030         4.82
+## 125 125                                Peru     PE    NA  24247490         5.71
+## 126 126                         Philippines     PH    NA  44533489         3.60
+## 127 127                    Papua New Guinea     PG    NA   1007089           NA
+## 128 128                              Poland     PL    NA  23022948         8.99
+## 129 129                         Puerto Rico     PR    NA   3309915        13.91
+## 130 130                     Dem. Rep. Korea     KP    NA  15249400           NA
+## 131 131                            Portugal     PT    NA   6543100        13.89
+## 132 132                            Paraguay     PY    NA   3893283         7.83
+## 133 133                           Palestine     PS    NA   3222128        26.95
+## 134 134                               Qatar     QA    NA   2354450         0.19
+## 135 135                             Romania     RO    NA  10829091         6.80
+## 136 136                  Russian Federation     RU    NA 106317250         5.16
+## 137 137                              Rwanda     RW 0.429   3158661         1.17
+## 138 138                      Western Sahara     EH    NA        NA           NA
+## 139 139                        Saudi Arabia     SA    NA  25521904         5.72
+## 140 140                               Sudan     SD 0.419  12688618           NA
+## 141 141                         South Sudan     SS    NA   2143723           NA
+## 142 142                             Senegal     SN 0.471   6311994           NA
+## 143 143                     Solomon Islands     SB    NA    125897           NA
+## 144 144                        Sierra Leone     SL 0.348   2801791         4.68
+## 145 145                         El Salvador     SV    NA   4161602         4.16
+## 146 146                          Somaliland   &lt;NA&gt;    NA        NA           NA
+## 147 147                             Somalia     SO    NA   5280659           NA
+## 148 148                              Serbia     RS    NA   3954261        19.22
+## 149 149                            Suriname     SR    NA    362098         6.94
+## 150 150                            Slovakia     SK    NA   2912903        13.18
+## 151 151                            Slovenia     SI    NA   1024701         9.67
+## 152 152                              Sweden     SE    NA   8306173         7.92
+## 153 153                           Swaziland     SZ 0.536    276050           NA
+## 154 154                               Syria     SY    NA  10994729           NA
+## 155 155                                Chad     TD 0.336   3031548           NA
+## 156 156                                Togo     TG 0.455   2853180           NA
+## 157 157                            Thailand     TH    NA  33643263         0.58
+## 158 158                          Tajikistan     TJ    NA   2232184           NA
+## 159 159                        Turkmenistan     TM    NA   2716066           NA
+## 160 160                         Timor-Leste     TL    NA    389689           NA
+## 161 161                 Trinidad and Tobago     TT    NA    115809         2.22
+## 162 162                             Tunisia     TN 0.710   7426857           NA
+## 163 163                              Turkey     TR    NA  56148395         9.88
+## 164 164                              Taiwan     TW    NA        NA           NA
+## 165 165                            Tanzania     TZ 0.470  16141097         2.12
+## 166 166                              Uganda     UG 0.454   6122464           NA
+## 167 167                             Ukraine     UA    NA  31455854         9.27
+## 168 168                             Uruguay     UY    NA   3253766         6.55
+## 169 169                       United States     US    NA 259460378         6.17
+## 170 170                          Uzbekistan     UZ    NA  11158278           NA
+## 171 171                           Venezuela     VE    NA  27339021         6.95
+## 172 172                             Vietnam     VN    NA  30494475         1.26
+## 173 173                             Vanuatu     VU    NA     66827           NA
+## 174 174                               Yemen     YE    NA   8930838        13.47
+## 175 175                        South Africa     ZA 0.625  35067853        24.90
+## 176 176                              Zambia     ZM 0.443   6322121           NA
+## 177 177                            Zimbabwe     ZW 0.387   5008948        11.32
+##      pop_growth literacy  ID
+## 1    3.18320146       NA   1
+## 2    3.48541253 66.03011   2
+## 3   -0.20704700       NA   3
+## 4    0.71476252       NA   4
+## 5    1.03270928       NA   5
+## 6    0.43833153       NA   6
+## 7            NA       NA   7
+## 8            NA       NA   8
+## 9    1.53587885       NA   9
+## 10   0.73086728       NA  10
+## 11   1.24820900 99.78899  11
+## 12   2.99226469 61.56973  12
+## 13   0.23437084       NA  13
+## 14   2.78228713       NA  14
+## 15   2.96197794 34.59940  15
+## 16   1.15718803       NA  16
+## 17  -0.56838926       NA  17
+## 18   1.29813295       NA  18
+## 19  -1.08764131       NA  19
+## 20   0.08990256       NA  20
+## 21   2.15937976       NA  21
+## 22   1.54465177       NA  22
+## 23   0.88756333 91.72943  23
+## 24   1.46512371       NA  24
+## 25   1.49048211       NA  25
+## 26   1.86485526       NA  26
+## 27   0.34917221       NA  27
+## 28   1.08358781       NA  28
+## 29   1.22010397       NA  29
+## 30   0.85992460       NA  30
+## 31   0.50631159       NA  31
+## 32   2.53976657 43.90842  32
+## 33   2.66187609       NA  33
+## 34   3.31917586       NA  34
+## 35   2.48821514       NA  35
+## 36   0.94378271 94.18625  36
+## 37   1.08145876       NA  37
+## 38   0.24155516       NA  38
+## 39           NA       NA  39
+## 40   0.73277757       NA  40
+## 41   0.10527758       NA  41
+## 42   0.41687736       NA  42
+## 43   1.71118230       NA  43
+## 44   0.50705328       NA  44
+## 45   1.20412493 91.76376  45
+## 46   2.00066646       NA  46
+## 47   1.53063409 94.22264  47
+## 48   2.20814281       NA  48
+## 49           NA       NA  49
+## 50  -0.29895106 98.09372  50
+## 51  -0.26225618       NA  51
+## 52   2.57906831       NA  52
+## 53   0.41356021       NA  53
+## 54   0.68999736       NA  54
+## 55           NA       NA  55
+## 56   0.50386891       NA  56
+## 57   3.16529286       NA  57
+## 58   0.75334950       NA  58
+## 59  -1.30616278 99.58619  59
+## 60   2.31233605       NA  60
+## 61   2.30403964 32.00386  61
+## 62   3.09928290       NA  62
+## 63   2.59749832 45.58116  63
+## 64   4.12842100       NA  64
+## 65  -0.66611329       NA  65
+## 66  -0.33339867       NA  66
+## 67   2.07715182 81.28590  67
+## 68   0.69827307 85.63973  68
+## 69   1.73395300 87.19753  69
+## 70  -0.40734318       NA  70
+## 71   1.33965419       NA  71
+## 72  -0.26937877       NA  72
+## 73   1.22204863 95.11622  73
+## 74   1.18932821       NA  74
+## 75   0.41085101       NA  75
+## 76   1.25215632 84.70524  76
+## 77   3.26040676       NA  77
+## 78   1.11250476       NA  78
+## 79   1.91954380       NA  79
+## 80   0.91750410       NA  80
+## 81   0.35982505       NA  81
+## 82   4.59753829       NA  82
+## 83  -0.13269422       NA  83
+## 84   1.47972230       NA  84
+## 85   2.63611636 78.73304  85
+## 86   2.00610790       NA  86
+## 87   1.63799953       NA  87
+## 88   0.62814986       NA  88
+## 89           NA       NA  89
+## 90   4.98868141       NA  90
+## 91   1.25225855       NA  91
+## 92   6.01643946       NA  92
+## 93   2.40753043       NA  93
+## 94   0.13125726       NA  94
+## 95   0.89951279       NA  95
+## 96   1.33349509 76.63520  96
+## 97  -0.85982734       NA  97
+## 98   2.35697870       NA  98
+## 99  -0.94174335       NA  99
+## 100  1.44790425       NA 100
+## 101 -0.06097010       NA 101
+## 102  2.70109745       NA 102
+## 103  1.36624560 94.55588 103
+## 104  0.08456061       NA 104
+## 105  2.90103101       NA 105
+## 106  0.92092177       NA 106
+## 107  0.09702201       NA 107
+## 108  1.89161420       NA 108
+## 109  2.90069573       NA 109
+## 110  2.94025368       NA 110
+## 111  2.92294017 65.14537 111
+## 112  1.73957921       NA 112
+## 113  2.32423734       NA 113
+## 114  1.88329483       NA 114
+## 115  3.84268093       NA 115
+## 116  2.65955070       NA 116
+## 117  1.14134117       NA 117
+## 118  0.35982817       NA 118
+## 119  1.12773668       NA 119
+## 120  1.20029747       NA 120
+## 121  1.51033949       NA 121
+## 122  6.50465955 91.98120 122
+## 123  2.08779243 56.97715 123
+## 124  1.69263169       NA 124
+## 125  1.32482978 93.70795 125
+## 126  1.63281925       NA 126
+## 127  2.12300260       NA 127
+## 128 -0.07484623       NA 128
+## 129 -1.63312833       NA 129
+## 130  0.52048386       NA 130
+## 131 -0.53919047       NA 131
+## 132  1.33420075 94.61672 132
+## 133  2.95799495 96.42839 133
+## 134  5.36123596 97.74669 134
+## 135 -0.37457550       NA 135
+## 136  0.21770010       NA 136
+## 137  2.50079653       NA 137
+## 138          NA       NA 138
+## 139  2.74137582       NA 139
+## 140  2.38118456       NA 140
+## 141  3.11346114       NA 141
+## 142  2.97087780       NA 142
+## 143  2.10557753       NA 143
+## 144  2.24393811       NA 144
+## 145  0.48535177       NA 145
+## 146          NA       NA 146
+## 147  2.85828598       NA 147
+## 148 -0.46948929       NA 148
+## 149  0.98820760       NA 149
+## 150  0.09704542       NA 150
+## 151  0.09835192       NA 151
+## 152  0.99221973       NA 152
+## 153  1.84228953       NA 153
+## 154 -3.10722942       NA 154
+## 155  3.26470637       NA 155
+## 156  2.60621232       NA 156
+## 157  0.40086071       NA 157
+## 158  2.23624562       NA 158
+## 159  1.84568053       NA 159
+## 160  2.37356691       NA 160
+## 161  0.46212427       NA 161
+## 162  1.16751285 79.03643 162
+## 163  1.62719411 95.43963 163
+## 164          NA       NA 164
+## 165  3.10757242       NA 165
+## 166  3.35065035       NA 166
+## 167 -0.47961593       NA 167
+## 168  0.33807176 98.43593 168
+## 169  0.74312426       NA 169
+## 170  1.68690036 99.98055 170
+## 171  1.37753896       NA 171
+## 172  1.13799857       NA 172
+## 173  2.22981472       NA 173
+## 174  2.58590538       NA 174
+## 175  1.42592504 94.13990 175
+## 176  3.04021077       NA 176
+## 177  2.34479907 88.69342 177</code></pre>
+<p>To add rows to a data frame we need to use the function <code>rbind()</code>.</p>
+</div>
+<div id="categorical-data-factors" class="section level1">
+<h1><span class="header-section-number">7</span> Categorical data: factors</h1>
+<p>Remember when I told you that in R there is more data type than only numeric and character? Well factor is another important type of data and deserve a section on its own!</p>
+<p>When we did str(data) we saw that <code>name</code> was a factor right? Well, factors are very useful and are actually something that make R particularly well suited to working with data, so we’re going to spend a little time introducing them.</p>
+<p>Factors are used to represent <code>categorical data</code>. Factors can be ordered or unordered, and understanding them is necessary for statistical analysis and for plotting.</p>
+<p>Factors are stored as integers, and have labels (text) associated with these unique integers. While factors look (and often behave) like character vectors, <code>they are actually integers under the hood</code>, and you need to be careful when treating them like strings.</p>
+<p>Once created, factors can only contain a pre-defined set of values, known as levels. By default, R always sorts levels in alphabetical order. For instance, if you have a factor with 2 levels:</p>
+<pre class="r"><code>sex &lt;- factor(c(&quot;man&quot;, &quot;woman&quot;, &quot;woman&quot;, &quot;man&quot;, &quot;woman&quot;))</code></pre>
+<p>R will assign the value of 1 to the level man and the value 2 to the level woman. You can check this by using the functions <code>levels()</code> and <code>nlevels()</code>.</p>
+<pre class="r"><code>levels(sex)</code></pre>
+<pre><code>## [1] &quot;man&quot;   &quot;woman&quot;</code></pre>
+<pre class="r"><code>nlevels(sex)</code></pre>
+<pre><code>## [1] 2</code></pre>
+<p>Sometimes the order of the factors do not matter (here that would be the same if the level <code>woman</code> has the value 1 but there is some cases when it is meaningful: a value of 1 for “low”, 2 for “moderate” and 3 for “high” would make sense.</p>
+<div id="reordering-levels" class="section level2">
+<h2><span class="header-section-number">7.1</span> Reordering levels</h2>
+<p>It is possible to reorder the levels of a vector:</p>
+<pre class="r"><code>sex #gives the current order of the levels</code></pre>
+<pre><code>## [1] man   woman woman man   woman
+## Levels: man woman</code></pre>
+<pre class="r"><code>sex &lt;- factor(sex, levels = c(&#39;woman&#39;,&#39;man&#39;)) # I reorder
+sex # after re ordering</code></pre>
+<pre><code>## [1] man   woman woman man   woman
+## Levels: woman man</code></pre>
+</div>
+<div id="converting-factors" class="section level2">
+<h2><span class="header-section-number">7.2</span> Converting factors</h2>
+<p>Sometimes, R open that dataframe and thinks one of the column is a factor while in reality it is not (such as it is the case for <code>name</code> here). In these cases we need to convert the data type</p>
+<p>If you need to convert a factor vector to a character vector use the function <code>as.character()</code></p>
+<pre class="r"><code>as.character(data$name)</code></pre>
+<pre><code>##   [1] &quot;Afghanistan&quot;                        
+##   [2] &quot;Angola&quot;                             
+##   [3] &quot;Albania&quot;                            
+##   [4] &quot;United Arab Emirates&quot;               
+##   [5] &quot;Argentina&quot;                          
+##   [6] &quot;Armenia&quot;                            
+##   [7] &quot;Antarctica&quot;                         
+##   [8] &quot;French Southern and Antarctic Lands&quot;
+##   [9] &quot;Australia&quot;                          
+##  [10] &quot;Austria&quot;                            
+##  [11] &quot;Azerbaijan&quot;                         
+##  [12] &quot;Burundi&quot;                            
+##  [13] &quot;Belgium&quot;                            
+##  [14] &quot;Benin&quot;                              
+##  [15] &quot;Burkina Faso&quot;                       
+##  [16] &quot;Bangladesh&quot;                         
+##  [17] &quot;Bulgaria&quot;                           
+##  [18] &quot;Bahamas&quot;                            
+##  [19] &quot;Bosnia and Herzegovina&quot;             
+##  [20] &quot;Belarus&quot;                            
+##  [21] &quot;Belize&quot;                             
+##  [22] &quot;Bolivia&quot;                            
+##  [23] &quot;Brazil&quot;                             
+##  [24] &quot;Brunei Darussalam&quot;                  
+##  [25] &quot;Bhutan&quot;                             
+##  [26] &quot;Botswana&quot;                           
+##  [27] &quot;Central African Republic&quot;           
+##  [28] &quot;Canada&quot;                             
+##  [29] &quot;Switzerland&quot;                        
+##  [30] &quot;Chile&quot;                              
+##  [31] &quot;China&quot;                              
+##  [32] &quot;Cote d&#39;Ivoire&quot;                      
+##  [33] &quot;Cameroon&quot;                           
+##  [34] &quot;Democratic Republic of the Congo&quot;   
+##  [35] &quot;Republic of Congo&quot;                  
+##  [36] &quot;Colombia&quot;                           
+##  [37] &quot;Costa Rica&quot;                         
+##  [38] &quot;Cuba&quot;                               
+##  [39] &quot;Northern Cyprus&quot;                    
+##  [40] &quot;Cyprus&quot;                             
+##  [41] &quot;Czech Republic&quot;                     
+##  [42] &quot;Germany&quot;                            
+##  [43] &quot;Djibouti&quot;                           
+##  [44] &quot;Denmark&quot;                            
+##  [45] &quot;Dominican Republic&quot;                 
+##  [46] &quot;Algeria&quot;                            
+##  [47] &quot;Ecuador&quot;                            
+##  [48] &quot;Egypt&quot;                              
+##  [49] &quot;Eritrea&quot;                            
+##  [50] &quot;Spain&quot;                              
+##  [51] &quot;Estonia&quot;                            
+##  [52] &quot;Ethiopia&quot;                           
+##  [53] &quot;Finland&quot;                            
+##  [54] &quot;Fiji&quot;                               
+##  [55] &quot;Falkland Islands&quot;                   
+##  [56] &quot;France&quot;                             
+##  [57] &quot;Gabon&quot;                              
+##  [58] &quot;United Kingdom&quot;                     
+##  [59] &quot;Georgia&quot;                            
+##  [60] &quot;Ghana&quot;                              
+##  [61] &quot;Guinea&quot;                             
+##  [62] &quot;The Gambia&quot;                         
+##  [63] &quot;Guinea-Bissau&quot;                      
+##  [64] &quot;Equatorial Guinea&quot;                  
+##  [65] &quot;Greece&quot;                             
+##  [66] &quot;Greenland&quot;                          
+##  [67] &quot;Guatemala&quot;                          
+##  [68] &quot;Guyana&quot;                             
+##  [69] &quot;Honduras&quot;                           
+##  [70] &quot;Croatia&quot;                            
+##  [71] &quot;Haiti&quot;                              
+##  [72] &quot;Hungary&quot;                            
+##  [73] &quot;Indonesia&quot;                          
+##  [74] &quot;India&quot;                              
+##  [75] &quot;Ireland&quot;                            
+##  [76] &quot;Iran&quot;                               
+##  [77] &quot;Iraq&quot;                               
+##  [78] &quot;Iceland&quot;                            
+##  [79] &quot;Israel&quot;                             
+##  [80] &quot;Italy&quot;                              
+##  [81] &quot;Jamaica&quot;                            
+##  [82] &quot;Jordan&quot;                             
+##  [83] &quot;Japan&quot;                              
+##  [84] &quot;Kazakhstan&quot;                         
+##  [85] &quot;Kenya&quot;                              
+##  [86] &quot;Kyrgyzstan&quot;                         
+##  [87] &quot;Cambodia&quot;                           
+##  [88] &quot;Republic of Korea&quot;                  
+##  [89] &quot;Kosovo&quot;                             
+##  [90] &quot;Kuwait&quot;                             
+##  [91] &quot;Lao PDR&quot;                            
+##  [92] &quot;Lebanon&quot;                            
+##  [93] &quot;Liberia&quot;                            
+##  [94] &quot;Libya&quot;                              
+##  [95] &quot;Sri Lanka&quot;                          
+##  [96] &quot;Lesotho&quot;                            
+##  [97] &quot;Lithuania&quot;                          
+##  [98] &quot;Luxembourg&quot;                         
+##  [99] &quot;Latvia&quot;                             
+## [100] &quot;Morocco&quot;                            
+## [101] &quot;Moldova&quot;                            
+## [102] &quot;Madagascar&quot;                         
+## [103] &quot;Mexico&quot;                             
+## [104] &quot;Macedonia&quot;                          
+## [105] &quot;Mali&quot;                               
+## [106] &quot;Myanmar&quot;                            
+## [107] &quot;Montenegro&quot;                         
+## [108] &quot;Mongolia&quot;                           
+## [109] &quot;Mozambique&quot;                         
+## [110] &quot;Mauritania&quot;                         
+## [111] &quot;Malawi&quot;                             
+## [112] &quot;Malaysia&quot;                           
+## [113] &quot;Namibia&quot;                            
+## [114] &quot;New Caledonia&quot;                      
+## [115] &quot;Niger&quot;                              
+## [116] &quot;Nigeria&quot;                            
+## [117] &quot;Nicaragua&quot;                          
+## [118] &quot;Netherlands&quot;                        
+## [119] &quot;Norway&quot;                             
+## [120] &quot;Nepal&quot;                              
+## [121] &quot;New Zealand&quot;                        
+## [122] &quot;Oman&quot;                               
+## [123] &quot;Pakistan&quot;                           
+## [124] &quot;Panama&quot;                             
+## [125] &quot;Peru&quot;                               
+## [126] &quot;Philippines&quot;                        
+## [127] &quot;Papua New Guinea&quot;                   
+## [128] &quot;Poland&quot;                             
+## [129] &quot;Puerto Rico&quot;                        
+## [130] &quot;Dem. Rep. Korea&quot;                    
+## [131] &quot;Portugal&quot;                           
+## [132] &quot;Paraguay&quot;                           
+## [133] &quot;Palestine&quot;                          
+## [134] &quot;Qatar&quot;                              
+## [135] &quot;Romania&quot;                            
+## [136] &quot;Russian Federation&quot;                 
+## [137] &quot;Rwanda&quot;                             
+## [138] &quot;Western Sahara&quot;                     
+## [139] &quot;Saudi Arabia&quot;                       
+## [140] &quot;Sudan&quot;                              
+## [141] &quot;South Sudan&quot;                        
+## [142] &quot;Senegal&quot;                            
+## [143] &quot;Solomon Islands&quot;                    
+## [144] &quot;Sierra Leone&quot;                       
+## [145] &quot;El Salvador&quot;                        
+## [146] &quot;Somaliland&quot;                         
+## [147] &quot;Somalia&quot;                            
+## [148] &quot;Serbia&quot;                             
+## [149] &quot;Suriname&quot;                           
+## [150] &quot;Slovakia&quot;                           
+## [151] &quot;Slovenia&quot;                           
+## [152] &quot;Sweden&quot;                             
+## [153] &quot;Swaziland&quot;                          
+## [154] &quot;Syria&quot;                              
+## [155] &quot;Chad&quot;                               
+## [156] &quot;Togo&quot;                               
+## [157] &quot;Thailand&quot;                           
+## [158] &quot;Tajikistan&quot;                         
+## [159] &quot;Turkmenistan&quot;                       
+## [160] &quot;Timor-Leste&quot;                        
+## [161] &quot;Trinidad and Tobago&quot;                
+## [162] &quot;Tunisia&quot;                            
+## [163] &quot;Turkey&quot;                             
+## [164] &quot;Taiwan&quot;                             
+## [165] &quot;Tanzania&quot;                           
+## [166] &quot;Uganda&quot;                             
+## [167] &quot;Ukraine&quot;                            
+## [168] &quot;Uruguay&quot;                            
+## [169] &quot;United States&quot;                      
+## [170] &quot;Uzbekistan&quot;                         
+## [171] &quot;Venezuela&quot;                          
+## [172] &quot;Vietnam&quot;                            
+## [173] &quot;Vanuatu&quot;                            
+## [174] &quot;Yemen&quot;                              
+## [175] &quot;South Africa&quot;                       
+## [176] &quot;Zambia&quot;                             
+## [177] &quot;Zimbabwe&quot;</code></pre>
+<p>If you need to convert factors where the levels appear as numbers (such as dates) to a numeric vector you need to first convert factors to character and then numbers:</p>
+<pre class="r"><code>dates &lt;- factor(c(1500,1600,1700,1800,1900,2000))
+as.numeric(as.character(dates)) #Looks a bit complicated but works well</code></pre>
+<pre><code>## [1] 1500 1600 1700 1800 1900 2000</code></pre>
+</div>
+</div>
+<div id="some-questions" class="section level1">
+<h1><span class="header-section-number">8</span> Some questions!</h1>
+<p>As usual you have a task to complete! This task may take a bit more time and research but I am sure you are able to complete it :)</p>
+<p>We discovered a new country whom name is “Wakanda”! Using all your previous knowledge add a new row to the data frame. the <code>iso_a2</code> code for Wakanda is “WA” and you can choose the other values (you can choose to make Wakanda a very litterate country or not for instance)</p>
+</div>
+<div id="end-of-the-tutorial" class="section level1">
+<h1><span class="header-section-number">9</span> End of the tutorial</h1>
+<p>You made it until the end of this -short- tutorial about R! While I tried to be concise keep in mind that R is much much more than what you learned! However, this tutorial will give you the basics to handle to most common data structures that you will find.</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,26 +1,29 @@
 ---
-title: "GEOG 2015 - Introduction to GIS and statistics"
-author: "Ben"
-date: "6/10/2020"
+title: ""
 output: html_document
 ---
 
-# Welcome!
+## Welcome!
 
 Welcome to GEOG 2015: Introduction to GIS and statistics. During this course you will learn the principles and the basics of spatial data analysis. 
 
 During this course we will use **R** as the main software for both GIS and statistical analysis. R is an extremely versatile and widespread software used by some of the biggest companies including Facebook, Google, Twitter, AirBnB and much more. 
 
-# Introduction to R tutorials
+## Introduction to R tutorials
 
 Make sure you install on your computer and get comfortable with it. You will find the tutorial below.
 
 - [Get started with R! - Introduction to R](IntroR.html)
 - [Get started with R! - Basic manipulations in R](BasicR.html)
+- [Get started with R! - Data frame manipulation in R](DFmanip.html)
 
-# Course exercises
+## Course exercises
 
 Once you have trained in R and done the small exercises from the tutorials you should be ready to do the exercises following the plan of the course. Below you will find a link to the exercises followed by a short description:
 
-- [Exercise 1: Introduction to R and Frequency histograms]() will focus primarily on descriptive statistics.
+- [Lab 1: Introduction to statistics and Frequency histograms]() will focus primarily on descriptive statistics.
+- [Lab 2: Introduction to Geographical Information System]() 
+
+... In construction ...
+
 
