@@ -11,7 +11,7 @@
 
 
 
-<title>index.utf8</title>
+<title>Lab 2 - Map projections and CRS</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +19,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -251,6 +254,69 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -258,6 +324,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -292,36 +368,43 @@ $(document).ready(function () {
 
 
 
+<h1 class="title toc-ignore">Lab 2 - Map projections and CRS</h1>
 
 </div>
 
 
-<div id="welcome" class="section level2">
-<h2>Welcome!</h2>
-<p>Welcome to GEOG 2015: Introduction to GIS and statistics. During this course you will learn the principles and the basics of spatial data analysis.</p>
-<p>During this course we will use <strong>R</strong> as the main software for both GIS and statistical analysis. R is an extremely versatile and widespread software used by some of the biggest companies including Facebook, Google, Twitter, AirBnB and much more.</p>
-</div>
-<div id="introduction-to-r-tutorials" class="section level2">
-<h2>Introduction to R tutorials</h2>
-<p>Make sure you install on your computer and get comfortable with it. You will find the tutorial below.</p>
+<p>In this exercise you will learn:</p>
+<ol style="list-style-type: decimal">
+<li>Get to know the basics R packages to do GIS analysis</li>
+<li>Get to know basic concepts related to spatial reference systems</li>
+<li>Understand that different map projections make measurements of distance and area different</li>
+<li>Be able to add a new field to the attribute table and calculate area values</li>
+<li>Be able to define and change map projections</li>
+</ol>
+<p>Submission:</p>
+<p>You are required to submit a pdf file with two exported maps with area correct and perpendicular map projection. You must also take the test that belongs to learning module 2 (test 2).</p>
+<div id="introduction-to-the-exercise" class="section level1">
+<h1><span class="header-section-number">1</span> Introduction to the exercise</h1>
+<p>In this exercise, you will become familiar with geographical reference systems and map coordinate systems. We will also see how different map projections affect distance and area measurements.</p>
+<p><strong>Map projection</strong> is a way to convert geographical positions from a spherical system to a flat coordinate system (Cartesian coordinate system). The problem with map projections problem is that it can introduce errors through distorsion. Distortions can affect:</p>
 <ul>
-<li><a href="IntroR.html">Get started with R! - Introduction to R</a></li>
-<li><a href="BasicR.html">Get started with R! - Basic manipulations in R</a></li>
-<li><a href="DFmanip.html">Get started with R! - Data frame manipulation in R</a></li>
+<li>Form</li>
+<li>Area</li>
+<li>Distance</li>
+<li>Direction</li>
 </ul>
-</div>
-<div id="course-exercises" class="section level2">
-<h2>Course exercises</h2>
-<p>Once you have trained in R and done the small exercises from the tutorials you should be ready to do the exercises following the plan of the course. Below you will find a link to the exercises followed by a short description:</p>
+<p>Note that during the exercise you will find questions in italic. You have to answer the questions.</p>
+<blockquote>
 <ul>
-<li><a href="Lab_1.html">Lab 1: Introduction to statistics in R and histograms</a>In this exercise we will focus primarily on descriptive statistics.</li>
-<li><a href="">Lab 2: Introduction to Geographical Information System</a>. In this exercise we will introduce GIS in R. You will become familiar with map projections and its effects on distances.</li>
+<li>What is a Cartesian coordinate system?</li>
 </ul>
-<p>… In construction …</p>
+</blockquote>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -354,6 +437,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

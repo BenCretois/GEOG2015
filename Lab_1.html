@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Lab 1 - Introduction to statistics in R and histograms</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/united.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">GEOG 2015 - Introduction to GIS and statistics</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/BenCretois/GEOG2015">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Lab 1 - Introduction to statistics in R and histograms</h1>
+
+</div>
+
+
+<p>What you will learn during this exercise:</p>
+<ol style="list-style-type: decimal">
+<li>Get to know the user interface in SPSS</li>
+<li>Understand what is data table and what is unit and variable</li>
+<li>Be able to sort values into a variable to identify units with min and max values</li>
+<li>Be able to create frequency histograms and understand them</li>
+<li>Be able to construct a change variable</li>
+</ol>
+<div id="grading" class="section level1">
+<h1><span class="header-section-number">1</span> Grading</h1>
+<ol style="list-style-type: decimal">
+<li><p>A maximum of 3 pages of PDF on BlackBoard within the deadline. Put your last name in the file name. Make sure you have a clear layout. Use only one language - either Norwegian or English in the answer. NB Failure to do so will count negatively in evaluation.</p></li>
+<li><p>Questions asked in the exercise text may be repeated in a test. Write down answers to these and be sure to answer the corresponding test (Test 1 in LM1) before the deadline.</p></li>
+<li><p>The results of the exercise and the test will count towards the final exam (in total folder teaching will count 40% of the exam grade).</p></li>
+</ol>
+</div>
+<div id="preliminary-steps" class="section level1">
+<h1><span class="header-section-number">2</span> Preliminary steps</h1>
+<p>1- Create a folder on your home directory (go to ‘my computer’ and click into your ‘Home directory (M :)’) which you call, for example, Geog1004  Exercises. You may want to have individual subfolders - one for each exercise such as: M:  Geog2015  exercises  OV1</p>
+<p>2- Download the World_90_13.xlsx file from Exercise 1 into LM1 on the BlackBoard and save it to Exercise 1 folder that you created in a).</p>
+<p>3- Open R.</p>
+<p>4- Load the World_90_13.xlsx dataset in R (as you learnt during the tutorials)</p>
+<pre class="r"><code>library(xlsx)
+data &lt;- read.xlsx(&#39;data/World_90_13.xlsx&#39;, sheetIndex = 1)</code></pre>
+</div>
+<div id="get-to-know-the-r-interface" class="section level1">
+<h1><span class="header-section-number">3</span> Get to know the R interface</h1>
+<blockquote>
+<ul>
+<li>Remember the tutorials and answer the following question: what are the main panes in RStudio, what are their functions?</li>
+</ul>
+</blockquote>
+<p>If you need some refreshment watch <a href="https://www.youtube.com/watch?v=5YmcEYTSN7k">this video</a></p>
+</div>
+<div id="get-to-know-the-data" class="section level1">
+<h1><span class="header-section-number">4</span> Get to know the data</h1>
+<p>The data presented is taken from the World Bank’s development indicators web pages and contains information on life expectancy, annual population growth and purchasing power adjusted gross domestic product per capita for 1990 and 2013 respectively.</p>
+<pre class="r"><code>head(data) # Show the 5 first rows</code></pre>
+<pre><code>##   NA.                      CntryName CntryCode LifeExp90 LifeExp13 PopGrowth90
+## 1   1 Afghanistan                          AFG  48.56705  60.93141    3.879694
+## 2   2 Albania                              ALB  71.95732  77.53724    1.799086
+## 3   3 Algeria                              DZA  66.75117  71.00966    2.559032
+## 4   4 American Samoa                       ASM        NA        NA    3.137301
+## 5   5 Andorra                              ADO        NA        NA    3.856125
+## 6   6 Angola                               AGO  41.13834  51.86617    2.796482
+##   PopGrowth13 GDP_PPP90 GDP_PPP13
+## 1   3.1643363        NA  1876.191
+## 2  -0.1077295  4303.374  9910.841
+## 3   1.9748145 10289.019 13300.682
+## 4   0.1357110        NA        NA
+## 5  -4.3996839        NA        NA
+## 6   3.3062046        NA        NA</code></pre>
+<p>You can also visualize the entire dataset by clicking on the dataset name in your <code>Environment</code>. This will give you the result shown below:</p>
+<pre class="r"><code>knitr::include_graphics(&#39;imgs_lab/lab_1/dataview.PNG&#39;)</code></pre>
+<p><img src="imgs_lab/lab_1/dataview.PNG" width="796" /></p>
+<p>You can also learn about the type of variable (numeric, date, factor …) in your dataset using <code>str()</code>:</p>
+<pre class="r"><code>str(data)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    219 obs. of  9 variables:
+##  $ NA.        : Factor w/ 219 levels &quot;1&quot;,&quot;10&quot;,&quot;100&quot;,..: 1 112 143 154 165 176 187 198 209 2 ...
+##  $ CntryName  : Factor w/ 215 levels &quot;                              &quot;,..: 2 3 4 5 6 7 8 9 10 11 ...
+##  $ CntryCode  : Factor w/ 215 levels &quot;   &quot;,&quot;ABW&quot;,&quot;ADO&quot;,..: 4 6 56 10 3 5 11 8 9 2 ...
+##  $ LifeExp90  : num  48.6 72 66.8 NA NA ...
+##  $ LifeExp13  : num  60.9 77.5 71 NA NA ...
+##  $ PopGrowth90: num  3.88 1.8 2.56 3.14 3.86 ...
+##  $ PopGrowth13: num  3.164 -0.108 1.975 0.136 -4.4 ...
+##  $ GDP_PPP90  : num  NA 4303 10289 NA NA ...
+##  $ GDP_PPP13  : num  1876 9911 13301 NA NA ...</code></pre>
+<blockquote>
+<ul>
+<li>How many variables do you have in your dataset? How many rows?</li>
+</ul>
+</blockquote>
+</div>
+<div id="create-a-histogram" class="section level1">
+<h1><span class="header-section-number">5</span> Create a histogram</h1>
+<p>In R, constructing a histogram or other graph is generally very easy. You have 2 options for this:</p>
+<ul>
+<li>You can use the base function <code>hist()</code></li>
+<li>You can use the package <code>ggplot2</code> which enhance significatively the aesthetic of your graph.</li>
+</ul>
+<p>Because <code>ggplot2</code> is more complex we will stick to the base graphics. Nevertheless if you are curious about using <code>ggplot2</code> to produce high quality graph I recommend you to read <a href="http://r-statistics.co/Complete-Ggplot2-Tutorial-Part1-With-R-Code.html">this website</a>.</p>
+<p>Here, we will draw a histogram of gross national product per capita in 2013.</p>
+<pre class="r"><code>hist(data$GDP_PPP13)</code></pre>
+<p><img src="Lab_1_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>You can modify the graph to give a more relevant title and axis names:</p>
+<pre class="r"><code>hist(data$GDP_PPP13,
+     main = &#39;Histogram of the GDP per capita in 2013&#39;,
+     xlab = &#39;GDP per capita in 2013&#39;,
+     ylab = &#39;Frequency&#39;)</code></pre>
+<p><img src="Lab_1_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>You can also add colors, change the size of the bins … I let you discover the possibilities by typing <code>?hist</code>.</p>
+<blockquote>
+<ul>
+<li>Repeat the procedure with the variable: Population growth 2013 (annual%). Bonus: Add a color to the bars in the histogram</li>
+</ul>
+</blockquote>
+</div>
+<div id="create-new-variables-for-changes-in-gross-domestic-product-population-growth-and-life-expectancy" class="section level1">
+<h1><span class="header-section-number">6</span> Create new variables for changes in gross domestic product, population growth and life expectancy</h1>
+<p>In step 4, we have given a static representation of the distribution for the variables gross national product and population growth for 2013.</p>
+<p>We now want to look at the changes between 1990 and 2013 in the individual countries for these two variables. We also want to do the same for the variable life expectancy. We must therefore construct three new variables representing these changes.</p>
+<p>To add the new variable in the dataset you can do as follow:</p>
+<pre class="r"><code># Create a new column &quot;changes_GDP&quot; representing the difference between GDP in 2013 an GDP in 1990.
+data$changes_GDP &lt;- data$GDP_PPP13 - data$GDP_PPP90</code></pre>
+<p>We can check that the new variables has been created by for instance typing <code>str(data)</code></p>
+<pre class="r"><code>str(data)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    219 obs. of  10 variables:
+##  $ NA.        : Factor w/ 219 levels &quot;1&quot;,&quot;10&quot;,&quot;100&quot;,..: 1 112 143 154 165 176 187 198 209 2 ...
+##  $ CntryName  : Factor w/ 215 levels &quot;                              &quot;,..: 2 3 4 5 6 7 8 9 10 11 ...
+##  $ CntryCode  : Factor w/ 215 levels &quot;   &quot;,&quot;ABW&quot;,&quot;ADO&quot;,..: 4 6 56 10 3 5 11 8 9 2 ...
+##  $ LifeExp90  : num  48.6 72 66.8 NA NA ...
+##  $ LifeExp13  : num  60.9 77.5 71 NA NA ...
+##  $ PopGrowth90: num  3.88 1.8 2.56 3.14 3.86 ...
+##  $ PopGrowth13: num  3.164 -0.108 1.975 0.136 -4.4 ...
+##  $ GDP_PPP90  : num  NA 4303 10289 NA NA ...
+##  $ GDP_PPP13  : num  1876 9911 13301 NA NA ...
+##  $ changes_GDP: num  NA 5607 3012 NA NA ...</code></pre>
+<blockquote>
+<ul>
+<li>Add variables representing the changes in population growth and life expectancy.</li>
+</ul>
+</blockquote>
+<p><em>Note 1: The variable you have constructed is not change in population, but change in population growth. A country that had population growth in 1990 and also had population growth, but somewhat lower, in 2013 will have a negative value for the change variable. Although the country is experiencing growth in both years, growth has slowed. A country that has received a positive value means that population growth in 2013 was greater than population growth in 1990</em></p>
+<p><em>Note 2: Note: The gross domestic product variables are adjusted in two ways. First, one it adjusted with regard to purchasing power. With a 1 dollar spent in India you can buy much more than with a 1 dollar spent in the United States (Check <a href="http://en.wikipedia.org/wiki/Purchasing_power_parity%20for%20details">wikipedia</a>). Secundly, the variable has been adjusted to dollar value as it was in 2011 (since 1 dollar in 1990 is different than a dollar in 2013).</em></p>
+<p>*Note 3: If one of the variables used to calculate the change variable is missing value for a country, the change variable will also be missing value for that country. Both variables used in the calculation must have value for the change variable to get value.</p>
+</div>
+<div id="create-frequency-histograms-of-the-new-change-variables-and-discuss-the-results" class="section level1">
+<h1><span class="header-section-number">7</span> Create frequency histograms of the new change variables and discuss the results</h1>
+<p>Create a histograms for your three new change variables as described in point 4. Study the data table and frequency histograms you have created and discuss with a fellow student:</p>
+<blockquote>
+<ul>
+<li>The variable values are displayed along the first axis (the x-axis, the horizontal). Along the second axis (the y-axis, the vertical), frequency is shown, but frequency of what?</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Which countries represent the extremes of change in population growth, life expectancy and gross domestic product?</li>
+</ul>
+</blockquote>
+<p>*Tip: you can use <code>which(max(data$...))</code> and <code>which(min(data$...))</code>. This will give you the row number of the maximum and minimum of your variable. You can then search for the corresponding country.</p>
+<blockquote>
+<ul>
+<li>Has population growth increased or decreased for most countries between 1990 and 2013?</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Has life expectancy increased or decreased for most countries between 1990 and 2013?</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Have most countries become richer or poorer (have they increased or decreased their GDP per capita) in the period between 1990 and 2013?</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>At what end of the GDP per capita change histogram are Botswana, Italy, Ireland and Saudi Arabia located? Where is find Norway (first quarter, first half …)?</li>
+</ul>
+</blockquote>
+<p>Write down the answers - you may be asked the same questions on the exam test 1 that finishes LM 1.</p>
+</div>
+<div id="use-hist-to-create-frequency-histograms-to-be-submitted-for-this-exercise." class="section level1">
+<h1><span class="header-section-number">8</span> Use hist() to create frequency histograms to be submitted for this exercise.</h1>
+<p>Create three histograms for the three change variables. Label the axis with relevant title and add colors to the histogram.</p>
+<p>You should end up with 3 histograms.</p>
+</div>
+<div id="save-your-histograms-and-place-them-in-a-word-document-ready-for-submission." class="section level1">
+<h1><span class="header-section-number">9</span> Save your histograms and place them in a word document ready for submission.</h1>
+<p>To save a graph you will need to select <code>Plots</code> on the lower right pane. Then select <code>Export &gt; Save as image</code>.</p>
+<pre class="r"><code>knitr::include_graphics(&#39;imgs_lab/lab_1/SaveImg.PNG&#39;)</code></pre>
+<p><img src="imgs_lab/lab_1/SaveImg.PNG" width="428" /></p>
+<p><em>Note: If you use Norwegian in the exercise, remember to change all text in the figures to Norwegian.</em></p>
+</div>
+<div id="submission" class="section level1">
+<h1><span class="header-section-number">10</span> Submission</h1>
+<p>As a hand in exercise 1 you must deliver:</p>
+<ol style="list-style-type: decimal">
+<li>The three frequency charts for the change variables (from point 5) that you created in point 7.</li>
+<li>A text explaining briefly what frequency charts are for something and why it is useful to create such charts. Use your own words! (The answers will be checked for plagiarism)</li>
+</ol>
+<p>Provide brief, descriptive character texts for each chart. Put them under the figure.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>What type of chart does the figure show?</li>
+<li>What variables are used?</li>
+<li>For what years?</li>
+</ol>
+<blockquote>
+<p>Remember to be brief! Make sure that figure text and figure are on the same page. Remember that the answer must be a maximum of three pages long. Remember to convert the Word file to .pdf after you finish. To convert the file to PDF format, go to File and Save as Adobe PDF.</p>
+</blockquote>
+</div>
+<div id="checklist" class="section level1">
+<h1><span class="header-section-number">11</span> Checklist</h1>
+<p>The submission must contain:</p>
+<ol style="list-style-type: decimal">
+<li>The three frequency histograms of the change variables you created.</li>
+<li>Short and descriptive character texts under each of the frequency histograms.</li>
+<li>A brief explanation of your own words about what a frequency histogram is and why it is useful to create such charts.</li>
+</ol>
+<p>Now you are ready to submit your exercise: Upload the (max) 3-page PDF file on BlackBoard as a response to this exercise.</p>
+<p>REMEMBER to include your last name in the file name and use only one language in the answer.</p>
+</div>
+<div id="prepare-for-the-test" class="section level1">
+<h1><span class="header-section-number">12</span> Prepare for the test</h1>
+<p>Make sure you are ready with the answers to the questions in steps 3, 4 and 6. These questions will be repeated in the test that completes Learning Module 1 (LM1).</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -2,11 +2,10 @@ name: "GEOG 2015"
 output_dir: "."
 navbar:
   title: "GEOG 2015 - Introduction to GIS and statistics"
-  left:
-    - text: "Jan Ketil Rød; Benjamin Cretois"
+  right:
     - icon: fa-github fa-lg
       href: https://github.com/BenCretois/GEOG2015
 output:
   html_document:
-    theme: jekyll-theme-cayman
+    theme: paper
     css: 'styles.css'

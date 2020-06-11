@@ -1,19 +1,11 @@
 ---
-title: "Get started with R! 3 / 3"
-knit: (function(input_file, encoding) {
-  out_dir <- '';
-  rmarkdown::render(input_file,
- encoding=encoding,
- output_file=file.path(dirname(input_file), out_dir, 'DFmanip.html'))})
-author: "Benjamin Cretois"
-output:
-  html_document:
-    toc: true
-    toc_float: true
-    theme: united
-    number_sections: yes
-    self_contained: no
-  pdf_document: default
+title: "Get started with R - 3/3"
+output: 
+    html_document:
+        toc: TRUE
+        toc_float: TRUE
+        number_sections: yes
+        theme: united
 ---
 
 This lesson is the last of this small introduction to R! Here there will be even more practice as we will be manipulating a real dataset and you will learn some of the basic functions to inspect a dataset! For this lesson I expext you to get a good understanding of what a data frame is :)
@@ -229,7 +221,7 @@ Sometimes, R open that dataframe and thinks one of the column is a factor while 
 
 If you need to convert a factor vector to a character vector use the function `as.character()`
 
-```{r}
+```{r, eval = FALSE}
 as.character(data$name)
 ```
 
@@ -249,4 +241,6 @@ We discovered a new country whom name is “Wakanda”! Using all your previous 
 # End of the tutorial
 
 You made it until the end of this -short- tutorial about R! While I tried to be concise keep in mind that R is much much more than what you learned! However, this tutorial will give you the basics to handle to most common data structures that you will find. 
+
+In the exercises we will learn much more things, and especially how to turn R into a GIS software!
 
