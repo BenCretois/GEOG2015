@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Lab 5 - Multivariate analysis</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 54px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h2 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h3 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h4 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h5 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h6 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">GEOG 2015 - Introduction to GIS and statistics</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/BenCretois/GEOG2015">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Lab 5 - Multivariate analysis</h1>
+
+</div>
+
+
+<p>What you will learn:</p>
+<p>The goal of this exercise is to become familiar with how to perform bivariate analysis (co-variation and regression) in R and to store the residuals from the regression analysis for later use in ArcGIS.</p>
+<p><em>Note: this exercise must be done to do the next exercise (Exercise 6) which is a GIS exercise.</em></p>
+<div id="load-the-data-in-r" class="section level1">
+<h1><span class="header-section-number">1</span> Load the data in R</h1>
+<ol style="list-style-type: lower-alpha">
+<li>In this exercise, you should also use the file World20xx.sav (the one you were assigned in the <strong>NameOgVariables.pdf</strong>). Copy the file to the folder for this exercise.</li>
+<li>Open the World20xx.sav in R.</li>
+<li>Each of you will use the same variables that you did in Exercise 3 and 4 that were referred to as Variable 1 and Variable 2. The exercise text here uses Female life expectancy at birth and Primary school completion rate for females as Variable 1 and Variable 2.</li>
+</ol>
+<p>We have to work through some steps before using the dataset for the analysis that follows.</p>
+<p>First we will only take the variables we are interested in. That is the third line of code here. Then we will get rid of the <strong>missing values</strong>. We can do that using the function ´complete.cases()´.</p>
+</div>
+<div id="visualize-the-relationship-between-your-variables-using-a-scatter-plot" class="section level1">
+<h1><span class="header-section-number">2</span> Visualize the relationship between your variables using a scatter plot</h1>
+<p>To create a scatterplot in R you can use the function <code>plot()</code>. Firsts arguments of the function are the variables you want to vizualise and the other arguments are for aesthetics (title of the axis, colors etc.)</p>
+<pre class="r"><code>plot(data$LifeExp05 ~ data$PrimComp05,
+     main = &#39;Scatterplot of Female life expectancy vs Primary school completion&#39;,
+     ylab = &#39;Female life expectancy&#39;,
+     xlab = &#39;Primary school completion&#39;)</code></pre>
+<p><img src="Lab_5_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Look carefully at the scatter plot:</p>
+<ul>
+<li>Do you think the chart suggests a trend - a correlation between how the values of variable 1 correlate with values of variable 2? If there is a sort of correlation, what does this suggest?</li>
+<li>Are there any countries that stand out from such a possible trend?</li>
+</ul>
+<p>In addition to a scatter plot, we want a measure of the relationship (correlation) between the two variables. One possible solution is to compute the Pearson’s correlation coefficient, abbreviated Pearson’s r.</p>
+<p><span class="math inline">\(\LARGE r=\frac{Cov(X,Y)}{\sigma_{X} \sigma_{Y}}\)</span></p>
+<ul>
+<li><span class="math inline">\(Cov(X,Y)\)</span> being the covariance between X and Y</li>
+<li><span class="math inline">\(\sigma_{X}\)</span> being the standard deviation of <span class="math inline">\(X\)</span></li>
+<li><span class="math inline">\(\sigma_{Y}\)</span> being the standard deviation of <span class="math inline">\(Y\)</span></li>
+</ul>
+<p>In R you do not need to compute the formula, there is already a built in function ´cor()´:</p>
+<pre class="r"><code>cor(data$LifeExp05, data$PrimComp05, use = &#39;complete.obs&#39;)  # We specify that we want the &#39;pearson&#39; correlation as there are multiple correlation function.</code></pre>
+<pre><code>## [1] 0.7212422</code></pre>
+<p><em>Note: do not forget that if you have missing data the function will return NA. Be sure to include the argument use = ‘complete.obs’. See ?cor for more details</em></p>
+<ul>
+<li>If r = 0 we have no co-variation</li>
+<li>If r = -1 we have perfectly negative co-variation</li>
+<li>If r = 1 we have perfectly positive co-variation.</li>
+</ul>
+<p>There is no objective answers to what is high correlation, but traditionally we consider a r &gt; 0.7 as strong correlation. The correlation coefficient for “my” variables is equal to 0.721.</p>
+</div>
+<div id="show-the-regression-line-in-your-scatter-plot" class="section level1">
+<h1><span class="header-section-number">3</span> Show the regression line in your scatter plot</h1>
+<p>Usually, in a scatterplot we want to visualize the dependant variable function of the independant one. The <strong>dependent</strong> is the variable that is affected - in our case it is Life expectancy. The <strong>independent</strong> is the variable that affects the dependent (in our case Primary school completion rate).</p>
+<p><em>Which way does the impact for their Variables 1 and 2 go? Maybe the influence goes both ways? Feel free to discuss this with a fellow student.</em></p>
+<p>In a scatter plot, the dependent variable should be shown along the Y-axis and independent variable along the X-axis.</p>
+<p>To show the relationship between the dependant and the independant variable we usually draw a <strong>regression line</strong>. We first need to fit a <strong>linear model</strong> with the function <code>lm()</code>. We can then draw the line as follow:</p>
+<pre class="r"><code># Fit the model // we store the result of the linear regression in the object &quot;model&quot;
+model &lt;- lm(data$LifeExp05 ~ data$PrimComp05)
+
+# You can then visualize the model output
+summary(model)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = data$LifeExp05 ~ data$PrimComp05)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -23.547  -3.366   1.177   5.043  10.099 
+## 
+## Coefficients:
+##                 Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)     40.02012    2.51091   15.94   &lt;2e-16 ***
+## data$PrimComp05  0.32432    0.02797   11.60   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.747 on 124 degrees of freedom
+## Multiple R-squared:  0.5202, Adjusted R-squared:  0.5163 
+## F-statistic: 134.4 on 1 and 124 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code># Draw the plot showing the data
+plot(data$LifeExp05 ~ data$PrimComp05,
+     main = &#39;Scatterplot of Female life expectancy vs Primary school completion&#39;,
+     ylab = &#39;Female life expectancy&#39;,
+     xlab = &#39;Primary school completion&#39;)
+
+# Show the regression line
+abline(model, add = TRUE)</code></pre>
+<pre><code>## Warning in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...): &quot;add&quot; is
+## not a graphical parameter</code></pre>
+<p><img src="Lab_5_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="linear-bivariate-regression-with-the-storage-of-residuals" class="section level1">
+<h1><span class="header-section-number">4</span> Linear bivariate regression with the storage of residuals</h1>
+<p>Now that we have fitted the linear model to the data we can extract the <strong>residuals</strong>. You will use the residuals in the next exercise, which is a GIS exercise. It should also be noted that this type of analysis has several prerequisites that we will disregard at this time (model checking etc.).</p>
+<p>We can create a new column in the dataset called “res” where we extract the model residuals:</p>
+<pre class="r"><code>data$res &lt;- model$residuals</code></pre>
+<p>The observations that are far from expected value (with a high and low residual values) are called outliers.</p>
+<p>You can see which countries have high and low residuals values by opening the dataset by clicking on it or by typing <code>View(data)</code> in R.</p>
+</div>
+<div id="save-the-data-for-use-in-arcgis" class="section level1">
+<h1><span class="header-section-number">5</span> Save the data for use in ArcGIS</h1>
+<p>You will save your dataset as a .CSV file for the next exercise. For that, you can simply use the <code>write.csv()</code> function as follow:</p>
+<pre class="r"><code>write.csv(data, &quot;PATH_TO_YOUR_FOLDER/data.csv&quot;)</code></pre>
+</div>
+<div id="answer-the-following-questions" class="section level1">
+<h1><span class="header-section-number">6</span> Answer the following questions:</h1>
+<ol style="list-style-type: decimal">
+<li>What is your dependent and independent variable in your analysis? Justify the answer.</li>
+<li>What is the value of Pearson’s r between your variables? What does that mean?</li>
+<li>What value does your R square have? What does that mean?</li>
+<li>Look at the scatter plot you made in point 2 and the res column in the dataset - are there any countries far away from the others? Which countries are these?</li>
+<li>What is the value of the intercept? What does that mean?</li>
+<li>What is the value of your regression coefficient? What does that mean?</li>
+</ol>
+</div>
+<div id="submit" class="section level1">
+<h1><span class="header-section-number">7</span> Submit</h1>
+<ul>
+<li>Use the document Submission template_exercise5.docx.</li>
+<li>Enter two scatter charts - one showing only the scatter plot with colors (but not regression line) and one showing the regression line and the scatter plot (but not country codes). The regression line and the points should have different colors. Place the charts side by side. Remember to change the axis titles to Norwegian if you are writing in Norwegian (you can do this in Variable View by clicking Label for your variable).</li>
+<li>Copy-paste tables showing the regression coefficients and R-square of Word (Step 5) - This will be in the summary of your <strong>lm object</strong>.</li>
+<li>Insert small chart and table texts that tell what the chart / table shows. You should be brief, but precise, and include all the information needed to understand what the table / chart shows. An example for Figure 3 from Exercise 1 is shown below.</li>
+<li>Answer the questions asked in Step 7.</li>
+<li>Convert Word file to one PDF document (with file name exercise 5_ <your_name> .pdf) and upload to Black Board. Remember! Maximum 2 pages.</li>
+<li>Up to 15 points are given for this exercise if submitted on time. There is no tests related to this specific exercise, but a test for LM5 where test questions from the practice tests are repeated.</li>
+</ul>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

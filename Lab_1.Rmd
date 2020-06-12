@@ -5,7 +5,7 @@ output:
         toc: TRUE
         toc_float: TRUE
         number_sections: yes
-        theme: united
+        theme: lumen
 ---
 
 What you will learn during this exercise:

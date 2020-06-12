@@ -2,7 +2,7 @@
 title: ""
 output: 
     html_document:
-      theme: united
+      theme: lumen
 ---
 
 ## Welcome!
@@ -11,20 +11,23 @@ Welcome to GEOG 2015: Introduction to GIS and statistics. During this course you
 
 During this course we will use **R** as the main software for both GIS and statistical analysis. R is an extremely versatile and widespread software used by some of the biggest companies including Facebook, Google, Twitter, AirBnB and much more. 
 
-## Introduction to R tutorials
+## Get started with R - Installation and basic manipulations
 
 Make sure you install on your computer and get comfortable with it. You will find the tutorial below.
 
-- [Get started with R! - Introduction to R](IntroR.html)
-- [Get started with R! - Basic manipulations in R](BasicR.html)
-- [Get started with R! - Data frame manipulation in R](DFmanip.html)
+- [Get started with R - Introduction to R](IntroR.html)
+- [Get started with R - Basic manipulations in R](BasicR.html)
+- [Get started with R - Data frame manipulation in R](DFmanip.html)
 
 ## Course exercises
 
 Once you have trained in R and done the small exercises from the tutorials you should be ready to do the exercises following the plan of the course. Below you will find a link to the exercises followed by a short description:
 
-- [Lab 1: Introduction to statistics in R and histograms](Lab_1.html)In this exercise we will focus primarily on descriptive statistics.
-- [Lab 2: Introduction to Geographical Information System](). In this exercise we will introduce GIS in R. You will become familiar with map projections and its effects on distances.
+- [Lab 1: Introduction to statistics in R and histograms](Lab_1.html). In this exercise we will focus primarily on descriptive statistics.
+- [Lab 2: Introduction to Geographical Information System](https://ntnu.blackboard.com/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_70_1). **ArcGIS exercise!** 
+- [Lab 3: Univariate analysis](Lab_3.html). In this exercise you will learn to vizualise and compare variables from two different groups.
+- [Lab 4: Introduction to Geographical Information System](https://ntnu.blackboard.com/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_70_1). **ArcGIS exercise!** 
+- [Lab 5: Multivariate analysis](Lab_5.html). In this exercise you will learn to vizualise and compare variables from two different groups.
 
 ... In construction ...
 

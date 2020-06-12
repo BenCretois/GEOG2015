@@ -1,0 +1,142 @@
+---
+title: "Lab 5 - Multivariate analysis"
+output: 
+    html_document:
+        toc: TRUE
+        toc_float: TRUE
+        number_sections: yes
+        theme: lumen
+---
+
+What you will learn:
+
+The goal of this exercise is to become familiar with how to perform bivariate analysis (co-variation and regression) in R and to store the residuals from the regression analysis for later use in ArcGIS.
+
+*Note: this exercise must be done to do the next exercise (Exercise 6) which is a GIS exercise.*
+
+# Load the data in R
+
+a. In this exercise, you should also use the file World20xx.sav (the one you were assigned in the **NameOgVariables.pdf**). Copy the file to the folder for this exercise.
+b. Open the World20xx.sav in R.
+c. Each of you will use the same variables that you did in Exercise 3 and 4 that were referred to as Variable 1 and Variable 2. The exercise text here uses Female life expectancy at birth and Primary school completion rate for females as Variable 1 and Variable 2.
+
+We have to work through some steps before using the dataset for the analysis that follows.
+
+First we will only take the variables we are interested in. That is the third line of code here. Then we will get rid of the **missing values**. We can do that using the function ´complete.cases()´.
+
+```{r, echo=FALSE, results=FALSE}
+library(xlsx)
+data <- read.xlsx('data/Lab_3/World2005.xlsx', sheetIndex = 1)
+
+# For simplifying the dataset I will create a dataset only with the data I am interested in
+data <- data[ , c('id','CntrName', 'LifeExp05', 'PrimComp05', 'Region')]
+
+# I then get rid of all the countries which have missing value
+data <- data[complete.cases(data) , ] # Do not forget the comma!
+```
+
+# Visualize the relationship between your variables using a scatter plot
+
+To create a scatterplot in R you can use the function `plot()`. Firsts arguments of the function are the variables you want to vizualise and the other arguments are for aesthetics (title of the axis, colors etc.)
+
+```{r}
+plot(data$LifeExp05 ~ data$PrimComp05,
+     main = 'Scatterplot of Female life expectancy vs Primary school completion',
+     ylab = 'Female life expectancy',
+     xlab = 'Primary school completion')
+```
+
+Look carefully at the scatter plot:
+
+- Do you think the chart suggests a trend - a correlation between how the values of variable 1 correlate with values of variable 2? If there is a sort of correlation, what does this suggest?
+- Are there any countries that stand out from such a possible trend?
+
+In addition to a scatter plot, we want a measure of the relationship (correlation) between the two variables. One possible solution is to compute the Pearson's correlation coefficient, abbreviated Pearson's r.
+
+$\LARGE r=\frac{Cov(X,Y)}{\sigma_{X} \sigma_{Y}}$
+
+- $Cov(X,Y)$ being the covariance between X and Y
+- $\sigma_{X}$ being the standard deviation of $X$
+- $\sigma_{Y}$ being the standard deviation of $Y$
+
+In R you do not need to compute the formula, there is already a built in function ´cor()´:
+
+```{r}
+cor(data$LifeExp05, data$PrimComp05, use = 'complete.obs')  # We specify that we want the 'pearson' correlation as there are multiple correlation function.
+```
+
+*Note: do not forget that if you have missing data the function will return NA. Be sure to include the argument use = 'complete.obs'. See ?cor for more details*
+
+- If r = 0 we have no co-variation
+- If r = -1 we have perfectly negative co-variation
+- If r = 1 we have perfectly positive co-variation. 
+
+There is no objective answers to what is high correlation, but traditionally we consider a r > 0.7 as strong correlation. The correlation coefficient for "my" variables is equal to 0.721.
+
+# Show the regression line in your scatter plot
+
+Usually, in a scatterplot we want to visualize the dependant variable function of the independant one. The **dependent** is the variable that is affected - in our case it is Life expectancy. The **independent** is the variable that affects the dependent (in our case Primary school completion rate).
+
+*Which way does the impact for their Variables 1 and 2 go? Maybe the influence goes both ways? Feel free to discuss this with a fellow student.*
+
+In a scatter plot, the dependent variable should be shown along the Y-axis and independent variable along the X-axis. 
+
+To show the relationship between the dependant and the independant variable we usually draw a **regression line**. We first need to fit a **linear model** with the function `lm()`. We can then draw the line as follow:
+
+```{r}
+# Fit the model // we store the result of the linear regression in the object "model"
+model <- lm(data$LifeExp05 ~ data$PrimComp05)
+
+# You can then visualize the model output
+summary(model)
+
+# Draw the plot showing the data
+plot(data$LifeExp05 ~ data$PrimComp05,
+     main = 'Scatterplot of Female life expectancy vs Primary school completion',
+     ylab = 'Female life expectancy',
+     xlab = 'Primary school completion')
+
+# Show the regression line
+abline(model, add = TRUE)
+```
+
+# Linear bivariate regression with the storage of residuals
+
+Now that we have fitted the linear model to the data we can extract the **residuals**. You will use the residuals in the next exercise, which is a GIS exercise. It should also be noted that this type of analysis has several prerequisites that we will disregard at this time (model checking etc.).
+
+We can create a new column in the dataset called "res" where we extract the model residuals:
+
+```{r}
+data$res <- model$residuals
+```
+
+The observations that are far from expected value (with a high and low residual values) are called outliers.
+
+You can see which countries have high and low residuals values by opening the dataset by clicking on it or by typing `View(data)` in R.
+
+# Save the data for use in ArcGIS
+
+You will save your dataset as a .CSV file for the next exercise. For that, you can simply use the `write.csv()` function as follow:
+
+```{r, eval=FALSE}
+write.csv(data, "PATH_TO_YOUR_FOLDER/data.csv")
+```
+
+# Answer the following questions:
+
+1. What is your dependent and independent variable in your analysis? Justify the answer.
+2. What is the value of Pearson's r between your variables? What does that mean?
+3. What value does your R square have? What does that mean?
+4. Look at the scatter plot you made in point 2 and the res column in the dataset - are there any countries far away from the others? Which countries are these?
+5. What is the value of the intercept? What does that mean?
+6. What is the value of your regression coefficient? What does that mean?
+
+# Submit 
+
+- Use the document Submission template_exercise5.docx.
+- Enter two scatter charts - one showing only the scatter plot with colors (but not regression line) and one showing the regression line and the scatter plot (but not country codes). The regression line and the points should have different colors. Place the charts side by side. Remember to change the axis titles to Norwegian if you are writing in Norwegian (you can do this in Variable View by clicking Label for your variable).
+- Copy-paste tables showing the regression coefficients and R-square of Word (Step 5) - This will be in the summary of your **lm object**.
+- Insert small chart and table texts that tell what the chart / table shows. You should be brief, but precise, and include all the information needed to understand what the table / chart shows. An example for Figure 3 from Exercise 1 is shown below.
+- Answer the questions asked across this exercise.
+- Convert Word file to one PDF document (with file name exercise 5_ <your_name> .pdf) and upload to Black Board. Remember! Maximum 2 pages.
+- Up to 15 points are given for this exercise if submitted on time. There is no tests related to this specific exercise, but a test for LM5 where test questions from the practice tests are repeated.
