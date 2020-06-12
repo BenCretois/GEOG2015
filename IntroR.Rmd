@@ -12,9 +12,9 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Welcome to __GEOG3006__: Quantitative methods, a course where you will learn how to use R, wrangle (yes I already begin with some technical terms ;) ) and analyse your data!
+Welcome to **GEOG2015: Introduction to GIS and Statistics**, a course where you will learn how to use R, wrangle (yes I already begin with some technical terms ;) ) and analyse your data!
 
-I must say this document is heavily inspired from: **Introduction to R** by Claudia A Engel, I am just simplifying a little bit more.
+I must say this document is heavily inspired from: **Introduction to R** by Claudia A Engel, which is a really great ressource to learn R. I am just simplifying a little bit more.
 
 You will learn:
 
