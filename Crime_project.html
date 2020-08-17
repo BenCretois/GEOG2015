@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Crime project</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 54px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h2 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h3 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h4 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h5 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h6 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">GEOG 2015 - Introduction to GIS and statistics</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/BenCretois/GEOG2015">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Crime project</h1>
+
+</div>
+
+
+<div id="crime-project" class="section level1">
+<h1>Crime project</h1>
+<p>In this project you will analyse crime data from the San Francisco police department. You will learn how to identify cold and hot spots of crime and use the R-ArcGIS bridge to carry out statistical analysis and visualize the results of your analysis.</p>
+<div id="step-1-get-started" class="section level3">
+<h3>Step 1: Get started</h3>
+<p>First of all, create a folder “CrimeProj” in which you will save your work and all the documents related to this project.</p>
+<p>Download the crime data (CrimeData.zip) that you will find in the folder “Crime project” on BlackBoard. Once this is done, save the data in your folder and import the data in ArcGIS Pro. Add a new basemap.</p>
+<p>Your ArcGIS pane should look like this:</p>
+<p><img src="crime_files/imgs_crime/Map1.PNG" width="556" /> Note that you may have to change the coordinate system of your map, as you learned during the labs.</p>
+</div>
+<div id="step-2-isolate-your-crime-data" class="section level3">
+<h3>Step 2: Isolate your crime data</h3>
+<p>Open the attribute table of your data. You will find 12 columns and 74760 observations in this dataset. Each “observation” represents one crime. Regarding the columns:</p>
+<ul>
+<li><strong>OBJECTID</strong> : is the identifying number of your point.</li>
+<li><strong>Shape</strong> : either your observation is a point, a line or a polygon. Here, all observations are points.</li>
+<li><strong>Field1</strong> : another identifying number for your observation.</li>
+<li><strong>Data</strong> : when the crime has been committed.</li>
+<li><strong>Category</strong> : the crime which has been committed.</li>
+<li><strong>Descript</strong> : a short description of the crime.</li>
+<li><strong>DayOfWeek</strong> : the day of the week the crime has been committed.</li>
+<li><strong>PdDct</strong> : the district in which the crime has been committed.</li>
+<li><strong>Resolution</strong> : what has the police done.</li>
+<li><strong>Adress</strong> : where did the call alerting the crime came from.</li>
+<li><strong>X &amp; Y</strong> : the coordinates of the crime.</li>
+</ul>
+<p>Refer to the pdf “Crime4me” where you will find the day of the week you are supposed to work with.</p>
+</div>
+<div id="step-3-aggregate-point-data-by-counts-within-a-defined-location" class="section level3">
+<h3>Step 3: Aggregate point data by counts within a defined location</h3>
+<p>The number of points is too overwhelming to do any visual analysis or to be able to detect any patterns. Before we continue further we need to aggregate crime counts in space and time. This may reveal patterns impossible to detect otherwise.</p>
+<ul>
+<li>In the <strong>Geoprocessing pane</strong>, search for ´Create Space Time Cube´</li>
+<li>Click on the tool <code>Create Space Time Cube By Aggregating Points</code></li>
+<li>Change the parameters with the following and run:</li>
+</ul>
+<p><img src="crime_files/imgs_crime/SpaceCube.PNG" width="146" /></p>
+<p>This will create a netCDF file (.nc) which allows you to view spatial patterns and trend over time. The tool aggregated the “crime points” into hexagons. Each hexagon represents an area of approximately 78,000 square meters. The Distance Interval and Time Step Interval parameters impact the number of resulting bins and the size of each bin. These values can be chosen based on prior knowledge of the analysis area, or the tool will calculate values for you based on the spatial distribution of your data.</p>
+</div>
+<div id="step-4-analyze-crime-hot-spots" class="section level3">
+<h3>Step 4: Analyze crime hot spots</h3>
+<p>At this point you should be able to analyze your data and look at where clusters of crime are emerging. In the <strong>Geoprocessing</strong> pane, search for and open <code>Emergins Hot Spot Analysis</code> tool.</p>
+<p>Change the parameters as follow:</p>
+<p><img src="crime_files/imgs_crime/HotSpotText.PNG" width="152" /></p>
+<p>By using the default value for Neighborhood Distance, you are letting the tool calculate a distance band for you based on the spatial distribution of your data. The Neighborhood Time Step value is set to one time step interval (one month in this case) by default.</p>
+<p><strong>WARNING</strong>: Do not change where the “Output Features” is stored, otherwise ArcGIS will fail to run the tool.</p>
+<p>Your map should look like this:</p>
+<p><img src="crime_files/imgs_crime/HotSpotMap.PNG" width="806" /></p>
+<p>You should be able to quickly vizualise the cold spots (in blue) and the hot spots (in red). Red areas indicate that over time there has been clustering of high numbers of crime, and blue areas indicate that over time there has been clustering of low numbers of crime. Each location is categorized based on the trends in clustering over time.</p>
+<p>The dark red hexagon bins are persistent hot spots. These locations do not have a discernible increase or decrease in the intensity of clustering of crime counts over time. In contrast, the light red with beige outlined hexagon bins are intensifying hot spots. In addition, these are locations where the intensity of clustering of crime counts is increasing over time, and that increase is statistically significant.</p>
+<p>Conversely, the dark blue bins are persistent cold spots. These are areas where crime is less prevalent. The light blue outlined bins are intensifying cold spots but means the opposite of its counterpart. Clusters of low crime counts in these cells are becoming more intense over time. In other words, the cold spots are getting colder.</p>
+</div>
+<div id="step-5-going-further-in-the-analysis" class="section level3">
+<h3>Step 5: Going further in the analysis</h3>
+<p>Now that you know where crime hot spots are emerging, you’ll try to determine why they are emerging. In particular, you’ll examine the relationship between an area’s crime and its population.</p>
+<p>Statistical analysis can determine if the number of crimes occurring in a particular area is influenced by population. In addition, we will be interested in analyzing the presence of certain types of businesses, as well as the prevalence of parks, the amount of public land in a given area (hexagon bins), the median household income and home value, among other factors.</p>
+<p>Currently, the hexagon bins in the space time cube layer contain no attribute information suitable for this kind of analysis. You’ll run another geoprocessing tool to enrich the layer with relevant attribute information.</p>
+<p>For this exercise we won’t use the <strong>Enrich</strong> tool as it consumes “ArcGIS credit”. Nevertheless the enriched data can be found in the zip file you downloaded on BlackBoard. In <strong>CrimeDat</strong>, under <strong>StepResult</strong> you will find a <strong>Result.gdb</strong> which itself contains <strong>San_Francisco_Crimes_Enrich</strong>. Import the latter in your ArcGIS Project.</p>
+<p>You should be able to vizualise a map similar to below:</p>
+<p><img src="crime_files/imgs_crime/EnrichMap.PNG" width="410" /></p>
+<p>If you open the attribue table your data should have the following columns added:</p>
+<ul>
+<li><strong>HasData</strong> : Indicates whether the Enrich Layer tool found data for the given hexagon bin, with 0 meaning a hexagon had no available data for all of the attributes you selected and 1 meaning a hexagon bin had data for at least one of the attributes you selected. You can use this field to filter your data so that only features with relevant attribute information appear on the map.</li>
+<li><strong>2010 Total Population (Esri 2019) (historicalpopulation_tspop10_cy)</strong> : Contains the population count per hexagon bin. Some hexagons have a population of 0. A hexagon bin may have a population of 0 because it is located in an industrial area or in a park. The first priority of your department is to reduce crimes in populated areas, so you’ll focus only on populated locations.</li>
+<li><strong>2019 Median Home Value (wealth_medval_cy)</strong> : Contains the median home value per hexagon bin.</li>
+<li><strong>2019 Median Household Income (wealth_medhinc_cy)</strong> : Contains the median household income value per hexagon bin.</li>
+<li><strong>2019 Renter Occupied HUs (ownerrenter_renter_cy)</strong> : Contains the number of renter occupied households per hexagon bin.</li>
+<li><strong>Food &amp; Beverage Stores Bus (NAICS) (businesses_n13_bus)</strong> : Contains the count of food and beverage stores located within each hexagon bin.</li>
+<li><strong>Food Service/Drinking Estab Bus (NAICS) (businesses_n37_bus)</strong> : Contains the count of businesses that serve food, beverages, or both located within each hexagon bin.</li>
+</ul>
+</div>
+<div id="step-6-prepare-your-dataset-for-additional-analysis" class="section level3">
+<h3>Step 6: Prepare your dataset for additional analysis</h3>
+<p>Next, you’ll select the data that is relevant to your analysis and make a subset with only that information.</p>
+<ul>
+<li>In <strong>Geoprocessing</strong> search for and open the <strong>Select Layer by Attribute</strong> tool.</li>
+<li>Change the parameters with the following:</li>
+</ul>
+<p><img src="crime_files/imgs_crime/Attribute.PNG" width="284" /></p>
+<ul>
+<li>Click <strong>Run</strong>. Here, The tool runs and selects features that have no enriched data, or that have zero population. These may be industrial sites or parks.</li>
+<li>Open the attribute table for the <strong>San_Francisco_Crimes_Enrich</strong> layer. The table indicates that 222 of 1,996 rows are selected, meaning they have 0 values for the HasData or 2010 Total Population (Esri 2019) fields.</li>
+<li>You’ll create a new dataset without these selected features so you can focus on features that have data relevant to your analysis. You will call this new layer <strong>San_Francisco_Crimes_Enrich_Subset</strong>. I am not giving further information on how to do this since this is a basic operation you should be able to achieve.</li>
+</ul>
+</div>
+<div id="step-7-bridge-your-data-into-r" class="section level3">
+<h3>Step 7: Bridge your data into R</h3>
+<p>First of all we need to intall the <strong>R-ArcGIS bridge</strong>.</p>
+<p>In RStudio, in the R console type and run:</p>
+<pre class="r"><code>library(arcgisbinding)</code></pre>
+<p>If you receive a message such as Error in library(arcgisbinding): there is no package called <code>arcgisbinding</code>, ensure that you have correctly installed the R-ArcGIS bridge.</p>
+<p>In the R console, also type the command:</p>
+<pre class="r"><code>arc.check_product()</code></pre>
+<p>After the <code>arcgisbinding</code> package has been loaded into the RStudio workspace and the connection from R to ArcGIS has been initialized, data from your current project in ArcGIS can be loaded into the RStudio workspace. Shapefiles, feature classes from geodatabases, and tables are all valid arguments to use in the open function.</p>
+<p>Now you will import your data in R. For this you will use the <code>arc.open</code> function.</p>
+<pre class="r"><code>enrich_df &lt;- arc.open(path = &#39;C:/Users/benjamcr/Rproj/GEOG2015/CrimeDat/SF_Crime.gdb/San_Francisco_Crimes_Enrich_Subset&#39;)</code></pre>
+<p>Of course, the path will depends on where you saved your <strong>San_Francisco_Crimes_Enrich_Subset</strong> file.</p>
+<p>The function stores a new arc.dataset class object in the variable enrich_df. This object contains both the spatial information and the attribute information for your ArcGIS data and can now be used in other functions. The variable is listed in RStudio under Data.</p>
+<p>With the <code>arc.select()</code> function, you can choose a subset of attributes from the enrich_df object that you want to use as data for your analysis.</p>
+<p>Run the <code>arc.select()</code> function as shown in the following code block. For the first argument, put enrich_df as the object from which you’re making a subset. For the second argument, add a character vector containing the name of each attribute from your dataset that you want in your subset and run the command.</p>
+<pre class="r"><code>enrich_select_df &lt;- arc.select(object = enrich_df, fields = c(&#39;OBJECTID&#39;, &#39;SUM_VALUE&#39;, &#39;historicalpopulation_tspop10_cy&#39;, &#39;wealth_medval_cy&#39;, &#39;wealth_medhinc_cy&#39;, &#39;ownerrenter_renter_cy&#39;, &#39;businesses_n13_bus&#39;, &#39;businesses_n37_bus&#39;))</code></pre>
+<p>Your enrich_select_df variable now contains an R data frame object with the eight attributes you selected from your full original shapefile in R. These attributes include an ID value, the crime counts for each hexagon bin, and the six attributes with which the data has been enriched.</p>
+<p>Finally, you’ll convert your R data frame into a spatial data frame object using the arc.data2sp() function. A spatial data frame object is one of the spatial data classes contained in the sp package. The sp package offers classes and methods for working with spatial data such as points, lines, polygons, pixels, rings, and grids. With this function, you can transfer all of the spatial attributes from your data, including projections, from ArcGIS into R without worrying about a loss of information.</p>
+<p>If you have never used the paaackage <code>sp</code> before you need to install it in R:</p>
+<pre class="r"><code>install.packages(&#39;sp&#39;)
+library(sp)</code></pre>
+<p>You can then run the function <code>arc.data2sp()</code> as shown below:</p>
+<pre class="r"><code>enrich_sp &lt;- arc.data2sp(enrich_select_df)</code></pre>
+</div>
+<div id="step-8-calculate-smoothed-crime-rates" class="section level3">
+<h3>Step 8: Calculate smoothed crime rates</h3>
+<p>All the information that you need to start your analysis is in place, but you may notice that the current attribute labels are cryptic and abbreviated as they represent the original field names from the San_Francisco_Crimes_Enrich_Subset feature class . In R, you can change the names of the enriched attributes to make them easier to identify.</p>
+<p>First, run the following code to create a vector of names. This will be used to replace the current names of <strong>enrich_sp</strong>.</p>
+<pre class="r"><code>col_names &lt;- c(&quot;OBJECTID&quot;, &quot;Crime_Counts&quot;,
+&quot;Population&quot;, &quot;Med_HomeValue&quot;, &quot;Med_HomeIncome&quot;,
+&quot;Renter_Count&quot;, &quot;Grocery&quot;,
+&quot;Restaurant&quot;)
+
+# Replace the colnames of enrich_sp by the ones you specified above
+colnames(enrich_sp@data) &lt;- col_names
+
+# Check if the change has been made:
+head(enrich_sp@data)</code></pre>
+<p>Next, you’ll use the <code>EBest()</code> function to perform Empirical Bayes smoothing on your crime rates. <code>EBest()</code> function is contained in the <code>spdep</code> R package and if not already installed you should do it:</p>
+<pre class="r"><code>install.packages(&#39;spdep&#39;)
+library(spdep)</code></pre>
+<p>In the console, run the following lines of code to calculate Empirical Bayes smoothed crime rates for each hexagon bin.</p>
+<pre class="r"><code>n &lt;- enrich_sp@data$Crime_Counts
+x &lt;- enrich_sp@data$Population
+EB &lt;- EBest (n, x)
+p &lt;- EB$raw
+b &lt;- attr(EB, &quot;parameters&quot;)$b
+a &lt;- attr(EB, &quot;parameters&quot;)$a
+v &lt;- a + (b/x)
+v[v &lt; 0] &lt;- b/x
+z &lt;- (p - b)/sqrt(v)</code></pre>
+<blockquote>
+<p>You do not need to fully understand the lines of codes above. Empirical Bayes is a method of statistical inference, in this specific case this will tell you where you have “signicatively” more crimes or “significatively” less crimes.</p>
+</blockquote>
+<p>Finally, you’ll add your smoothed crime rates as a new attribute to your spatial data frame object.</p>
+<pre class="r"><code>enrich_sp@data$EB_Rate &lt;- z</code></pre>
+<p>Your data now contains a new column called EB_Rate that contains the crime rate values that you calculated above for each hexagon bin. We are now done with R and can return to ArgGIS to explore the created crime rates by mapping and analyzing them.</p>
+<p>First, you’ll use the <code>arc.sp2data()</code> function to convert your data back from an R spatial data frame object to an ArcGIS file type. You’ll then use <code>arc.write()</code> to write your data to your project of choice.</p>
+<pre class="r"><code>arcgis_df &lt;- arc.sp2data(enrich_sp)
+arc.write(&#39;C:/Users/benjamcr/Rproj/GEOG2015/CrimeDat/SF_Crime.gdb/San_Francisco_Crime_Rates&#39;, arcgis_df, shape_info = arc.shapeinfo(enrich_df))</code></pre>
+</div>
+<div id="step-9-continue-your-analysis-in-arcgis-pro" class="section level3">
+<h3>Step 9: Continue your analysis in ArcGIS Pro</h3>
+<p>In the <strong>Catalog</strong> pane, right-click your SF_Crime geodatabase and choose <strong>Refresh</strong>. You should see your newly created layer <strong>San_Francisco_Crime_Rates</strong>.</p>
+<p><img src="crime_files/imgs_crime/Refresh.PNG" width="198" /></p>
+<p>Add the layer to your map.</p>
+</div>
+<div id="step-10-identify-areas-with-high-crime-rates" class="section level3">
+<h3>Step 10: Identify areas with high crime rates</h3>
+<p>To see which areas in San Francisco have an unexpectedly high number of crimes given the number of people, you’ll run another hot spot analysis.</p>
+<p>The first hot spot analysis you ran identified areas with statistically significant higher numbers of crimes than expected and provided information on how the number of crimes for each location were changing over time. This hot spot analysis identifies statistically significant clusters of high and low crime rates, allowing you to see the areas with usually high numbers of crimes given the population in the area.</p>
+<ul>
+<li>In <strong>Geoprocessing</strong>, search for and open the <strong>Optimized Hot Spot Analysis</strong> tool.</li>
+<li>Fill the parameters as shown below:</li>
+</ul>
+<p><img src="crime_files/imgs_crime/HotSpot2.PNG" width="149" /></p>
+<p>By running this tool on the crime rates that you calculated in R contained in the EB_Rate column, the results of this tool will locate the statistically significant spatial clusters of high or low crime rate values.</p>
+<p>Your map should look like this:</p>
+<p><img src="crime_files/imgs_crime/MapHotSpot2.PNG" width="418" /></p>
+<p>On your map, the bright red hexagon bins signify areas where there is intense clustering of high values with 99 percent confidence. These are areas where there are unusually high numbers of crimes occurring even when accounting for population. Notice that once the population of each area is considered, there are no statistically significant cold spots (areas of clustering of low crime counts).</p>
+</div>
+<div id="hand-in" class="section level3">
+<h3>Hand in:</h3>
+<p>In your hand in you will prepare 2 maps:</p>
+<ul>
+<li>A map of the hot-spots you have visualized in Step 4</li>
+<li>A map of the hot-spots you have created using Empirical Bayes and visualized in Step 10</li>
+<li>You will also answer the following questions:</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>What are the advantages of the R-ArcGIS bridge?</li>
+<li>How many categories of crimes are in the dataset? Whcih one are they?</li>
+<li>What are the possible causes of the higher crime rates?</li>
+</ol>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -29,6 +29,10 @@ Once you have trained in R and done the small exercises from the tutorials you s
 - [Lab 4: Introduction to Geographical Information System](https://ntnu.blackboard.com/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_70_1). **ArcGIS exercise!** 
 - [Lab 5: Multivariate analysis](Lab_5.html). **R exercise!** In this exercise you will learn to vizualise and compare variables from two different groups.
 - [Lab 6: Residual analysis](https://ntnu.blackboard.com/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_70_1). **ArcGIS exercise!** 
+
+## Students projects
+
 - [Lab 7: Moose project](https://ntnu.blackboard.com/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_70_1). Please refer to BlackBoard for details about the project.
 - [Lab 8: Data collection](https://ntnu.blackboard.com/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_70_1). In this lab you will use Survey123 by ESRI. Please refer to the folder's exercise on BlackBoard for more details.
+- [Lab 9: Crime data analysis](Crime_project.html). **R AND ArcGIS** Exercise, here you will use the R & ArcGIS bridge and will analyse crime data from the San Francisco police department. 
 

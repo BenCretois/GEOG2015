@@ -8,5 +8,3 @@ spss_to_R <- function(file, save){
   d[d == -9999] <- NA
   write.xlsx(d, save)
 }
-
-
