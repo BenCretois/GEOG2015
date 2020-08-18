@@ -373,18 +373,16 @@ div.tocify {
 </div>
 
 
-<div id="crime-project" class="section level1">
-<h1>Crime project</h1>
 <p>In this project you will analyse crime data from the San Francisco police department. You will learn how to identify cold and hot spots of crime and use the R-ArcGIS bridge to carry out statistical analysis and visualize the results of your analysis.</p>
-<div id="step-1-get-started" class="section level3">
-<h3>Step 1: Get started</h3>
+<div id="step-1-get-started" class="section level1">
+<h1>Step 1: Get started</h1>
 <p>First of all, create a folder “CrimeProj” in which you will save your work and all the documents related to this project.</p>
 <p>Download the crime data (CrimeData.zip) that you will find in the folder “Crime project” on BlackBoard. Once this is done, save the data in your folder and import the data in ArcGIS Pro. Add a new basemap.</p>
 <p>Your ArcGIS pane should look like this:</p>
 <p><img src="crime_files/imgs_crime/Map1.PNG" width="556" /> Note that you may have to change the coordinate system of your map, as you learned during the labs.</p>
 </div>
-<div id="step-2-isolate-your-crime-data" class="section level3">
-<h3>Step 2: Isolate your crime data</h3>
+<div id="step-2-isolate-your-crime-data" class="section level1">
+<h1>Step 2: Isolate your crime data</h1>
 <p>Open the attribute table of your data. You will find 12 columns and 74760 observations in this dataset. Each “observation” represents one crime. Regarding the columns:</p>
 <ul>
 <li><strong>OBJECTID</strong> : is the identifying number of your point.</li>
@@ -401,8 +399,8 @@ div.tocify {
 </ul>
 <p>Refer to the pdf “Crime4me” where you will find the day of the week you are supposed to work with.</p>
 </div>
-<div id="step-3-aggregate-point-data-by-counts-within-a-defined-location" class="section level3">
-<h3>Step 3: Aggregate point data by counts within a defined location</h3>
+<div id="step-3-aggregate-point-data-by-counts-within-a-defined-location" class="section level1">
+<h1>Step 3: Aggregate point data by counts within a defined location</h1>
 <p>The number of points is too overwhelming to do any visual analysis or to be able to detect any patterns. Before we continue further we need to aggregate crime counts in space and time. This may reveal patterns impossible to detect otherwise.</p>
 <ul>
 <li>In the <strong>Geoprocessing pane</strong>, search for ´Create Space Time Cube´</li>
@@ -412,8 +410,8 @@ div.tocify {
 <p><img src="crime_files/imgs_crime/SpaceCube.PNG" width="146" /></p>
 <p>This will create a netCDF file (.nc) which allows you to view spatial patterns and trend over time. The tool aggregated the “crime points” into hexagons. Each hexagon represents an area of approximately 78,000 square meters. The Distance Interval and Time Step Interval parameters impact the number of resulting bins and the size of each bin. These values can be chosen based on prior knowledge of the analysis area, or the tool will calculate values for you based on the spatial distribution of your data.</p>
 </div>
-<div id="step-4-analyze-crime-hot-spots" class="section level3">
-<h3>Step 4: Analyze crime hot spots</h3>
+<div id="step-4-analyze-crime-hot-spots" class="section level1">
+<h1>Step 4: Analyze crime hot spots</h1>
 <p>At this point you should be able to analyze your data and look at where clusters of crime are emerging. In the <strong>Geoprocessing</strong> pane, search for and open <code>Emergins Hot Spot Analysis</code> tool.</p>
 <p>Change the parameters as follow:</p>
 <p><img src="crime_files/imgs_crime/HotSpotText.PNG" width="152" /></p>
@@ -425,8 +423,8 @@ div.tocify {
 <p>The dark red hexagon bins are persistent hot spots. These locations do not have a discernible increase or decrease in the intensity of clustering of crime counts over time. In contrast, the light red with beige outlined hexagon bins are intensifying hot spots. In addition, these are locations where the intensity of clustering of crime counts is increasing over time, and that increase is statistically significant.</p>
 <p>Conversely, the dark blue bins are persistent cold spots. These are areas where crime is less prevalent. The light blue outlined bins are intensifying cold spots but means the opposite of its counterpart. Clusters of low crime counts in these cells are becoming more intense over time. In other words, the cold spots are getting colder.</p>
 </div>
-<div id="step-5-going-further-in-the-analysis" class="section level3">
-<h3>Step 5: Going further in the analysis</h3>
+<div id="step-5-going-further-in-the-analysis" class="section level1">
+<h1>Step 5: Going further in the analysis</h1>
 <p>Now that you know where crime hot spots are emerging, you’ll try to determine why they are emerging. In particular, you’ll examine the relationship between an area’s crime and its population.</p>
 <p>Statistical analysis can determine if the number of crimes occurring in a particular area is influenced by population. In addition, we will be interested in analyzing the presence of certain types of businesses, as well as the prevalence of parks, the amount of public land in a given area (hexagon bins), the median household income and home value, among other factors.</p>
 <p>Currently, the hexagon bins in the space time cube layer contain no attribute information suitable for this kind of analysis. You’ll run another geoprocessing tool to enrich the layer with relevant attribute information.</p>
@@ -444,8 +442,8 @@ div.tocify {
 <li><strong>Food Service/Drinking Estab Bus (NAICS) (businesses_n37_bus)</strong> : Contains the count of businesses that serve food, beverages, or both located within each hexagon bin.</li>
 </ul>
 </div>
-<div id="step-6-prepare-your-dataset-for-additional-analysis" class="section level3">
-<h3>Step 6: Prepare your dataset for additional analysis</h3>
+<div id="step-6-prepare-your-dataset-for-additional-analysis" class="section level1">
+<h1>Step 6: Prepare your dataset for additional analysis</h1>
 <p>Next, you’ll select the data that is relevant to your analysis and make a subset with only that information.</p>
 <ul>
 <li>In <strong>Geoprocessing</strong> search for and open the <strong>Select Layer by Attribute</strong> tool.</li>
@@ -458,9 +456,23 @@ div.tocify {
 <li>You’ll create a new dataset without these selected features so you can focus on features that have data relevant to your analysis. You will call this new layer <strong>San_Francisco_Crimes_Enrich_Subset</strong>. I am not giving further information on how to do this since this is a basic operation you should be able to achieve.</li>
 </ul>
 </div>
-<div id="step-7-bridge-your-data-into-r" class="section level3">
-<h3>Step 7: Bridge your data into R</h3>
-<p>First of all we need to intall the <strong>R-ArcGIS bridge</strong>.</p>
+<div id="step-7-bridge-your-data-into-r" class="section level1">
+<h1>Step 7: Bridge your data into R</h1>
+<p>First of all we need to intall the <strong>R-ArcGIS bridge</strong>. Once the R-ArcGIS bridge is installed, you can begin reading and writing data to and from ArcGIS and R. This is very useful for carrying out statistical analysis on the data you handled in ArcGIS.</p>
+<ul>
+<li>Click on <strong>Project</strong></li>
+<li>Click on <strong>Option</strong>, then on <strong>Application</strong> and <strong>Geoprocessing</strong></li>
+<li>In the <strong>R-ArcGIS Support section</strong>, select your desired R home directory. This may require you to search for where R is stored on your computer.</li>
+</ul>
+<p><img src="crime_files/imgs_crime/RArc_bridge.PNG" width="364" /></p>
+<p>If you haven’t installed the R-ArcGIS bridge, a warning indicates that you need to install the ArcGIS R integration package to connect R with ArcGIS. You can automatically download and install the package by clicking on the sign next to the warning:</p>
+<ul>
+<li>click Install package and choose <strong>Install package from the Internet</strong>. When asked to confirm the installation, click Yes, and when the installation is complete, click Close.</li>
+</ul>
+<p>And it’s done, you now have a bridge between R and ArcGIS.</p>
+</div>
+<div id="step-8-import-your-data-into-r" class="section level1">
+<h1>Step 8: Import your data into R</h1>
 <p>In RStudio, in the R console type and run:</p>
 <pre class="r"><code>library(arcgisbinding)</code></pre>
 <p>If you receive a message such as Error in library(arcgisbinding): there is no package called <code>arcgisbinding</code>, ensure that you have correctly installed the R-ArcGIS bridge.</p>
@@ -482,8 +494,8 @@ library(sp)</code></pre>
 <p>You can then run the function <code>arc.data2sp()</code> as shown below:</p>
 <pre class="r"><code>enrich_sp &lt;- arc.data2sp(enrich_select_df)</code></pre>
 </div>
-<div id="step-8-calculate-smoothed-crime-rates" class="section level3">
-<h3>Step 8: Calculate smoothed crime rates</h3>
+<div id="step-9-calculate-smoothed-crime-rates" class="section level1">
+<h1>Step 9: Calculate smoothed crime rates</h1>
 <p>All the information that you need to start your analysis is in place, but you may notice that the current attribute labels are cryptic and abbreviated as they represent the original field names from the San_Francisco_Crimes_Enrich_Subset feature class . In R, you can change the names of the enriched attributes to make them easier to identify.</p>
 <p>First, run the following code to create a vector of names. This will be used to replace the current names of <strong>enrich_sp</strong>.</p>
 <pre class="r"><code>col_names &lt;- c(&quot;OBJECTID&quot;, &quot;Crime_Counts&quot;,
@@ -519,12 +531,11 @@ z &lt;- (p - b)/sqrt(v)</code></pre>
 <pre class="r"><code>arcgis_df &lt;- arc.sp2data(enrich_sp)
 arc.write(&#39;C:/Users/benjamcr/Rproj/GEOG2015/CrimeDat/SF_Crime.gdb/San_Francisco_Crime_Rates&#39;, arcgis_df, shape_info = arc.shapeinfo(enrich_df))</code></pre>
 </div>
-<div id="step-9-continue-your-analysis-in-arcgis-pro" class="section level3">
-<h3>Step 9: Continue your analysis in ArcGIS Pro</h3>
+<div id="step-10-continue-your-analysis-in-arcgis-pro" class="section level1">
+<h1>Step 10: Continue your analysis in ArcGIS Pro</h1>
 <p>In the <strong>Catalog</strong> pane, right-click your SF_Crime geodatabase and choose <strong>Refresh</strong>. You should see your newly created layer <strong>San_Francisco_Crime_Rates</strong>.</p>
 <p><img src="crime_files/imgs_crime/Refresh.PNG" width="198" /></p>
 <p>Add the layer to your map.</p>
-</div>
 <div id="step-10-identify-areas-with-high-crime-rates" class="section level3">
 <h3>Step 10: Identify areas with high crime rates</h3>
 <p>To see which areas in San Francisco have an unexpectedly high number of crimes given the number of people, you’ll run another hot spot analysis.</p>
@@ -539,8 +550,9 @@ arc.write(&#39;C:/Users/benjamcr/Rproj/GEOG2015/CrimeDat/SF_Crime.gdb/San_Franci
 <p><img src="crime_files/imgs_crime/MapHotSpot2.PNG" width="418" /></p>
 <p>On your map, the bright red hexagon bins signify areas where there is intense clustering of high values with 99 percent confidence. These are areas where there are unusually high numbers of crimes occurring even when accounting for population. Notice that once the population of each area is considered, there are no statistically significant cold spots (areas of clustering of low crime counts).</p>
 </div>
-<div id="hand-in" class="section level3">
-<h3>Hand in:</h3>
+</div>
+<div id="step-11-hand-in" class="section level1">
+<h1>Step 11: Hand in</h1>
 <p>In your hand in you will prepare 2 maps:</p>
 <ul>
 <li>A map of the hot-spots you have visualized in Step 4</li>
@@ -552,7 +564,6 @@ arc.write(&#39;C:/Users/benjamcr/Rproj/GEOG2015/CrimeDat/SF_Crime.gdb/San_Franci
 <li>How many categories of crimes are in the dataset? Whcih one are they?</li>
 <li>What are the possible causes of the higher crime rates?</li>
 </ol>
-</div>
 </div>
 
 

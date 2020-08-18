@@ -7,11 +7,9 @@ output:
         theme: lumen
 ---
 
-# Crime project
-
 In this project you will analyse crime data from the San Francisco police department. You will learn how to identify cold and hot spots of crime and use the R-ArcGIS bridge to carry out statistical analysis and visualize the results of your analysis.
 
-### Step 1: Get started
+# Step 1: Get started
 
 First of all, create a folder "CrimeProj" in which you will save your work and all the documents related to this project. 
 
@@ -24,7 +22,7 @@ knitr::include_graphics('crime_files/imgs_crime/Map1.PNG')
 ```
 Note that you may have to change the coordinate system of your map, as you learned during the labs.
 
-### Step 2: Isolate your crime data
+# Step 2: Isolate your crime data
 
 Open the attribute table of your data. You will find 12 columns and 74760 observations in this dataset. Each "observation" represents one crime. Regarding the columns:
 
@@ -42,7 +40,7 @@ Open the attribute table of your data. You will find 12 columns and 74760 observ
 
 Refer to the pdf "Crime4me" where you will find the day of the week you are supposed to work with.
 
-### Step 3: Aggregate point data by counts within a defined location
+# Step 3: Aggregate point data by counts within a defined location
 
 The number of points is too overwhelming to do any visual analysis or to be able to detect any patterns. Before we continue further we need to aggregate crime counts in space and time. This may reveal patterns impossible to detect otherwise.
 
@@ -56,7 +54,7 @@ knitr::include_graphics('crime_files/imgs_crime/SpaceCube.PNG')
 
 This will create a netCDF file (.nc) which allows you to view spatial patterns and trend over time. The tool aggregated the "crime points" into hexagons. Each hexagon represents an area of approximately 78,000 square meters. The Distance Interval and Time Step Interval parameters impact the number of resulting bins and the size of each bin. These values can be chosen based on prior knowledge of the analysis area, or the tool will calculate values for you based on the spatial distribution of your data.
 
-### Step 4: Analyze crime hot spots
+# Step 4: Analyze crime hot spots
 
 At this point you should be able to analyze your data and look at where clusters of crime are emerging. In the **Geoprocessing** pane, search for and open `Emergins Hot Spot Analysis` tool.
 
@@ -82,7 +80,7 @@ The dark red hexagon bins are persistent hot spots. These locations do not have 
 
 Conversely, the dark blue bins are persistent cold spots. These are areas where crime is less prevalent. The light blue outlined bins are intensifying cold spots but means the opposite of its counterpart. Clusters of low crime counts in these cells are becoming more intense over time. In other words, the cold spots are getting colder.
 
-### Step 5: Going further in the analysis
+# Step 5: Going further in the analysis
 
 Now that you know where crime hot spots are emerging, you'll try to determine why they are emerging. In particular, you'll examine the relationship between an area's crime and its population. 
 
@@ -108,7 +106,7 @@ If you open the attribue table your data should have the following columns added
 - **Food & Beverage Stores Bus (NAICS) (businesses_n13_bus)** : Contains the count of food and beverage stores located within each hexagon bin.
 - **Food Service/Drinking Estab Bus (NAICS) (businesses_n37_bus)** : Contains the count of businesses that serve food, beverages, or both located within each hexagon bin.
 
-### Step 6: Prepare your dataset for additional analysis
+# Step 6: Prepare your dataset for additional analysis
 
 Next, you'll select the data that is relevant to your analysis and make a subset with only that information. 
 
@@ -123,9 +121,25 @@ knitr::include_graphics('crime_files/imgs_crime/Attribute.PNG')
 - Open the attribute table for the **San_Francisco_Crimes_Enrich** layer. The table indicates that 222 of 1,996 rows are selected, meaning they have 0 values for the HasData or 2010 Total Population (Esri 2019) fields. 
 - You'll create a new dataset without these selected features so you can focus on features that have data relevant to your analysis. You will call this new layer **San_Francisco_Crimes_Enrich_Subset**. I am not giving further information on how to do this since this is a basic operation you should be able to achieve.
 
-### Step 7: Bridge your data into R
+# Step 7: Bridge your data into R
 
-First of all we need to intall the **R-ArcGIS bridge**.
+First of all we need to intall the **R-ArcGIS bridge**. Once the R-ArcGIS bridge is installed, you can begin reading and writing data to and from ArcGIS and R. This is very useful for carrying out statistical analysis on the data you handled in ArcGIS.
+
+- Click on **Project**
+- Click on **Option**, then on **Application** and **Geoprocessing**
+- In the **R-ArcGIS Support section**, select your desired R home directory. This may require you to search for where R is stored on your computer.
+
+```{r, echo = FALSE}
+knitr::include_graphics('crime_files/imgs_crime/RArc_bridge.PNG')
+```
+
+If you haven't installed the R-ArcGIS bridge, a warning indicates that you need to install the ArcGIS R integration package to connect R with ArcGIS. You can automatically download and install the package by clicking on the sign next to the warning:
+
+- click Install package and choose **Install package from the Internet**. When asked to confirm the installation, click Yes, and when the installation is complete, click Close.
+
+And it's done, you now have a bridge between R and ArcGIS.
+
+# Step 8: Import your data into R
 
 In RStudio, in the R console type and run:
 
@@ -178,7 +192,7 @@ You can then run the function `arc.data2sp()` as shown below:
 enrich_sp <- arc.data2sp(enrich_select_df)
 ```
 
-### Step 8: Calculate smoothed crime rates
+# Step 9: Calculate smoothed crime rates
 
 All the information that you need to start your analysis is in place, but you may notice that the current attribute labels are cryptic and abbreviated as they represent the original field names from the San_Francisco_Crimes_Enrich_Subset feature class . In R, you can change the names of the enriched attributes to make them easier to identify.
 
@@ -234,7 +248,7 @@ arcgis_df <- arc.sp2data(enrich_sp)
 arc.write('C:/Users/benjamcr/Rproj/GEOG2015/CrimeDat/SF_Crime.gdb/San_Francisco_Crime_Rates', arcgis_df, shape_info = arc.shapeinfo(enrich_df))
 ```
 
-### Step 9: Continue your analysis in ArcGIS Pro
+# Step 10: Continue your analysis in ArcGIS Pro
 
 In the **Catalog** pane, right-click your SF_Crime geodatabase and choose **Refresh**. You should see your newly created layer **San_Francisco_Crime_Rates**.
 
@@ -268,7 +282,7 @@ knitr::include_graphics('crime_files/imgs_crime/MapHotSpot2.PNG')
 
 On your map, the bright red hexagon bins signify areas where there is intense clustering of high values with 99 percent confidence. These are areas where there are unusually high numbers of crimes occurring even when accounting for population. Notice that once the population of each area is considered, there are no statistically significant cold spots (areas of clustering of low crime counts).
 
-### Hand in:
+# Step 11: Hand in
 
 In your hand in you will prepare 2 maps:
 
