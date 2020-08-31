@@ -10,7 +10,7 @@ output:
 
 What you will learn during this exercise:
 
-1. Get to know the user interface in SPSS
+1. Get to know the user interface in R
 2. Understand what is data table and what is unit and variable
 3. Be able to sort values into a variable to identify units with min and max values
 4. Be able to create frequency histograms and understand them
@@ -21,8 +21,6 @@ What you will learn during this exercise:
 1. A maximum of 3 pages of PDF on BlackBoard within the deadline. Put your last name in the file name. Make sure you have a clear layout. Use only one language - either Norwegian or English in the answer. NB Failure to do so will count negatively in evaluation.
 
 2. Questions asked in the exercise text may be repeated in a test. Write down answers to these and be sure to answer the corresponding test (Test 1 in LM1) before the deadline.
-
-3. The results of the exercise and the test will count towards the final exam (in total folder teaching will count 40% of the exam grade).
 
 # Preliminary steps
 
@@ -164,18 +162,46 @@ knitr::include_graphics('imgs_lab/lab_1/SaveImg.PNG')
 
 As a hand in exercise 1 you must deliver:
 
-1. The three frequency charts for the change variables (from point 5) that you created in point 7.
-2. A text explaining briefly what frequency charts are for something and why it is useful to create such charts. Use your own words! (The answers will be checked for plagiarism)
+* The three frequency charts for the change variables (from point 5) that you created in point 7.
+* A text explaining briefly what frequency charts are for something and why it is useful to create such charts. Use your own words! (The answers will be checked for plagiarism)
 
 Provide brief, descriptive character texts for each chart. Put them under the figure.
 
-3. What type of chart does the figure show? 
-4. What variables are used? 
-5. For what years? 
+* What type of chart does the figure show? 
+* What variables are used? 
+* For what years? 
+
+Finally provide answers for each questions below:
+
+1. How many variables and observations do you have in the dataset? 
+2. What are the units of the variables contained in the dataset?
+3. In your dataset, is there any variables which look normally distributed? Which one?
+3. Which country had the least change in population growth?
+4. Has population growth increased or decreased for most countries between 1990 and 2013?
+5. Has life expectancy increased or decreased for most countries between 1990 and 2013?
 
 > Remember to be brief! Make sure that figure text and figure are on the same page.
 > Remember that the answer must be a maximum of three pages long.
 > Remember to convert the Word file to .pdf after you finish. To convert the file to PDF format, go to File and Save as Adobe PDF.
+
+# Rubrik
+
+```{r, echo = FALSE}
+rubrik <- data.frame(Questions = c("Histograms", "Text figures", "Answers to Questions"),
+                     Level_1 = c("1 points: The hand-in only has 1 histogram",
+                                 "2 points: The hand-in has 2 histograms",
+                                 "3 points: The hand-in has 2 histograms with different colors"),
+                     Level_2 = c("0.5 points: The text describing the charts is missing",
+                     "1 points: The text describing the charts does not explained well
+                                 ",
+                     "1.5 points: All histograms are well explained"),
+                     Level_3 = c("1 points: At least 2 answers are correct",
+                                 "2 points: At least 4 answers are correct",
+                                 "3 points: All answers are correct"))
+
+knitr::kable(rubrik)
+```
+
 
 # Checklist
 
@@ -188,7 +214,3 @@ The submission must contain:
 Now you are ready to submit your exercise: Upload the (max) 3-page PDF file on BlackBoard as a response to this exercise.
 
 REMEMBER to include your last name in the file name and use only one language in the answer.
-
-# Prepare for the test
-
-Make sure you are ready with the answers to the questions in steps 3, 4 and 6. These questions will be repeated in the test that completes Learning Module 1 (LM1).

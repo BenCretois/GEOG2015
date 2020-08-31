@@ -375,7 +375,7 @@ div.tocify {
 
 <p>What you will learn during this exercise:</p>
 <ol style="list-style-type: decimal">
-<li>Get to know the user interface in SPSS</li>
+<li>Get to know the user interface in R</li>
 <li>Understand what is data table and what is unit and variable</li>
 <li>Be able to sort values into a variable to identify units with min and max values</li>
 <li>Be able to create frequency histograms and understand them</li>
@@ -386,7 +386,6 @@ div.tocify {
 <ol style="list-style-type: decimal">
 <li><p>A maximum of 3 pages of PDF on BlackBoard within the deadline. Put your last name in the file name. Make sure you have a clear layout. Use only one language - either Norwegian or English in the answer. NB Failure to do so will count negatively in evaluation.</p></li>
 <li><p>Questions asked in the exercise text may be repeated in a test. Write down answers to these and be sure to answer the corresponding test (Test 1 in LM1) before the deadline.</p></li>
-<li><p>The results of the exercise and the test will count towards the final exam (in total folder teaching will count 40% of the exam grade).</p></li>
 </ol>
 </div>
 <div id="preliminary-steps" class="section level1">
@@ -395,8 +394,9 @@ div.tocify {
 <p>2- Download the World_90_13.xlsx file from Exercise 1 into LM1 on the BlackBoard and save it to Exercise 1 folder that you created in a).</p>
 <p>3- Open R.</p>
 <p>4- Load the World_90_13.xlsx dataset in R (as you learnt during the tutorials)</p>
-<pre class="r"><code>library(xlsx)
-data &lt;- read.xlsx(&#39;data/World_90_13.xlsx&#39;, sheetIndex = 1)</code></pre>
+<pre class="r"><code>library(xlsx)</code></pre>
+<pre><code>## Warning: package &#39;xlsx&#39; was built under R version 3.6.3</code></pre>
+<pre class="r"><code>data &lt;- read.xlsx(&#39;data/World_90_13.xlsx&#39;, sheetIndex = 1)</code></pre>
 </div>
 <div id="get-to-know-the-r-interface" class="section level1">
 <h1><span class="header-section-number">3</span> Get to know the R interface</h1>
@@ -550,22 +550,70 @@ data$changes_GDP &lt;- data$GDP_PPP13 - data$GDP_PPP90</code></pre>
 <div id="submission" class="section level1">
 <h1><span class="header-section-number">10</span> Submission</h1>
 <p>As a hand in exercise 1 you must deliver:</p>
-<ol style="list-style-type: decimal">
+<ul>
 <li>The three frequency charts for the change variables (from point 5) that you created in point 7.</li>
 <li>A text explaining briefly what frequency charts are for something and why it is useful to create such charts. Use your own words! (The answers will be checked for plagiarism)</li>
-</ol>
+</ul>
 <p>Provide brief, descriptive character texts for each chart. Put them under the figure.</p>
-<ol start="3" style="list-style-type: decimal">
+<ul>
 <li>What type of chart does the figure show?</li>
 <li>What variables are used?</li>
 <li>For what years?</li>
+</ul>
+<p>Finally provide answers for each questions below:</p>
+<ol style="list-style-type: decimal">
+<li>How many variables and observations do you have in the dataset?</li>
+<li>What are the units of the variables contained in the dataset?</li>
+<li>In your dataset, is there any variables which look normally distributed? Which one?</li>
+<li>Which country had the least change in population growth?</li>
+<li>Has population growth increased or decreased for most countries between 1990 and 2013?</li>
+<li>Has life expectancy increased or decreased for most countries between 1990 and 2013?</li>
 </ol>
 <blockquote>
 <p>Remember to be brief! Make sure that figure text and figure are on the same page. Remember that the answer must be a maximum of three pages long. Remember to convert the Word file to .pdf after you finish. To convert the file to PDF format, go to File and Save as Adobe PDF.</p>
 </blockquote>
 </div>
+<div id="rubrik" class="section level1">
+<h1><span class="header-section-number">11</span> Rubrik</h1>
+<table>
+<colgroup>
+<col width="11%" />
+<col width="32%" />
+<col width="34%" />
+<col width="21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Questions</th>
+<th align="left">Level_1</th>
+<th align="left">Level_2</th>
+<th align="left">Level_3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Histograms</td>
+<td align="left">1 points: The hand-in only has 1 histogram</td>
+<td align="left">0.5 points: The text describing the charts is missing</td>
+<td align="left">1 points: At least 2 answers are correct</td>
+</tr>
+<tr class="even">
+<td align="left">Text figures</td>
+<td align="left">2 points: The hand-in has 2 histograms</td>
+<td align="left">1 points: The text describing the charts does not explained well</td>
+<td align="left">2 points: At least 4 answers are correct</td>
+</tr>
+<tr class="odd">
+<td align="left">Answers to Questions</td>
+<td align="left">3 points: The hand-in has 2 histograms with different colors</td>
+<td align="left">1.5 points: All histograms are well explained</td>
+<td align="left">3 points: All answers are correct</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div id="checklist" class="section level1">
-<h1><span class="header-section-number">11</span> Checklist</h1>
+<h1><span class="header-section-number">12</span> Checklist</h1>
 <p>The submission must contain:</p>
 <ol style="list-style-type: decimal">
 <li>The three frequency histograms of the change variables you created.</li>
@@ -574,10 +622,6 @@ data$changes_GDP &lt;- data$GDP_PPP13 - data$GDP_PPP90</code></pre>
 </ol>
 <p>Now you are ready to submit your exercise: Upload the (max) 3-page PDF file on BlackBoard as a response to this exercise.</p>
 <p>REMEMBER to include your last name in the file name and use only one language in the answer.</p>
-</div>
-<div id="prepare-for-the-test" class="section level1">
-<h1><span class="header-section-number">12</span> Prepare for the test</h1>
-<p>Make sure you are ready with the answers to the questions in steps 3, 4 and 6. These questions will be repeated in the test that completes Learning Module 1 (LM1).</p>
 </div>
 
 
@@ -630,7 +674,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
