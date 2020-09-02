@@ -20,7 +20,7 @@ What you will learn during this exercise:
 
 1. A maximum of 3 pages of PDF on BlackBoard within the deadline. Put your last name in the file name. Make sure you have a clear layout. Use only one language - either Norwegian or English in the answer. NB Failure to do so will count negatively in evaluation.
 
-2. Questions asked in the exercise text may be repeated in a test. Write down answers to these and be sure to answer the corresponding test (Test 1 in LM1) before the deadline.
+2. Questions asked in the exercise text may be repeated in the test on BlackBoard.
 
 # Preliminary steps
 
@@ -245,15 +245,15 @@ Finally, you will have some questions to answer on BlackBoard, to prepare yourse
 
 ```{r, echo = FALSE}
 rubrik <- data.frame(Questions = c("Histograms", "Text figures", "Answers to Questions"),
-                     Level_1 = c("1 points: The hand-in only has 1 histogram",
-                                 "2 points: The hand-in has 2 histograms",
-                                 "3 points: The hand-in has 2 histograms with different colors"),
-                     Level_2 = c("0.5 points: The text describing the charts is missing",
-                     "1 points: The text describing the charts does not explained well
+                     Level_1 = c("0.5 points: The hand-in only has 1 histogram",
+                                 "1 points: The hand-in has 2 histograms",
+                                 "2 points: The hand-in has 2 histograms with different colors"),
+                     Level_2 = c("0.25 points: The text describing the charts is missing",
+                     "0-5 points: The text describing the charts does not explained well
                                  ",
-                     "1.5 points: All histograms are well explained"),
-                     Level_3 = c("1 points: At least 2 answers are correct",
-                                 "2 points: At least 4 answers are correct",
+                     "1 points: All histograms are well explained"),
+                     Level_3 = c("1 points: At least 3 answers are correct",
+                                 "2 points: At least 6 answers are correct",
                                  "3 points: All answers are correct"))
 
 knitr::kable(rubrik)
