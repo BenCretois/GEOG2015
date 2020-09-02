@@ -138,7 +138,7 @@ Create a histograms for your three new change variables as described in point 4.
 
 > *  Have most countries become richer or poorer (have they increased or decreased their GDP per capita) in the period between 1990 and 2013?
 
-> * At what end of the GDP per capita change histogram are Botswana, Italy, Ireland and Saudi Arabia located? Where is find Norway (first quarter, first half ...)?
+> * Where at the GDP per capita change histogram are Botswana, Italy, Ireland and Saudi Arabia located? Where do we find Norway (between the minimum and the first quartile, between the first quartile and the median, between the median and the third quartile, between the third quartile and the maximum)?
 
 Write down the answers - you may be asked the same questions on the exam test 1 that finishes LM 1.
 
@@ -171,14 +171,71 @@ Provide brief, descriptive character texts for each chart. Put them under the fi
 * What variables are used? 
 * For what years? 
 
-Finally provide answers for each questions below:
+Finally, you will have some questions to answer on BlackBoard, to prepare yourself for the questions try to answer the following:
 
 1. How many variables and observations do you have in the dataset? 
-2. What are the units of the variables contained in the dataset?
+    * 9 variables & 219 observations
+    * 9 observations & 219 variables
+    * 21 observations & 3 variables
+2. What is the unit of LifeExp90 and PopGrowth90?
+    * years / years
+    * years / no unit
+    * decades / number of persons
+    * decades / no unit
 3. In your dataset, is there any variables which look normally distributed? Which one?
-3. Which country had the least change in population growth?
-4. Has population growth increased or decreased for most countries between 1990 and 2013?
-5. Has life expectancy increased or decreased for most countries between 1990 and 2013?
+    * PopGrowth90
+    * GDP_PPP90
+    * GDP_PPP13
+    * None
+4. Which country had the least change in population growth?
+    * Argentina
+    * Norway
+    * Cameroon
+    * Thailand
+5. Has population growth increased or decreased for most countries between 1990 and 2013?
+    * Increased
+    * Decreased
+    * None
+6. Has life expectancy increased or decreased for most countries between 1990 and 2013?
+    * Increased
+    * Decreased
+    * None
+7. What is the trend in population growth overall?
+    * Increased
+    * Decreased
+    * None
+8. What is the trend in life expectancy overall?
+    * Increased
+    * Decreased
+    * None
+9. Where at the GDP per capita 2013 is Botswana located? (between the minimum and the first quartile, between the first quartile and the median, between the median and the third quartile, between the third quartile and the maximum)?
+    * between the minimum and the first quartile
+    * between the first quartile and the median
+    * between the median and the third quartile
+    * between the third quartile and the maximum
+10. Where at the GDP per capita 1990 is Norway located? (between the minimum and the first quartile, between the first quartile and the median, between the median and the third quartile, between the third quartile and the maximum)?
+    * between the minimum and the first quartile
+    * between the first quartile and the median
+    * between the median and the third quartile
+    * between the third quartile and the maximum
+11. Where at the GDP per capita 2013 is Saudia Arabia located? (between the minimum and the first quartile, between the first quartile and the median, between the median and the third quartile, between the third quartile and the maximum)?
+    * between the minimum and the first quartile
+    * between the first quartile and the median
+    * between the median and the third quartile
+    * between the third quartile and the maximum
+
+```{r,echo = FALSE, eval = FALSE}
+1. 9 observations & 219 variables
+2. years / no unit
+3. PopGrowth90
+4. Cameroon
+5. Increased
+6. Increased
+7. Increased
+8. Increased
+9. First 50%
+
+```
 
 > Remember to be brief! Make sure that figure text and figure are on the same page.
 > Remember that the answer must be a maximum of three pages long.

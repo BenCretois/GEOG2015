@@ -394,9 +394,8 @@ div.tocify {
 <p>2- Download the World_90_13.xlsx file from Exercise 1 into LM1 on the BlackBoard and save it to Exercise 1 folder that you created in a).</p>
 <p>3- Open R.</p>
 <p>4- Load the World_90_13.xlsx dataset in R (as you learnt during the tutorials)</p>
-<pre class="r"><code>library(xlsx)</code></pre>
-<pre><code>## Warning: package &#39;xlsx&#39; was built under R version 3.6.3</code></pre>
-<pre class="r"><code>data &lt;- read.xlsx(&#39;data/World_90_13.xlsx&#39;, sheetIndex = 1)</code></pre>
+<pre class="r"><code>library(xlsx)
+data &lt;- read.xlsx(&#39;data/World_90_13.xlsx&#39;, sheetIndex = 1)</code></pre>
 </div>
 <div id="get-to-know-the-r-interface" class="section level1">
 <h1><span class="header-section-number">3</span> Get to know the R interface</h1>
@@ -427,13 +426,13 @@ div.tocify {
 ## 6   3.3062046        NA        NA</code></pre>
 <p>You can also visualize the entire dataset by clicking on the dataset name in your <code>Environment</code>. This will give you the result shown below:</p>
 <pre class="r"><code>knitr::include_graphics(&#39;imgs_lab/lab_1/dataview.PNG&#39;)</code></pre>
-<p><img src="imgs_lab/lab_1/dataview.PNG" width="796" /></p>
+<p><img src="imgs_lab/lab_1/dataview.PNG" /><!-- --></p>
 <p>You can also learn about the type of variable (numeric, date, factor …) in your dataset using <code>str()</code>:</p>
 <pre class="r"><code>str(data)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    219 obs. of  9 variables:
-##  $ NA.        : Factor w/ 219 levels &quot;1&quot;,&quot;10&quot;,&quot;100&quot;,..: 1 112 143 154 165 176 187 198 209 2 ...
-##  $ CntryName  : Factor w/ 215 levels &quot;                              &quot;,..: 2 3 4 5 6 7 8 9 10 11 ...
-##  $ CntryCode  : Factor w/ 215 levels &quot;   &quot;,&quot;ABW&quot;,&quot;ADO&quot;,..: 4 6 56 10 3 5 11 8 9 2 ...
+##  $ NA.        : chr  &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...
+##  $ CntryName  : chr  &quot;Afghanistan                   &quot; &quot;Albania                       &quot; &quot;Algeria                       &quot; &quot;American Samoa                &quot; ...
+##  $ CntryCode  : chr  &quot;AFG&quot; &quot;ALB&quot; &quot;DZA&quot; &quot;ASM&quot; ...
 ##  $ LifeExp90  : num  48.6 72 66.8 NA NA ...
 ##  $ LifeExp13  : num  60.9 77.5 71 NA NA ...
 ##  $ PopGrowth90: num  3.88 1.8 2.56 3.14 3.86 ...
@@ -480,9 +479,9 @@ data$changes_GDP &lt;- data$GDP_PPP13 - data$GDP_PPP90</code></pre>
 <p>We can check that the new variables has been created by for instance typing <code>str(data)</code></p>
 <pre class="r"><code>str(data)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    219 obs. of  10 variables:
-##  $ NA.        : Factor w/ 219 levels &quot;1&quot;,&quot;10&quot;,&quot;100&quot;,..: 1 112 143 154 165 176 187 198 209 2 ...
-##  $ CntryName  : Factor w/ 215 levels &quot;                              &quot;,..: 2 3 4 5 6 7 8 9 10 11 ...
-##  $ CntryCode  : Factor w/ 215 levels &quot;   &quot;,&quot;ABW&quot;,&quot;ADO&quot;,..: 4 6 56 10 3 5 11 8 9 2 ...
+##  $ NA.        : chr  &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...
+##  $ CntryName  : chr  &quot;Afghanistan                   &quot; &quot;Albania                       &quot; &quot;Algeria                       &quot; &quot;American Samoa                &quot; ...
+##  $ CntryCode  : chr  &quot;AFG&quot; &quot;ALB&quot; &quot;DZA&quot; &quot;ASM&quot; ...
 ##  $ LifeExp90  : num  48.6 72 66.8 NA NA ...
 ##  $ LifeExp13  : num  60.9 77.5 71 NA NA ...
 ##  $ PopGrowth90: num  3.88 1.8 2.56 3.14 3.86 ...
@@ -544,7 +543,7 @@ data$changes_GDP &lt;- data$GDP_PPP13 - data$GDP_PPP90</code></pre>
 <h1><span class="header-section-number">9</span> Save your histograms and place them in a word document ready for submission.</h1>
 <p>To save a graph you will need to select <code>Plots</code> on the lower right pane. Then select <code>Export &gt; Save as image</code>.</p>
 <pre class="r"><code>knitr::include_graphics(&#39;imgs_lab/lab_1/SaveImg.PNG&#39;)</code></pre>
-<p><img src="imgs_lab/lab_1/SaveImg.PNG" width="428" /></p>
+<p><img src="imgs_lab/lab_1/SaveImg.PNG" /><!-- --></p>
 <p><em>Note: If you use Norwegian in the exercise, remember to change all text in the figures to Norwegian.</em></p>
 </div>
 <div id="submission" class="section level1">
@@ -562,12 +561,64 @@ data$changes_GDP &lt;- data$GDP_PPP13 - data$GDP_PPP90</code></pre>
 </ul>
 <p>Finally provide answers for each questions below:</p>
 <ol style="list-style-type: decimal">
-<li>How many variables and observations do you have in the dataset?</li>
-<li>What are the units of the variables contained in the dataset?</li>
-<li>In your dataset, is there any variables which look normally distributed? Which one?</li>
-<li>Which country had the least change in population growth?</li>
-<li>Has population growth increased or decreased for most countries between 1990 and 2013?</li>
-<li>Has life expectancy increased or decreased for most countries between 1990 and 2013?</li>
+<li>How many variables and observations do you have in the dataset?
+<ul>
+<li>9 variables &amp; 219 observations</li>
+<li>9 observations &amp; 219 variables</li>
+<li>21 observations &amp; 3 variables</li>
+</ul></li>
+<li>What is the unit of LifeExp90 and PopGrowth90?
+<ul>
+<li>years / years</li>
+<li>years / no unit</li>
+<li>decades / number of persons</li>
+<li>decades / no unit</li>
+</ul></li>
+<li>In your dataset, is there any variables which look normally distributed? Which one?
+<ul>
+<li>PopGrowth90</li>
+<li>GDP_PPP90</li>
+<li>GDP_PPP13</li>
+<li>None</li>
+</ul></li>
+<li>Which country had the least change in population growth?
+<ul>
+<li>Argentina</li>
+<li>Norway</li>
+<li>Cameroon</li>
+<li>Thailand</li>
+</ul></li>
+<li>Has population growth increased or decreased for most countries between 1990 and 2013?
+<ul>
+<li>Increased</li>
+<li>Decreased</li>
+<li>None</li>
+</ul></li>
+<li>Has life expectancy increased or decreased for most countries between 1990 and 2013?
+<ul>
+<li>Increased</li>
+<li>Decreased</li>
+<li>None</li>
+</ul></li>
+<li>What is the trend in population growth overall?
+<ul>
+<li>Increased</li>
+<li>Decreased</li>
+<li>None</li>
+</ul></li>
+<li>What is the trend in life expectancy overall?
+<ul>
+<li>Increased</li>
+<li>Decreased</li>
+<li>None</li>
+</ul></li>
+<li>At what end of the GDP per capita in 2013 histogram is Botswana?
+<ul>
+<li>First 25%</li>
+<li>First 50%</li>
+<li>Top 50%</li>
+<li>Top 75%</li>
+</ul></li>
 </ol>
 <blockquote>
 <p>Remember to be brief! Make sure that figure text and figure are on the same page. Remember that the answer must be a maximum of three pages long. Remember to convert the Word file to .pdf after you finish. To convert the file to PDF format, go to File and Save as Adobe PDF.</p>
