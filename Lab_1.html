@@ -385,7 +385,7 @@ div.tocify {
 <h1><span class="header-section-number">1</span> Grading</h1>
 <ol style="list-style-type: decimal">
 <li><p>A maximum of 3 pages of PDF on BlackBoard within the deadline. Put your last name in the file name. Make sure you have a clear layout. Use only one language - either Norwegian or English in the answer. NB Failure to do so will count negatively in evaluation.</p></li>
-<li><p>Questions asked in the exercise text may be repeated in a test. Write down answers to these and be sure to answer the corresponding test (Test 1 in LM1) before the deadline.</p></li>
+<li><p>Questions asked in the exercise text may be repeated in the test on BlackBoard.</p></li>
 </ol>
 </div>
 <div id="preliminary-steps" class="section level1">
@@ -426,7 +426,7 @@ data &lt;- read.xlsx(&#39;data/World_90_13.xlsx&#39;, sheetIndex = 1)</code></pr
 ## 6   3.3062046        NA        NA</code></pre>
 <p>You can also visualize the entire dataset by clicking on the dataset name in your <code>Environment</code>. This will give you the result shown below:</p>
 <pre class="r"><code>knitr::include_graphics(&#39;imgs_lab/lab_1/dataview.PNG&#39;)</code></pre>
-<p><img src="imgs_lab/lab_1/dataview.PNG" /><!-- --></p>
+<p><img src="imgs_lab/lab_1/dataview.PNG" width="796" /></p>
 <p>You can also learn about the type of variable (numeric, date, factor …) in your dataset using <code>str()</code>:</p>
 <pre class="r"><code>str(data)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    219 obs. of  9 variables:
@@ -529,7 +529,7 @@ data$changes_GDP &lt;- data$GDP_PPP13 - data$GDP_PPP90</code></pre>
 </blockquote>
 <blockquote>
 <ul>
-<li>At what end of the GDP per capita change histogram are Botswana, Italy, Ireland and Saudi Arabia located? Where is find Norway (first quarter, first half …)?</li>
+<li>Where at the GDP per capita change histogram are Botswana, Italy, Ireland and Saudi Arabia located? Where do we find Norway (between the minimum and the first quartile, between the first quartile and the median, between the median and the third quartile, between the third quartile and the maximum)?</li>
 </ul>
 </blockquote>
 <p>Write down the answers - you may be asked the same questions on the exam test 1 that finishes LM 1.</p>
@@ -543,7 +543,7 @@ data$changes_GDP &lt;- data$GDP_PPP13 - data$GDP_PPP90</code></pre>
 <h1><span class="header-section-number">9</span> Save your histograms and place them in a word document ready for submission.</h1>
 <p>To save a graph you will need to select <code>Plots</code> on the lower right pane. Then select <code>Export &gt; Save as image</code>.</p>
 <pre class="r"><code>knitr::include_graphics(&#39;imgs_lab/lab_1/SaveImg.PNG&#39;)</code></pre>
-<p><img src="imgs_lab/lab_1/SaveImg.PNG" /><!-- --></p>
+<p><img src="imgs_lab/lab_1/SaveImg.PNG" width="428" /></p>
 <p><em>Note: If you use Norwegian in the exercise, remember to change all text in the figures to Norwegian.</em></p>
 </div>
 <div id="submission" class="section level1">
@@ -559,7 +559,7 @@ data$changes_GDP &lt;- data$GDP_PPP13 - data$GDP_PPP90</code></pre>
 <li>What variables are used?</li>
 <li>For what years?</li>
 </ul>
-<p>Finally provide answers for each questions below:</p>
+<p>Finally, you will have some questions to answer on BlackBoard, to prepare yourself for the questions try to answer the following:</p>
 <ol style="list-style-type: decimal">
 <li>How many variables and observations do you have in the dataset?
 <ul>
@@ -612,25 +612,39 @@ data$changes_GDP &lt;- data$GDP_PPP13 - data$GDP_PPP90</code></pre>
 <li>Decreased</li>
 <li>None</li>
 </ul></li>
-<li>At what end of the GDP per capita in 2013 histogram is Botswana?
+<li>Where at the GDP per capita 2013 is Botswana located? (between the minimum and the first quartile, between the first quartile and the median, between the median and the third quartile, between the third quartile and the maximum)?
 <ul>
-<li>First 25%</li>
-<li>First 50%</li>
-<li>Top 50%</li>
-<li>Top 75%</li>
+<li>between the minimum and the first quartile</li>
+<li>between the first quartile and the median</li>
+<li>between the median and the third quartile</li>
+<li>between the third quartile and the maximum</li>
+</ul></li>
+<li>Where at the GDP per capita 1990 is Norway located? (between the minimum and the first quartile, between the first quartile and the median, between the median and the third quartile, between the third quartile and the maximum)?
+<ul>
+<li>between the minimum and the first quartile</li>
+<li>between the first quartile and the median</li>
+<li>between the median and the third quartile</li>
+<li>between the third quartile and the maximum</li>
+</ul></li>
+<li>Where at the GDP per capita 2013 is Saudia Arabia located? (between the minimum and the first quartile, between the first quartile and the median, between the median and the third quartile, between the third quartile and the maximum)?
+<ul>
+<li>between the minimum and the first quartile</li>
+<li>between the first quartile and the median</li>
+<li>between the median and the third quartile</li>
+<li>between the third quartile and the maximum</li>
 </ul></li>
 </ol>
 <blockquote>
 <p>Remember to be brief! Make sure that figure text and figure are on the same page. Remember that the answer must be a maximum of three pages long. Remember to convert the Word file to .pdf after you finish. To convert the file to PDF format, go to File and Save as Adobe PDF.</p>
 </blockquote>
 </div>
-<div id="rubrik" class="section level1">
-<h1><span class="header-section-number">11</span> Rubrik</h1>
+<div id="rubric" class="section level1">
+<h1><span class="header-section-number">11</span> Rubric</h1>
 <table>
 <colgroup>
 <col width="11%" />
 <col width="32%" />
-<col width="34%" />
+<col width="35%" />
 <col width="21%" />
 </colgroup>
 <thead>
@@ -644,20 +658,20 @@ data$changes_GDP &lt;- data$GDP_PPP13 - data$GDP_PPP90</code></pre>
 <tbody>
 <tr class="odd">
 <td align="left">Histograms</td>
-<td align="left">1 points: The hand-in only has 1 histogram</td>
-<td align="left">0.5 points: The text describing the charts is missing</td>
-<td align="left">1 points: At least 2 answers are correct</td>
+<td align="left">0.5 points: The hand-in only has 1 histogram</td>
+<td align="left">0.25 points: The text describing the charts is missing</td>
+<td align="left">1 points: At least 3 answers are correct</td>
 </tr>
 <tr class="even">
 <td align="left">Text figures</td>
-<td align="left">2 points: The hand-in has 2 histograms</td>
-<td align="left">1 points: The text describing the charts does not explained well</td>
-<td align="left">2 points: At least 4 answers are correct</td>
+<td align="left">1 points: The hand-in has 2 histograms</td>
+<td align="left">0-5 points: The text describing the charts does not explained well</td>
+<td align="left">2 points: At least 6 answers are correct</td>
 </tr>
 <tr class="odd">
 <td align="left">Answers to Questions</td>
-<td align="left">3 points: The hand-in has 2 histograms with different colors</td>
-<td align="left">1.5 points: All histograms are well explained</td>
+<td align="left">2 points: The hand-in has 2 histograms with different colors</td>
+<td align="left">1 points: All histograms are well explained</td>
 <td align="left">3 points: All answers are correct</td>
 </tr>
 </tbody>
