@@ -1,11 +1,11 @@
 ---
 title: "Lab 1 - Introduction to statistics in R and histograms"
-output: 
-    html_document:
-        toc: TRUE
-        toc_float: TRUE
-        number_sections: yes
-        theme: lumen
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    number_sections: yes
+    theme: lumen
 ---
 
 What you will learn during this exercise:
@@ -20,7 +20,7 @@ What you will learn during this exercise:
 
 1. A maximum of 3 pages of PDF on BlackBoard within the deadline. Put your last name in the file name. Make sure you have a clear layout. Use only one language - either Norwegian or English in the answer. NB Failure to do so will count negatively in evaluation.
 
-2. Questions asked in the exercise text may be repeated in the test on BlackBoard.
+2. Questions asked in the exercise text may be repeated in the test on BlackBoard. ** You do not need to hand-in the questions**
 
 # Preliminary steps
 
@@ -171,72 +171,6 @@ Provide brief, descriptive character texts for each chart. Put them under the fi
 * What variables are used? 
 * For what years? 
 
-Finally, you will have some questions to answer on BlackBoard, to prepare yourself for the questions try to answer the following:
-
-1. How many variables and observations do you have in the dataset? 
-    * 9 variables & 219 observations
-    * 9 observations & 219 variables
-    * 21 observations & 3 variables
-2. What is the unit of LifeExp90 and PopGrowth90?
-    * years / years
-    * years / no unit
-    * decades / number of persons
-    * decades / no unit
-3. In your dataset, is there any variables which look normally distributed? Which one?
-    * PopGrowth90
-    * GDP_PPP90
-    * GDP_PPP13
-    * None
-4. Which country had the least change in population growth?
-    * Argentina
-    * Norway
-    * Cameroon
-    * Thailand
-5. Has population growth increased or decreased for most countries between 1990 and 2013?
-    * Increased
-    * Decreased
-    * None
-6. Has life expectancy increased or decreased for most countries between 1990 and 2013?
-    * Increased
-    * Decreased
-    * None
-7. What is the trend in population growth overall?
-    * Increased
-    * Decreased
-    * None
-8. What is the trend in life expectancy overall?
-    * Increased
-    * Decreased
-    * None
-9. Where at the GDP per capita 2013 is Botswana located? (between the minimum and the first quartile, between the first quartile and the median, between the median and the third quartile, between the third quartile and the maximum)?
-    * between the minimum and the first quartile
-    * between the first quartile and the median
-    * between the median and the third quartile
-    * between the third quartile and the maximum
-10. Where at the GDP per capita 1990 is Norway located? (between the minimum and the first quartile, between the first quartile and the median, between the median and the third quartile, between the third quartile and the maximum)?
-    * between the minimum and the first quartile
-    * between the first quartile and the median
-    * between the median and the third quartile
-    * between the third quartile and the maximum
-11. Where at the GDP per capita 2013 is Saudia Arabia located? (between the minimum and the first quartile, between the first quartile and the median, between the median and the third quartile, between the third quartile and the maximum)?
-    * between the minimum and the first quartile
-    * between the first quartile and the median
-    * between the median and the third quartile
-    * between the third quartile and the maximum
-
-```{r,echo = FALSE, eval = FALSE}
-1. 9 observations & 219 variables
-2. years / no unit
-3. PopGrowth90
-4. Cameroon
-5. Increased
-6. Increased
-7. Increased
-8. Increased
-9. First 50%
-
-```
-
 > Remember to be brief! Make sure that figure text and figure are on the same page.
 > Remember that the answer must be a maximum of three pages long.
 > Remember to convert the Word file to .pdf after you finish. To convert the file to PDF format, go to File and Save as Adobe PDF.
@@ -244,17 +178,13 @@ Finally, you will have some questions to answer on BlackBoard, to prepare yourse
 # Rubric
 
 ```{r, echo = FALSE}
-rubrik <- data.frame(Questions = c("Histograms", "Text figures", "Answers to Questions"),
-                     Level_1 = c("0.5 points: The hand-in only has 1 histogram",
-                                 "1 points: The hand-in has 2 histograms",
-                                 "2 points: The hand-in has 2 histograms with different colors"),
-                     Level_2 = c("0.25 points: The text describing the charts is missing",
-                     "0-5 points: The text describing the charts does not explained well
-                                 ",
-                     "1 points: All histograms are well explained"),
-                     Level_3 = c("1 points: At least 3 answers are correct",
-                                 "2 points: At least 6 answers are correct",
-                                 "3 points: All answers are correct"))
+rubrik <- data.frame(Questions = c("Histograms", "Figure caption"),
+                     Level_1 = c("1 points: The hand-in only has 1 histogram",
+                                 "1 points: The text describing the charts is not explicit enough"),
+                     Level_2 = c("2 points: The hand-in only has 2 histogram",
+                     "2 points: The text describing the charts is explicit enough"),
+                     Level_3 = c("3 points: The hand-in has 3 histograms",
+                                 "3 points: The text describing the charts is explicit enough & each histogram has a different color"))
 
 knitr::kable(rubrik)
 ```
