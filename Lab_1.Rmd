@@ -241,7 +241,7 @@ Finally, you will have some questions to answer on BlackBoard, to prepare yourse
 > Remember that the answer must be a maximum of three pages long.
 > Remember to convert the Word file to .pdf after you finish. To convert the file to PDF format, go to File and Save as Adobe PDF.
 
-# Rubrik
+# Rubric
 
 ```{r, echo = FALSE}
 rubrik <- data.frame(Questions = c("Histograms", "Text figures", "Answers to Questions"),
