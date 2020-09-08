@@ -401,7 +401,7 @@ data &lt;- read.xlsx(&#39;data/World_90_13.xlsx&#39;, sheetIndex = 1)</code></pr
 <h1><span class="header-section-number">3</span> Get to know the R interface</h1>
 <blockquote>
 <ul>
-<li>Remember the tutorials and answer the following question: what are the main panes in RStudio, what are their functions?</li>
+<li>Remember the tutorials, what are the main panes in RStudio, what are their functions?</li>
 </ul>
 </blockquote>
 <p>If you need some refreshment watch <a href="https://www.youtube.com/watch?v=5YmcEYTSN7k">this video</a></p>
@@ -409,7 +409,7 @@ data &lt;- read.xlsx(&#39;data/World_90_13.xlsx&#39;, sheetIndex = 1)</code></pr
 <div id="get-to-know-the-data" class="section level1">
 <h1><span class="header-section-number">4</span> Get to know the data</h1>
 <p>The data presented is taken from the World Bank’s development indicators web pages and contains information on life expectancy, annual population growth and purchasing power adjusted gross domestic product per capita for 1990 and 2013 respectively.</p>
-<pre class="r"><code>head(data) # Show the 5 first rows</code></pre>
+<pre class="r"><code>head(data) # Shows the 5 first rows</code></pre>
 <pre><code>##   NA.                      CntryName CntryCode LifeExp90 LifeExp13 PopGrowth90
 ## 1   1 Afghanistan                          AFG  48.56705  60.93141    3.879694
 ## 2   2 Albania                              ALB  71.95732  77.53724    1.799086
@@ -425,7 +425,6 @@ data &lt;- read.xlsx(&#39;data/World_90_13.xlsx&#39;, sheetIndex = 1)</code></pr
 ## 5  -4.3996839        NA        NA
 ## 6   3.3062046        NA        NA</code></pre>
 <p>You can also visualize the entire dataset by clicking on the dataset name in your <code>Environment</code>. This will give you the result shown below:</p>
-<pre class="r"><code>knitr::include_graphics(&#39;imgs_lab/lab_1/dataview.PNG&#39;)</code></pre>
 <p><img src="imgs_lab/lab_1/dataview.PNG" width="796" /></p>
 <p>You can also learn about the type of variable (numeric, date, factor …) in your dataset using <code>str()</code>:</p>
 <pre class="r"><code>str(data)</code></pre>
@@ -442,6 +441,7 @@ data &lt;- read.xlsx(&#39;data/World_90_13.xlsx&#39;, sheetIndex = 1)</code></pr
 <blockquote>
 <ul>
 <li>How many variables do you have in your dataset? How many rows?</li>
+<li>What is the unit of LifeExp90 and PopGrowth90?</li>
 </ul>
 </blockquote>
 </div>
@@ -465,7 +465,27 @@ data &lt;- read.xlsx(&#39;data/World_90_13.xlsx&#39;, sheetIndex = 1)</code></pr
 <p>You can also add colors, change the size of the bins … I let you discover the possibilities by typing <code>?hist</code>.</p>
 <blockquote>
 <ul>
-<li>Repeat the procedure with the variable: Population growth 2013 (annual%). Bonus: Add a color to the bars in the histogram</li>
+<li>Where at the GDP per capita 2013 is Bostwana located? Between the minimum and the first quartile, between the first quartile and the median, between the median and the third quartile or between the third quartile and the maximum. (Hint: you can estimate this by using the function <code>summary()</code>)</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Where at the GDP per capita 1990 is Norway located?</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Where at the GDP per capita 2013 is Saudia Arabia located?</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>Draw a new histogram with the variable: Population growth 2013 (annual%).</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>By drawing a histogram for the other variables, can you see if there is which look normally distributed? Which one?</li>
 </ul>
 </blockquote>
 </div>
@@ -494,21 +514,16 @@ data$changes_GDP &lt;- data$GDP_PPP13 - data$GDP_PPP90</code></pre>
 <li>Add variables representing the changes in population growth and life expectancy.</li>
 </ul>
 </blockquote>
-<p><em>Note 1: The variable you have constructed is not change in population, but change in population growth. A country that had population growth in 1990 and also had population growth, but somewhat lower, in 2013 will have a negative value for the change variable. Although the country is experiencing growth in both years, growth has slowed. A country that has received a positive value means that population growth in 2013 was greater than population growth in 1990</em></p>
-<p><em>Note 2: Note: The gross domestic product variables are adjusted in two ways. First, one it adjusted with regard to purchasing power. With a 1 dollar spent in India you can buy much more than with a 1 dollar spent in the United States (Check <a href="http://en.wikipedia.org/wiki/Purchasing_power_parity%20for%20details">wikipedia</a>). Secundly, the variable has been adjusted to dollar value as it was in 2011 (since 1 dollar in 1990 is different than a dollar in 2013).</em></p>
-<p>*Note 3: If one of the variables used to calculate the change variable is missing value for a country, the change variable will also be missing value for that country. Both variables used in the calculation must have value for the change variable to get value.</p>
+<p><strong>Note 1:</strong> The variable you have constructed is not change in population, but change in population growth. A country that had population growth in 1990 and also had population growth, but somewhat lower, in 2013 will have a negative value for the change variable. Although the country is experiencing growth in both years, growth has slowed. A country that has received a positive value means that population growth in 2013 was greater than population growth in 1990.</p>
+<p><strong>Note 2:</strong> Note: The gross domestic product variables are adjusted in two ways. First, one it adjusted with regard to purchasing power. With a 1 dollar spent in India you can buy much more than with a 1 dollar spent in the United States (Check <a href="http://en.wikipedia.org/wiki/Purchasing_power_parity%20for%20details">wikipedia</a>). Secundly, the variable has been adjusted to dollar value as it was in 2011 (since 1 dollar in 1990 is different than a dollar in 2013).</p>
+<p><strong>Note 3:</strong> If one of the variables used to calculate the change variable is missing value for a country, the change variable will also be missing value for that country. Both variables used in the calculation must have value for the change variable to get value.</p>
 </div>
 <div id="create-frequency-histograms-of-the-new-change-variables-and-discuss-the-results" class="section level1">
 <h1><span class="header-section-number">7</span> Create frequency histograms of the new change variables and discuss the results</h1>
 <p>Create a histograms for your three new change variables as described in point 4. Study the data table and frequency histograms you have created and discuss with a fellow student:</p>
 <blockquote>
 <ul>
-<li>The variable values are displayed along the first axis (the x-axis, the horizontal). Along the second axis (the y-axis, the vertical), frequency is shown, but frequency of what?</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>Which countries represent the extremes of change in population growth, life expectancy and gross domestic product?</li>
+<li>Which country had the least change in population growth?</li>
 </ul>
 </blockquote>
 <p>*Tip: you can use <code>which(max(data$...))</code> and <code>which(min(data$...))</code>. This will give you the row number of the maximum and minimum of your variable. You can then search for the corresponding country.</p>
@@ -524,15 +539,9 @@ data$changes_GDP &lt;- data$GDP_PPP13 - data$GDP_PPP90</code></pre>
 </blockquote>
 <blockquote>
 <ul>
-<li>Have most countries become richer or poorer (have they increased or decreased their GDP per capita) in the period between 1990 and 2013?</li>
+<li>What is the trend in population growth overall?</li>
 </ul>
 </blockquote>
-<blockquote>
-<ul>
-<li>Where at the GDP per capita change histogram are Botswana, Italy, Ireland and Saudi Arabia located? Where do we find Norway (between the minimum and the first quartile, between the first quartile and the median, between the median and the third quartile, between the third quartile and the maximum)?</li>
-</ul>
-</blockquote>
-<p>Write down the answers - you may be asked the same questions on the exam test 1 that finishes LM 1.</p>
 </div>
 <div id="use-hist-to-create-frequency-histograms-to-be-submitted-for-this-exercise." class="section level1">
 <h1><span class="header-section-number">8</span> Use hist() to create frequency histograms to be submitted for this exercise.</h1>
@@ -542,7 +551,6 @@ data$changes_GDP &lt;- data$GDP_PPP13 - data$GDP_PPP90</code></pre>
 <div id="save-your-histograms-and-place-them-in-a-word-document-ready-for-submission." class="section level1">
 <h1><span class="header-section-number">9</span> Save your histograms and place them in a word document ready for submission.</h1>
 <p>To save a graph you will need to select <code>Plots</code> on the lower right pane. Then select <code>Export &gt; Save as image</code>.</p>
-<pre class="r"><code>knitr::include_graphics(&#39;imgs_lab/lab_1/SaveImg.PNG&#39;)</code></pre>
 <p><img src="imgs_lab/lab_1/SaveImg.PNG" width="428" /></p>
 <p><em>Note: If you use Norwegian in the exercise, remember to change all text in the figures to Norwegian.</em></p>
 </div>

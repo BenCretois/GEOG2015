@@ -39,7 +39,7 @@ data <- read.xlsx('data/World_90_13.xlsx', sheetIndex = 1)
 
 # Get to know the R interface
 
-> * Remember the tutorials and answer the following question: what are the main panes in RStudio, what are their functions?
+> * Remember the tutorials, what are the main panes in RStudio, what are their functions?
 
 If you need some refreshment watch [this video](https://www.youtube.com/watch?v=5YmcEYTSN7k)
 
@@ -48,12 +48,12 @@ If you need some refreshment watch [this video](https://www.youtube.com/watch?v=
 The data presented is taken from the World Bank's development indicators web pages and contains information on life expectancy, annual population growth and purchasing power adjusted gross domestic product per capita for 1990 and 2013 respectively.
 
 ```{r}
-head(data) # Show the 5 first rows
+head(data) # Shows the 5 first rows
 ```
 
 You can also visualize the entire dataset by clicking on the dataset name in your `Environment`. This will give you the result shown below:
 
-```{r}
+```{r, echo = FALSE}
 knitr::include_graphics('imgs_lab/lab_1/dataview.PNG')
 ```
 
@@ -64,6 +64,7 @@ str(data)
 ```
 
 > * How many variables do you have in your dataset? How many rows?
+> * What is the unit of LifeExp90 and PopGrowth90?
 
 # Create a histogram
 
@@ -91,7 +92,15 @@ hist(data$GDP_PPP13,
 
 You can also add colors, change the size of the bins ... I let you discover the possibilities by typing `?hist`.
 
-> * Repeat the procedure with the variable: Population growth 2013 (annual%). Bonus: Add a color to the bars in the histogram
+> * Where at the GDP per capita 2013 is Bostwana located? Between the minimum and the first quartile, between the first quartile and the median, between the median and the third quartile or between the third quartile and the maximum. (Hint: you can estimate this by using the function `summary()`)
+
+> * Where at the GDP per capita 1990 is Norway located?
+
+> * Where at the GDP per capita 2013 is Saudia Arabia located?
+
+> * Draw a new histogram with the variable: Population growth 2013 (annual%). 
+
+> * By drawing a histogram for the other variables, can you see if there is which look normally distributed? Which one?
 
 # Create new variables for changes in gross domestic product, population growth and life expectancy
 
@@ -114,21 +123,19 @@ str(data)
 
 > * Add variables representing the changes in population growth and life expectancy.
 
-*Note 1: The variable you have constructed is not change in population, but change in population growth. A country that had population growth in 1990 and also had population growth, but somewhat lower, in 2013 will have a negative value for the change variable. Although the country is experiencing growth in both years, growth has slowed. A country that has received a positive value means that population growth in 2013 was greater than population growth in 1990*
+**Note 1:** The variable you have constructed is not change in population, but change in population growth. A country that had population growth in 1990 and also had population growth, but somewhat lower, in 2013 will have a negative value for the change variable. Although the country is experiencing growth in both years, growth has slowed. A country that has received a positive value means that population growth in 2013 was greater than population growth in 1990.
 
-*Note 2: Note: The gross domestic product variables are adjusted in two ways. First, one it adjusted with regard to purchasing power. With a 1 dollar spent in India you can buy much more than with a 1 dollar spent in the United States
+**Note 2:** Note: The gross domestic product variables are adjusted in two ways. First, one it adjusted with regard to purchasing power. With a 1 dollar spent in India you can buy much more than with a 1 dollar spent in the United States
 (Check [wikipedia](http://en.wikipedia.org/wiki/Purchasing_power_parity for details)).
-Secundly, the variable has been adjusted to dollar value as it was in 2011 (since 1 dollar in 1990 is different than a dollar in 2013).*
+Secundly, the variable has been adjusted to dollar value as it was in 2011 (since 1 dollar in 1990 is different than a dollar in 2013).
 
-*Note 3: If one of the variables used to calculate the change variable is missing value for a country, the change variable will also be missing value for that country. Both variables used in the calculation must have value for the change variable to get value.
+**Note 3:** If one of the variables used to calculate the change variable is missing value for a country, the change variable will also be missing value for that country. Both variables used in the calculation must have value for the change variable to get value.
 
 # Create frequency histograms of the new change variables and discuss the results
 
 Create a histograms for your three new change variables as described in point 4. Study the data table and frequency histograms you have created and discuss with a fellow student:
 
-> * The variable values are displayed along the first axis (the x-axis, the horizontal). Along the second axis (the y-axis, the vertical), frequency is shown, but frequency of what?
-
-> * Which countries represent the extremes of change in population growth, life expectancy and gross domestic product? 
+> * Which country had the least change in population growth?
 
 *Tip: you can use `which(max(data$...))` and `which(min(data$...))`. This will give you the row number of the maximum and minimum of your variable. You can then search for the corresponding country.
 
@@ -136,11 +143,7 @@ Create a histograms for your three new change variables as described in point 4.
 
 > *  Has life expectancy increased or decreased for most countries between 1990 and 2013?
 
-> *  Have most countries become richer or poorer (have they increased or decreased their GDP per capita) in the period between 1990 and 2013?
-
-> * Where at the GDP per capita change histogram are Botswana, Italy, Ireland and Saudi Arabia located? Where do we find Norway (between the minimum and the first quartile, between the first quartile and the median, between the median and the third quartile, between the third quartile and the maximum)?
-
-Write down the answers - you may be asked the same questions on the exam test 1 that finishes LM 1.
+> *  What is the trend in population growth overall?
 
 # Use hist() to create frequency histograms to be submitted for this exercise.
 
@@ -152,7 +155,7 @@ You should end up with 3 histograms.
 
 To save a graph you will need to select `Plots` on the lower right pane. Then select `Export > Save as image`.
 
-```{r}
+```{r, echo = FALSE}
 knitr::include_graphics('imgs_lab/lab_1/SaveImg.PNG')
 ```
 
