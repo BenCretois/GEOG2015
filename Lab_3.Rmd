@@ -12,21 +12,40 @@ What you will learn:
 
 - Use R to calculate simple statistical measures to describe a variable.
 
+> IMPORTANT NOTE:
+> You do not need to answer the questions in your hand out. The questions asked in this document are to prepare you to the MCQ on BlackBoard.
+
 
 # Find the variables to use in this exercise 
 
 In this exercise, each of you will analyze a different variable. In the **NameOgVariables.pdf** you will which of the two variables you are supposed to use and in which dataset you will find them. The document DataDescription.pdf contains a brief description (associated label / label). 
 
-In this exercise I will use World2005.xlsx.
+In this exercise I will use Verden2005.sav as an example. 
+
+> Note that your dataset is a .sav file, to open it you need to use the function `read.spss()` as demonstrated below.
 
 The data is, as in Exercise 1, taken from the World Bank. Data source is:
 World Bank 2016. [World Bank development indicators](http://data.worldbank.org/indicator)
 
 # Load your data in R
 
-From BlackBoard, in the exercise folder dedicated to LM 3, you will find the files World2005.xlsx, World2006.xlsx, etc. Download one of these containing your variables and save it in a folder created for this exercise.
+From BlackBoard, in the exercise folder dedicated to LM2, you will find the files Verden2005.sav, Verden2006.sav, etc.... Download one of these containing your variables and save it in a folder created for this exercise.
 
 Load the dataset in R.
+
+Since your file is an .sav file you have to open it as follow:
+
+```{r, echo = TRUE, eval = FALSE}
+library(foreign)
+data <- read.spss('Verden2005.sav', to.data.frame=TRUE)
+```
+
+If you do not have the library `foreign` you need to install it:
+
+```{r, eval = FALSE}
+install.packages('foreign')
+```
+
 
 ```{r, echo=FALSE, results=FALSE}
 library(xlsx)
@@ -38,7 +57,7 @@ data <- read.xlsx('data/Lab_3/World2005.xlsx', sheetIndex = 1)
 Find your Variable 1 and Variable 2 in the XLSX file and answer the questions below for both variables:
 
 1. What is the type of the variable? Use the function `str()`
-2. For how countries devices do you have data for? *Tip: find the number of missing data for your variable by using the function `table()` for example*
+2. For how many countries devices do you have data for? *Tip: find the number of missing data for your variable by using the function `table()` for example*
 3. What is the average? Use the function `mean()`
 4. What is the median value? Use the function `median()`
 5. What is the standard deviation? Use the function `sd()`
@@ -54,8 +73,6 @@ mean(data$LifeExp05)
 # If I account for the NAs
 mean(data$LifeExp05, na.rm = TRUE)
 ```
-
-Fill the document Submission template_Exercise3.docx with your answers.
 
 # Compare descriptive statistics for two continents
 
