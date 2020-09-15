@@ -151,8 +151,8 @@ Study the results that you get in the output window. Discuss with a fellow stude
 
 # Submission
 
-- Fill the blanks found on the document **template_Exercise3.docx** that you will find in BlackBoard.
-- The histograms of your two variables for the continents you have selected - a pair of  histograms per page (expand the two-page submission template_exercise3.docx to accommodate your frequency histograms).
+- Fill the blanks found on the document **template_Exercise2.docx** that you will find in BlackBoard.
+- The histograms of your two variables for the continents you have selected - a pair of  histograms per page (expand the two-page submission template_exercise2.docx to accommodate your frequency histograms).
 - Insert short and informative captions to your histograms.
 - Make sure everything is neat and clear. Use only one language.
 - Submit a maximum of one 3-page file - change the file name to <your name>_exercise3.
