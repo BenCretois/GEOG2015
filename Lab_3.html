@@ -377,29 +377,42 @@ div.tocify {
 <ul>
 <li>Use R to calculate simple statistical measures to describe a variable.</li>
 </ul>
+<blockquote>
+<p>IMPORTANT NOTE: You do not need to answer the questions in your hand out. The questions asked in this document are to prepare you to the MCQ on BlackBoard.</p>
+</blockquote>
 <div id="find-the-variables-to-use-in-this-exercise" class="section level1">
 <h1><span class="header-section-number">1</span> Find the variables to use in this exercise</h1>
-<p>In this exercise, each of you will analyze a different variable. In the <strong>NameOgVariables.pdf</strong> you will which of the two variables you are supposed to use and in which dataset you will find them. The document DataDescription.pdf contains a brief description (associated label / label).</p>
-<p>In this exercise I will use World2005.xlsx.</p>
+<p>In this exercise, each of you will analyze a different variable. In the <strong>NameOgVariables.pdf</strong> you will which of the two variables you are supposed to use and in which dataset you will find them. The document <strong>DataDescription.pdf</strong> contains a brief description (associated label / label).</p>
+<p>In this exercise I will use Verden2005.sav as an example.</p>
+<blockquote>
+<p>Note that your dataset is a .sav file, to open it you need to use the function <code>read.spss()</code> as demonstrated below.</p>
+</blockquote>
 <p>The data is, as in Exercise 1, taken from the World Bank. Data source is: World Bank 2016. <a href="http://data.worldbank.org/indicator">World Bank development indicators</a></p>
 </div>
 <div id="load-your-data-in-r" class="section level1">
 <h1><span class="header-section-number">2</span> Load your data in R</h1>
-<p>From BlackBoard, in the exercise folder dedicated to LM 3, you will find the files World2005.xlsx, World2006.xlsx, etc. Download one of these containing your variables and save it in a folder created for this exercise.</p>
+<p>From BlackBoard, in the exercise folder dedicated to LM2, you will find the files Verden2005.sav, Verden2006.sav, etc…. Download one of these containing your variables and save it in a folder created for this exercise.</p>
 <p>Load the dataset in R.</p>
+<p>Since your file is an <code>.sav</code> file you have to open it as follow:</p>
+<pre class="r"><code>library(foreign)
+data &lt;- read.spss(&#39;Verden2005.sav&#39;, to.data.frame=TRUE)</code></pre>
+<p>If you do not have the library <code>foreign</code> you need to install it:</p>
+<pre class="r"><code>install.packages(&#39;foreign&#39;)</code></pre>
 </div>
 <div id="calculate-descriptive-statistical-goals-for-variable-1-and-variable-2." class="section level1">
 <h1><span class="header-section-number">3</span> Calculate descriptive statistical goals for Variable 1 and Variable 2.</h1>
-<p>Find your Variable 1 and Variable 2 in the XLSX file and answer the questions below for both variables:</p>
-<ol style="list-style-type: decimal">
+<p>Find your Variable 1 and Variable 2 in the <code>.sav</code> file and answer the questions below for both variables:</p>
+<blockquote>
+<ul>
 <li>What is the type of the variable? Use the function <code>str()</code></li>
-<li>For how countries devices do you have data for? <em>Tip: find the number of missing data for your variable by using the function <code>table()</code> for example</em></li>
+<li>For how many countries devices do you have data for? <em>Tip: find the number of missing data for your variable by using the function <code>table()</code> for example</em></li>
 <li>What is the average? Use the function <code>mean()</code></li>
 <li>What is the median value? Use the function <code>median()</code></li>
 <li>What is the standard deviation? Use the function <code>sd()</code></li>
 <li>What is the variance? Use the function <code>var()</code></li>
 <li>What is the highest / lowest value in the data material?</li>
-</ol>
+</ul>
+</blockquote>
 <p><em>IMPORTANT NOTE: when using the summary functions such as <code>mean()</code>, <code>var()</code> etc. You may have to use the argument <code>na.rm = TRUE</code>. When there is missing data in the column R will return NA if you use the summary statistics. To avoid this write as follow (for instance for the mean function): </em></p>
 <pre class="r"><code># If I do not account for the NAs
 mean(data$LifeExp05)</code></pre>
@@ -407,16 +420,19 @@ mean(data$LifeExp05)</code></pre>
 <pre class="r"><code># If I account for the NAs
 mean(data$LifeExp05, na.rm = TRUE)</code></pre>
 <pre><code>## [1] 68.43416</code></pre>
-<p>Fill the document Submission template_Exercise3.docx with your answers.</p>
 </div>
 <div id="compare-descriptive-statistics-for-two-continents" class="section level1">
 <h1><span class="header-section-number">4</span> Compare descriptive statistics for two continents</h1>
 <p>So far we have looked at the whole world in one. Now we will calculate descriptive statistics for two continents separately. Note the Region variable in the data file. Each country (entity in the dataset) is assigned a code for continental affiliation. The codes are as follows:</p>
 <p>1 Europe 2 Middle East 3 Asia 4 Africa 5 America (north, central and south) 6 Oceania (Australia m.m.)</p>
-<p><em>What is the type of the <code>Region</code> variable? Do you think this is appropriate?</em>. Note that question can be repeated on the test associated with this exercise - final test for LM3.</p>
-<p>We will now calculate descriptive statistics for all countries belonging to two continents. You can decide which ones. For example, if you want to compare countries in Europe with countries in Africa, select region 1 and region 4 and subset the countries from the continent you are interested in. You must also make sure that the descriptive statistics are calculated separately for the two continents.</p>
+<blockquote>
+<p><em>What is the type of the <code>Region</code> variable? Do you think this is appropriate?</em></p>
+</blockquote>
+<p><strong>We will now calculate descriptive statistics for all countries belonging to two continents.</strong> You can decide which ones.</p>
+<p>For example, if you want to compare countries in Europe with countries in Africa, select region 1 and region 4 and <strong>subset</strong> the countries from the continent you are interested in. You must also make sure that the descriptive statistics are calculated separately for the two continents.</p>
 <p>Remember the subsetting section in the tutorial. For instance, if I want to do summary statistics on Europe and America I write:</p>
-<pre class="r"><code># I subset the dataset by taking the continents I am interested in
+<pre class="r"><code># I subset the dataset by taking the observations from the 
+# continents I am interested in
 sub &lt;- data[data$Region == 1 | data$Region == 5,]
 
 # I check if the subset has been successful
@@ -425,14 +441,14 @@ unique(sub$Region)</code></pre>
 <pre class="r"><code># You can also create one dataset for Europe and one dataset for America:
 Europe &lt;- data[data$Region == 1,]
 America &lt;- data[data$Region == 5,]</code></pre>
-<p>Once you have done the subsetting, do the summary statistics separately for each continent. That is, you will calculate the mean, standard deviation, variance … for each continent.</p>
+<p>Once you have done the subsetting, <strong>do the summary statistics separately for each continent</strong>. That is, you will calculate the mean, standard deviation, variance … for each continent.</p>
 </div>
 <div id="make-histograms" class="section level1">
 <h1><span class="header-section-number">5</span> Make histograms</h1>
-<p>Make histograms for the two variables you were assigned and for each of the two continents. You should have 4 histograms in total.</p>
+<p>Make histograms for the two variables you were assigned and for each of the two continents. <strong>You should have 4 histograms in total.</strong></p>
 <p>The histograms generated by R are not on the same scale and are therefore unsuitable for comparison. To facilitate comparison we need to change for the variable. We will <strong>standardize</strong> the variables.</p>
 <p><strong>To standardize</strong> means to substract the mean and divide by its standard deviation. The formula is as follow:</p>
-<p><span class="math inline">\(\begin{align} \Large \frac{x - \overline{x}}{\sigma_{x}} \end{align}\)</span></p>
+<p><span class="math inline">\(\Large \frac{x - \overline{x}}{\sigma_{x}}\)</span></p>
 <p><span class="math inline">\(x\)</span> being a value of the variable <span class="math inline">\(\overline{x}\)</span> being the mean of the variable <span class="math inline">\(sd(x)\)</span> being the standard deviation of the variable</p>
 <p>For instance, here I compare the variable LifeExp05 for both Europe and America.</p>
 <pre class="r"><code># First I standardized the values for Europe and America. For this I will create two vectors representing the standardized variables
@@ -444,10 +460,10 @@ America$LifeExp05_st &lt;- (America$LifeExp05 - mean(America$LifeExp05, na.rm = 
 # Then I draw histograms of the standardized variables:
 hist(Europe$LifeExp05_st, main = &#39;Histogram of life expectancy in Europe in 2005&#39;, 
      xlab = &#39;Life expectency (specify the unit)&#39;, ylab = &#39;Frequency&#39;)</code></pre>
-<p><img src="Lab_3_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="Lab_3_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <pre class="r"><code>hist(America$LifeExp05_st, main = &#39;Histogram of life expectancy in America in 2005&#39;, 
      xlab = &#39;Life expectency (specify the unit)&#39;, ylab = &#39;Frequency&#39;)</code></pre>
-<p><img src="Lab_3_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
+<p><img src="Lab_3_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
 <p>I let you as an exercise to add colors to your histograms.</p>
 </div>
 <div id="assess-the-results" class="section level1">
@@ -464,14 +480,50 @@ hist(Europe$LifeExp05_st, main = &#39;Histogram of life expectancy in Europe in 
 <div id="submission" class="section level1">
 <h1><span class="header-section-number">7</span> Submission</h1>
 <ul>
-<li>The results of step 3 - use the document Submission template_Exercise3.docx</li>
-<li>The histograms of your two variables for the continents you have selected - a pair of histograms per page (expand the two-page submission template_exercise3.docx to accommodate your frequency histograms)</li>
-<li>Insert descriptive (but short) character texts.</li>
-<li>Explain your variables and provide source reference. Remember that the viewer of the charts should have all the necessary information to understand what they are showing.</li>
+<li>Fill the blanks found on the document <strong>template_Exercise3.docx</strong> that you will find in BlackBoard.</li>
+<li>The histograms of your two variables for the continents you have selected - a pair of histograms per page (expand the two-page submission template_exercise3.docx to accommodate your frequency histograms).</li>
+<li>Insert short and informative captions to your histograms.</li>
 <li>Make sure everything is neat and clear. Use only one language.</li>
-<li>Submit a maximum of one 3-page file - change the file name to <your name> _exercise3</li>
+<li>Submit a maximum of one 3-page file - change the file name to <your name>_exercise3.</li>
 <li>Save the file as a PDF and go for a walk.</li>
 </ul>
+</div>
+<div id="rubric" class="section level1">
+<h1><span class="header-section-number">8</span> Rubric</h1>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Points</th>
+<th align="left">Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2 points</td>
+<td align="left">Descriptive statistics for both variables</td>
+</tr>
+<tr class="even">
+<td align="left">2 points</td>
+<td align="left">Frequency histogram for two different continents for variable 1</td>
+</tr>
+<tr class="odd">
+<td align="left">2 points</td>
+<td align="left">Frequency histogram for two different continents for variable 2</td>
+</tr>
+<tr class="even">
+<td align="left">2 points</td>
+<td align="left">Short but descriptive figure captions</td>
+</tr>
+<tr class="odd">
+<td align="left">1 points</td>
+<td align="left">Explanation of the variables</td>
+</tr>
+<tr class="even">
+<td align="left">1 points</td>
+<td align="left">Format pdf and as one file (max 3 pages)</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
@@ -524,7 +576,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

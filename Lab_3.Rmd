@@ -18,7 +18,7 @@ What you will learn:
 
 # Find the variables to use in this exercise 
 
-In this exercise, each of you will analyze a different variable. In the **NameOgVariables.pdf** you will which of the two variables you are supposed to use and in which dataset you will find them. The document DataDescription.pdf contains a brief description (associated label / label). 
+In this exercise, each of you will analyze a different variable. In the **NameOgVariables.pdf** you will which of the two variables you are supposed to use and in which dataset you will find them. The document **DataDescription.pdf** contains a brief description (associated label / label). 
 
 In this exercise I will use Verden2005.sav as an example. 
 
@@ -33,7 +33,7 @@ From BlackBoard, in the exercise folder dedicated to LM2, you will find the file
 
 Load the dataset in R.
 
-Since your file is an .sav file you have to open it as follow:
+Since your file is an `.sav` file you have to open it as follow:
 
 ```{r, echo = TRUE, eval = FALSE}
 library(foreign)
@@ -54,15 +54,15 @@ data <- read.xlsx('data/Lab_3/World2005.xlsx', sheetIndex = 1)
 
 # Calculate descriptive statistical goals for Variable 1 and Variable 2.
 
-Find your Variable 1 and Variable 2 in the XLSX file and answer the questions below for both variables:
+Find your Variable 1 and Variable 2 in the `.sav` file and answer the questions below for both variables:
 
-1. What is the type of the variable? Use the function `str()`
-2. For how many countries devices do you have data for? *Tip: find the number of missing data for your variable by using the function `table()` for example*
-3. What is the average? Use the function `mean()`
-4. What is the median value? Use the function `median()`
-5. What is the standard deviation? Use the function `sd()`
-6. What is the variance? Use the function `var()`
-7. What is the highest / lowest value in the data material?
+> * What is the type of the variable? Use the function `str()`
+> * For how many countries devices do you have data for? *Tip: find the number of missing data for your variable by using the function `table()` for example*
+> * What is the average? Use the function `mean()`
+> * What is the median value? Use the function `median()`
+> * What is the standard deviation? Use the function `sd()`
+> * What is the variance? Use the function `var()`
+> * What is the highest / lowest value in the data material?
 
 *IMPORTANT NOTE: when using the summary functions such as `mean()`, `var()` etc. You may have to use the argument `na.rm = TRUE`. When there is missing data in the column R will return NA if you use the summary statistics. To avoid this write as follow (for instance for the mean function): *
 
@@ -85,14 +85,17 @@ So far we have looked at the whole world in one. Now we will calculate descripti
 5	America (north, central and south)
 6	Oceania (Australia m.m.)
 
-*What is the type of the `Region` variable? Do you think this is appropriate?*. Note that question can be repeated on the test associated with this exercise - final test for LM3.
+> *What is the type of the `Region` variable? Do you think this is appropriate?*
 
-We will now calculate descriptive statistics for all countries belonging to two continents. You can decide which ones. For example, if you want to compare countries in Europe with countries in Africa, select region 1 and region 4 and subset the countries from the continent you are interested in. You must also make sure that the descriptive statistics are calculated separately for the two continents.
+**We will now calculate descriptive statistics for all countries belonging to two continents.** You can decide which ones. 
+
+For example, if you want to compare countries in Europe with countries in Africa, select region 1 and region 4 and **subset** the countries from the continent you are interested in. You must also make sure that the descriptive statistics are calculated separately for the two continents.
 
 Remember the subsetting section in the tutorial. For instance, if I want to do summary statistics on Europe and America I write:
 
 ```{r}
-# I subset the dataset by taking the continents I am interested in
+# I subset the dataset by taking the observations from the 
+# continents I am interested in
 sub <- data[data$Region == 1 | data$Region == 5,]
 
 # I check if the subset has been successful
@@ -103,11 +106,11 @@ Europe <- data[data$Region == 1,]
 America <- data[data$Region == 5,]
 ```
 
-Once you have done the subsetting, do the summary statistics separately for each continent. That is, you will calculate the mean, standard deviation, variance ... for each continent. 
+Once you have done the subsetting, **do the summary statistics separately for each continent**. That is, you will calculate the mean, standard deviation, variance ... for each continent. 
 
 # Make histograms
 
-Make histograms for the two variables you were assigned and for each of the two continents. You should have 4 histograms in total.
+Make histograms for the two variables you were assigned and for each of the two continents. **You should have 4 histograms in total.**
 
 The histograms generated by R are not on the same scale and are therefore unsuitable for comparison. To facilitate comparison we need to change for the variable. We will **standardize** the variables.
 
@@ -148,10 +151,26 @@ Study the results that you get in the output window. Discuss with a fellow stude
 
 # Submission
 
-- The results of step 3 - use the document Submission template_Exercise3.docx
-- The histograms of your two variables for the continents you have selected - a pair of  histograms per page (expand the two-page submission template_exercise3.docx to accommodate your frequency histograms)
-- Insert descriptive (but short) character texts.
-- Explain your variables and provide source reference. Remember that the viewer of the charts should have all the necessary information to understand what they are showing.
+- Fill the blanks found on the document **template_Exercise3.docx** that you will find in BlackBoard.
+- The histograms of your two variables for the continents you have selected - a pair of  histograms per page (expand the two-page submission template_exercise3.docx to accommodate your frequency histograms).
+- Insert short and informative captions to your histograms.
 - Make sure everything is neat and clear. Use only one language.
-- Submit a maximum of one 3-page file - change the file name to <your name> _exercise3
+- Submit a maximum of one 3-page file - change the file name to <your name>_exercise3.
 - Save the file as a PDF and go for a walk.
+
+# Rubric
+
+```{r, echo = FALSE}
+rubrik <- data.frame(Points = c("2 points", "2 points", "2 points", "2 points",
+                                "1 points", "1 points"),
+                     
+                     Criteria = c("Descriptive statistics for both variables",
+                                  "Frequency histogram for two different continents for variable 1",
+                                  "Frequency histogram for two different continents for variable 2",
+                                  "Short but descriptive figure captions",
+                                  "Explanation of the variables",
+                                  "Format pdf and as one file (max 3 pages)"))
+                     
+                  
+knitr::kable(rubrik)
+```
