@@ -104,9 +104,15 @@ abline(model, add = TRUE)
 
 Now that we have fitted the linear model to the data we can extract the **residuals**. You will use the residuals in the next exercise, which is a GIS exercise. It should also be noted that this type of analysis has several prerequisites that we will disregard at this time (model checking etc.).
 
-We can create a new column in the dataset called "res" where we extract the model residuals:
+We can create a new column in the dataset called "res" where we extract the model residuals. One issue you might encounter is that there might be a mismatch in the number of residuals and in the number of rows in your dataset. Under the hood, the function `lm()` remove all missing values from the variables you are using to fit your linear regression.
+
+This can easily be fixed by removing the rows with missing values for your variables. This can be done by using the function `complete.cases()`.
 
 ```{r}
+# Note that you need to replace the name of the variables with YOUR variables
+data <- data[complete.cases(data$LifeExp05, data$PrimComp05), ]
+
+# I then create a column residual where I store the residual values
 data$res <- model$residuals
 ```
 

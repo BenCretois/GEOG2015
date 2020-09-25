@@ -461,8 +461,13 @@ abline(model, add = TRUE)</code></pre>
 <div id="linear-bivariate-regression-with-the-storage-of-residuals" class="section level1">
 <h1><span class="header-section-number">4</span> Linear bivariate regression with the storage of residuals</h1>
 <p>Now that we have fitted the linear model to the data we can extract the <strong>residuals</strong>. You will use the residuals in the next exercise, which is a GIS exercise. It should also be noted that this type of analysis has several prerequisites that we will disregard at this time (model checking etc.).</p>
-<p>We can create a new column in the dataset called “res” where we extract the model residuals:</p>
-<pre class="r"><code>data$res &lt;- model$residuals</code></pre>
+<p>We can create a new column in the dataset called “res” where we extract the model residuals. One issue you might encounter is that there might be a mismatch in the number of residuals and in the number of rows in your dataset. Under the hood, the function <code>lm()</code> remove all missing values from the variables you are using to fit your linear regression.</p>
+<p>This can easily be fixed by removing the rows with missing values for your variables. This can be done by using the function <code>complete.cases()</code>.</p>
+<pre class="r"><code># Note that you need to replace the name of the variables with YOUR variables
+data &lt;- data[complete.cases(data$LifeExp05, data$PrimComp05), ]
+
+# I then create a column residual where I store the residual values
+data$res &lt;- model$residuals</code></pre>
 <p>The observations that are far from expected value (with a high and low residual values) are called outliers.</p>
 <p>You can see which countries have high and low residuals values by opening the dataset by clicking on it or by typing <code>View(data)</code> in R.</p>
 </div>
@@ -489,7 +494,7 @@ abline(model, add = TRUE)</code></pre>
 <li>Enter two scatter charts - one showing only the scatter plot with colors (but not regression line) and one showing the regression line and the scatter plot (but not country codes). The regression line and the points should have different colors. Place the charts side by side. Remember to change the axis titles to Norwegian if you are writing in Norwegian (you can do this in Variable View by clicking Label for your variable).</li>
 <li>Copy-paste tables showing the regression coefficients and R-square of Word (Step 5) - This will be in the summary of your <strong>lm object</strong>.</li>
 <li>Insert small chart and table texts that tell what the chart / table shows. You should be brief, but precise, and include all the information needed to understand what the table / chart shows. An example for Figure 3 from Exercise 1 is shown below.</li>
-<li>Answer the questions asked in Step 7.</li>
+<li>Answer the questions asked across this exercise.</li>
 <li>Convert Word file to one PDF document (with file name exercise 5_ <your_name> .pdf) and upload to Black Board. Remember! Maximum 2 pages.</li>
 <li>Up to 15 points are given for this exercise if submitted on time. There is no tests related to this specific exercise, but a test for LM5 where test questions from the practice tests are repeated.</li>
 </ul>
@@ -545,7 +550,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
