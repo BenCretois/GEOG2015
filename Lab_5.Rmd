@@ -144,7 +144,7 @@ write.csv(data, "PATH_TO_YOUR_FOLDER/data.csv")
 
 # Submit 
 
-- Answer the questions on the document **Innleveringsmal_øving5_endringer.docx**.
+- Answer the questions on the document **Innleveringsmal_øving4_endringer.docx**.
 - Enter two scatter charts - one showing only the scatter plot with colors (but not regression line) and one showing the regression line and the scatter plot. The regression line and the points should have different colors. Place the charts side by side. Remember to change the axis titles to Norwegian if you are writing in Norwegian (you can do this in Variable View by clicking Label for your variable).
 - Insert small figure caption that tell what the figure shows. You should be brief, but precise, and include all the information needed to understand what the table / chart shows. An example for Figure 3 from Exercise 1 is shown below.
 - Convert Word file to one PDF document (with file name exercise 5_ <your_name> .pdf) and upload to Black Board. Remember! Maximum 2 pages.
