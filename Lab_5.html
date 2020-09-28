@@ -379,16 +379,19 @@ div.tocify {
 <div id="load-the-data-in-r" class="section level1">
 <h1><span class="header-section-number">1</span> Load the data in R</h1>
 <ol style="list-style-type: lower-alpha">
-<li>In this exercise, you should also use the file World20xx.sav (the one you were assigned in the <strong>NameOgVariables.pdf</strong>). Copy the file to the folder for this exercise.</li>
+<li>In this exercise, you should also use the file <strong>World20xx.sav</strong> (the one you were assigned in the <strong>NameOgVariables.pdf</strong>). Copy the file to the folder for this exercise.</li>
 <li>Open the World20xx.sav in R.</li>
-<li>Each of you will use the same variables that you did in Exercise 3 and 4 that were referred to as Variable 1 and Variable 2. The exercise text here uses Female life expectancy at birth and Primary school completion rate for females as Variable 1 and Variable 2.</li>
+<li>Each of you will use the <strong>same variables that you did in Exercise 3 and 4</strong> that were referred to as Variable 1 and Variable 2. The exercise text here uses Female life expectancy at birth and Primary school completion rate for females as Variable 1 and Variable 2.</li>
 </ol>
 <p>We have to work through some steps before using the dataset for the analysis that follows.</p>
 <p>First we will only take the variables we are interested in. That is the third line of code here. Then we will get rid of the <strong>missing values</strong>. We can do that using the function ´complete.cases()´.</p>
 </div>
 <div id="visualize-the-relationship-between-your-variables-using-a-scatter-plot" class="section level1">
 <h1><span class="header-section-number">2</span> Visualize the relationship between your variables using a scatter plot</h1>
-<p>To create a scatterplot in R you can use the function <code>plot()</code>. Firsts arguments of the function are the variables you want to vizualise and the other arguments are for aesthetics (title of the axis, colors etc.)</p>
+<p>To create a <strong>scatterplot</strong> (i.e. a point cloud) in R you can use the function <code>plot()</code>. Firsts arguments of the function are the variables you want to vizualise and the other arguments are for aesthetics (title of the axis, colors etc.)</p>
+<blockquote>
+<p>What is the name of your dependant and independant variables? Justify the answer.</p>
+</blockquote>
 <pre class="r"><code>plot(data$LifeExp05 ~ data$PrimComp05,
      main = &#39;Scatterplot of Female life expectancy vs Primary school completion&#39;,
      ylab = &#39;Female life expectancy&#39;,
@@ -399,7 +402,7 @@ div.tocify {
 <li>Do you think the chart suggests a trend - a correlation between how the values of variable 1 correlate with values of variable 2? If there is a sort of correlation, what does this suggest?</li>
 <li>Are there any countries that stand out from such a possible trend?</li>
 </ul>
-<p>In addition to a scatter plot, we want a measure of the relationship (correlation) between the two variables. One possible solution is to compute the Pearson’s correlation coefficient, abbreviated Pearson’s r.</p>
+<p>In addition to a scatter plot, we want a measure of the relationship (correlation) between the two variables. One possible solution is to compute the <strong>Pearson’s correlation coefficient</strong>, abbreviated Pearson’s r.</p>
 <p><span class="math inline">\(\LARGE r=\frac{Cov(X,Y)}{\sigma_{X} \sigma_{Y}}\)</span></p>
 <ul>
 <li><span class="math inline">\(Cov(X,Y)\)</span> being the covariance between X and Y</li>
@@ -411,18 +414,21 @@ div.tocify {
 <pre><code>## [1] 0.7212422</code></pre>
 <p><em>Note: do not forget that if you have missing data the function will return NA. Be sure to include the argument use = ‘complete.obs’. See ?cor for more details</em></p>
 <ul>
-<li>If r = 0 we have no co-variation</li>
-<li>If r = -1 we have perfectly negative co-variation</li>
-<li>If r = 1 we have perfectly positive co-variation.</li>
+<li>If <strong>r = 0</strong> we have no co-variation</li>
+<li>If <strong>r = -1</strong> we have perfectly negative co-variation</li>
+<li>If <strong>r = 1</strong> we have perfectly positive co-variation.</li>
 </ul>
-<p>There is no objective answers to what is high correlation, but traditionally we consider a r &gt; 0.7 as strong correlation. The correlation coefficient for “my” variables is equal to 0.721.</p>
+<p>There is no objective answers to what is high correlation, but traditionally we consider a r &gt; 0.7 as strong correlation. The correlation coefficient for <strong>“my”</strong> variables is equal to 0.721.</p>
+<blockquote>
+<p>What is the value of the Pearson’s r between your variables? What does this mean? Pearson’s correlation coefficient is the best known indicator of correlation, why is it right of us to use it with the data we have? What is the value of the correlation coefficient of your model and what does it say about your model?</p>
+</blockquote>
 </div>
 <div id="show-the-regression-line-in-your-scatter-plot" class="section level1">
 <h1><span class="header-section-number">3</span> Show the regression line in your scatter plot</h1>
 <p>Usually, in a scatterplot we want to visualize the dependant variable function of the independant one. The <strong>dependent</strong> is the variable that is affected - in our case it is Life expectancy. The <strong>independent</strong> is the variable that affects the dependent (in our case Primary school completion rate).</p>
 <p><em>Which way does the impact for their Variables 1 and 2 go? Maybe the influence goes both ways? Feel free to discuss this with a fellow student.</em></p>
 <p>In a scatter plot, the dependent variable should be shown along the Y-axis and independent variable along the X-axis.</p>
-<p>To show the relationship between the dependant and the independant variable we usually draw a <strong>regression line</strong>. We first need to fit a <strong>linear model</strong> with the function <code>lm()</code>. We can then draw the line as follow:</p>
+<p>To show the relationship between the <strong>dependant</strong> and the <strong>independant variable</strong> we usually draw a <strong>regression line</strong>. We first need to fit a <strong>linear model</strong> with the function <code>lm()</code>. We can then draw the line as follow:</p>
 <pre class="r"><code># Fit the model // we store the result of the linear regression in the object &quot;model&quot;
 model &lt;- lm(data$LifeExp05 ~ data$PrimComp05)
 
@@ -456,12 +462,15 @@ plot(data$LifeExp05 ~ data$PrimComp05,
 abline(model, add = TRUE)</code></pre>
 <pre><code>## Warning in int_abline(a = a, b = b, h = h, v = v, untf = untf, ...): &quot;add&quot; is
 ## not a graphical parameter</code></pre>
-<p><img src="Lab_5_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="Lab_5_files/figure-html/unnamed-chunk-4-1.png" width="672" /> In the summary of your model you will also find the R2.</p>
+<blockquote>
+<p>What is the R2 for your model? Explain what this means for your model. R’s summary function produces two coefficients of determination - what is the difference between them?</p>
+</blockquote>
 </div>
 <div id="linear-bivariate-regression-with-the-storage-of-residuals" class="section level1">
 <h1><span class="header-section-number">4</span> Linear bivariate regression with the storage of residuals</h1>
 <p>Now that we have fitted the linear model to the data we can extract the <strong>residuals</strong>. You will use the residuals in the next exercise, which is a GIS exercise. It should also be noted that this type of analysis has several prerequisites that we will disregard at this time (model checking etc.).</p>
-<p>We can create a new column in the dataset called “res” where we extract the model residuals. One issue you might encounter is that there might be a mismatch in the number of residuals and in the number of rows in your dataset. Under the hood, the function <code>lm()</code> remove all missing values from the variables you are using to fit your linear regression.</p>
+<p>We can create a new column in the dataset called <code>res</code> where we extract the model residuals. One issue you might encounter is that there might be a mismatch in the number of residuals and in the number of rows in your dataset. Under the hood, the function <code>lm()</code> remove all missing values from the variables you are using to fit your linear regression.</p>
 <p>This can easily be fixed by removing the rows with missing values for your variables. This can be done by using the function <code>complete.cases()</code>.</p>
 <pre class="r"><code># Note that you need to replace the name of the variables with YOUR variables
 data &lt;- data[complete.cases(data$LifeExp05, data$PrimComp05), ]
@@ -470,34 +479,80 @@ data &lt;- data[complete.cases(data$LifeExp05, data$PrimComp05), ]
 data$res &lt;- model$residuals</code></pre>
 <p>The observations that are far from expected value (with a high and low residual values) are called outliers.</p>
 <p>You can see which countries have high and low residuals values by opening the dataset by clicking on it or by typing <code>View(data)</code> in R.</p>
+<blockquote>
+<p>Look at the scatter plot you made in point 2 and the RES_1 column in the data file - are there any countries that are far away from the others? What countries are these? A hypothesis test is a statistical test method of an assumption in one or more populations. Before testing the hypothesis, one must formulate a null hypothesis (H0) and an alternative hypothesis (HA). H0 is conservative and suggests that there is no correlation between the variables in the model. HA assumes that there is a connection between the variables. If we assume that the significance level is (α) = 0.05, will we then be able to reject the null hypothesis? What does this mean for your model?</p>
+</blockquote>
+<blockquote>
+<p>What is the value of the constant? What does that mean? What is the equation for your linear model? Write the equation and mention what the constant and the regression coefficient are, as well as the relevance / areas of use of these values</p>
+</blockquote>
 </div>
 <div id="save-the-data-for-use-in-arcgis" class="section level1">
 <h1><span class="header-section-number">5</span> Save the data for use in ArcGIS</h1>
 <p>You will save your dataset as a .CSV file for the next exercise. For that, you can simply use the <code>write.csv()</code> function as follow:</p>
 <pre class="r"><code>write.csv(data, &quot;PATH_TO_YOUR_FOLDER/data.csv&quot;)</code></pre>
 </div>
-<div id="answer-the-following-questions" class="section level1">
-<h1><span class="header-section-number">6</span> Answer the following questions:</h1>
-<ol style="list-style-type: decimal">
-<li>What is your dependent and independent variable in your analysis? Justify the answer.</li>
-<li>What is the value of Pearson’s r between your variables? What does that mean?</li>
-<li>What value does your R square have? What does that mean?</li>
-<li>Look at the scatter plot you made in point 2 and the res column in the dataset - are there any countries far away from the others? Which countries are these?</li>
-<li>What is the value of the intercept? What does that mean?</li>
-<li>What is the value of your regression coefficient? What does that mean?</li>
-</ol>
-</div>
 <div id="submit" class="section level1">
-<h1><span class="header-section-number">7</span> Submit</h1>
+<h1><span class="header-section-number">6</span> Submit</h1>
 <ul>
-<li>Use the document Submission template_exercise5.docx.</li>
-<li>Enter two scatter charts - one showing only the scatter plot with colors (but not regression line) and one showing the regression line and the scatter plot (but not country codes). The regression line and the points should have different colors. Place the charts side by side. Remember to change the axis titles to Norwegian if you are writing in Norwegian (you can do this in Variable View by clicking Label for your variable).</li>
-<li>Copy-paste tables showing the regression coefficients and R-square of Word (Step 5) - This will be in the summary of your <strong>lm object</strong>.</li>
-<li>Insert small chart and table texts that tell what the chart / table shows. You should be brief, but precise, and include all the information needed to understand what the table / chart shows. An example for Figure 3 from Exercise 1 is shown below.</li>
-<li>Answer the questions asked across this exercise.</li>
+<li>Answer the questions on the document <strong>Innleveringsmal_øving5_endringer.docx</strong>.</li>
+<li>Enter two scatter charts - one showing only the scatter plot with colors (but not regression line) and one showing the regression line and the scatter plot. The regression line and the points should have different colors. Place the charts side by side. Remember to change the axis titles to Norwegian if you are writing in Norwegian (you can do this in Variable View by clicking Label for your variable).</li>
+<li>Insert small figure caption that tell what the figure shows. You should be brief, but precise, and include all the information needed to understand what the table / chart shows. An example for Figure 3 from Exercise 1 is shown below.</li>
 <li>Convert Word file to one PDF document (with file name exercise 5_ <your_name> .pdf) and upload to Black Board. Remember! Maximum 2 pages.</li>
-<li>Up to 15 points are given for this exercise if submitted on time. There is no tests related to this specific exercise, but a test for LM5 where test questions from the practice tests are repeated.</li>
+<li>Up to 15 points are given for this exercise if submitted on time. 10 total points are given for the questions and 5 points for the plots. There is no tests related to this specific exercise, but a test for LM4 where test questions from the practice tests are repeated.</li>
 </ul>
+</div>
+<div id="rubric" class="section level1">
+<h1><span class="header-section-number">7</span> Rubric</h1>
+<table>
+<colgroup>
+<col width="9%" />
+<col width="91%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Points</th>
+<th align="left">Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2 points</td>
+<td align="left">The two scatterplot are included in the hand-in</td>
+</tr>
+<tr class="even">
+<td align="left">1 points</td>
+<td align="left">In the secund scatterplot, the regression line and the points have different colors</td>
+</tr>
+<tr class="odd">
+<td align="left">1 points</td>
+<td align="left">The figure captions describe well what the figures shows</td>
+</tr>
+<tr class="even">
+<td align="left">1 points</td>
+<td align="left">Format pdf and as one file (max 3 pages), include your name and consistent use of language</td>
+</tr>
+<tr class="odd">
+<td align="left">2 points</td>
+<td align="left">Question 1</td>
+</tr>
+<tr class="even">
+<td align="left">2 points</td>
+<td align="left">Question 2</td>
+</tr>
+<tr class="odd">
+<td align="left">2 points</td>
+<td align="left">Quesrion 3</td>
+</tr>
+<tr class="even">
+<td align="left">2 points</td>
+<td align="left">Question 4</td>
+</tr>
+<tr class="odd">
+<td align="left">2 points</td>
+<td align="left">Question 5</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 

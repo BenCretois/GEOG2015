@@ -16,9 +16,9 @@ The goal of this exercise is to become familiar with how to perform bivariate an
 
 # Load the data in R
 
-a. In this exercise, you should also use the file World20xx.sav (the one you were assigned in the **NameOgVariables.pdf**). Copy the file to the folder for this exercise.
+a. In this exercise, you should also use the file **World20xx.sav** (the one you were assigned in the **NameOgVariables.pdf**). Copy the file to the folder for this exercise.
 b. Open the World20xx.sav in R.
-c. Each of you will use the same variables that you did in Exercise 3 and 4 that were referred to as Variable 1 and Variable 2. The exercise text here uses Female life expectancy at birth and Primary school completion rate for females as Variable 1 and Variable 2.
+c. Each of you will use the **same variables that you did in Exercise 3 and 4** that were referred to as Variable 1 and Variable 2. The exercise text here uses Female life expectancy at birth and Primary school completion rate for females as Variable 1 and Variable 2.
 
 We have to work through some steps before using the dataset for the analysis that follows.
 
@@ -37,7 +37,9 @@ data <- data[complete.cases(data) , ] # Do not forget the comma!
 
 # Visualize the relationship between your variables using a scatter plot
 
-To create a scatterplot in R you can use the function `plot()`. Firsts arguments of the function are the variables you want to vizualise and the other arguments are for aesthetics (title of the axis, colors etc.)
+To create a **scatterplot** (i.e. a point cloud) in R you can use the function `plot()`. Firsts arguments of the function are the variables you want to vizualise and the other arguments are for aesthetics (title of the axis, colors etc.)
+
+> What is the name of your dependant and independant variables? Justify the answer.
 
 ```{r}
 plot(data$LifeExp05 ~ data$PrimComp05,
@@ -51,7 +53,7 @@ Look carefully at the scatter plot:
 - Do you think the chart suggests a trend - a correlation between how the values of variable 1 correlate with values of variable 2? If there is a sort of correlation, what does this suggest?
 - Are there any countries that stand out from such a possible trend?
 
-In addition to a scatter plot, we want a measure of the relationship (correlation) between the two variables. One possible solution is to compute the Pearson's correlation coefficient, abbreviated Pearson's r.
+In addition to a scatter plot, we want a measure of the relationship (correlation) between the two variables. One possible solution is to compute the **Pearson's correlation coefficient**, abbreviated Pearson's r.
 
 $\LARGE r=\frac{Cov(X,Y)}{\sigma_{X} \sigma_{Y}}$
 
@@ -67,11 +69,14 @@ cor(data$LifeExp05, data$PrimComp05, use = 'complete.obs')  # We specify that we
 
 *Note: do not forget that if you have missing data the function will return NA. Be sure to include the argument use = 'complete.obs'. See ?cor for more details*
 
-- If r = 0 we have no co-variation
-- If r = -1 we have perfectly negative co-variation
-- If r = 1 we have perfectly positive co-variation. 
+- If **r = 0** we have no co-variation
+- If **r = -1** we have perfectly negative co-variation
+- If **r = 1** we have perfectly positive co-variation. 
 
-There is no objective answers to what is high correlation, but traditionally we consider a r > 0.7 as strong correlation. The correlation coefficient for "my" variables is equal to 0.721.
+There is no objective answers to what is high correlation, but traditionally we consider a r > 0.7 as strong correlation. The correlation coefficient for **"my"** variables is equal to 0.721.
+
+> What is the value of the Pearson's r between your variables? What does this mean?
+> Pearson's correlation coefficient is the best known indicator of correlation, why is it right of us to use it with the data we have? What is the value of the correlation coefficient of your model and what does it say about your model?
 
 # Show the regression line in your scatter plot
 
@@ -81,7 +86,7 @@ Usually, in a scatterplot we want to visualize the dependant variable function o
 
 In a scatter plot, the dependent variable should be shown along the Y-axis and independent variable along the X-axis. 
 
-To show the relationship between the dependant and the independant variable we usually draw a **regression line**. We first need to fit a **linear model** with the function `lm()`. We can then draw the line as follow:
+To show the relationship between the **dependant** and the **independant variable** we usually draw a **regression line**. We first need to fit a **linear model** with the function `lm()`. We can then draw the line as follow:
 
 ```{r}
 # Fit the model // we store the result of the linear regression in the object "model"
@@ -99,12 +104,15 @@ plot(data$LifeExp05 ~ data$PrimComp05,
 # Show the regression line
 abline(model, add = TRUE)
 ```
+In the summary of your model you will also find the R2.
+
+> What is the R2 for your model? Explain what this means for your model. R's summary function produces two coefficients of determination - what is the difference between them?
 
 # Linear bivariate regression with the storage of residuals
 
 Now that we have fitted the linear model to the data we can extract the **residuals**. You will use the residuals in the next exercise, which is a GIS exercise. It should also be noted that this type of analysis has several prerequisites that we will disregard at this time (model checking etc.).
 
-We can create a new column in the dataset called "res" where we extract the model residuals. One issue you might encounter is that there might be a mismatch in the number of residuals and in the number of rows in your dataset. Under the hood, the function `lm()` remove all missing values from the variables you are using to fit your linear regression.
+We can create a new column in the dataset called `res` where we extract the model residuals. One issue you might encounter is that there might be a mismatch in the number of residuals and in the number of rows in your dataset. Under the hood, the function `lm()` remove all missing values from the variables you are using to fit your linear regression.
 
 This can easily be fixed by removing the rows with missing values for your variables. This can be done by using the function `complete.cases()`.
 
@@ -120,6 +128,12 @@ The observations that are far from expected value (with a high and low residual 
 
 You can see which countries have high and low residuals values by opening the dataset by clicking on it or by typing `View(data)` in R.
 
+> Look at the scatter plot you made in point 2 and the RES_1 column in the data file - are there any countries that are far away from the others? What countries are these?
+> A hypothesis test is a statistical test method of an assumption in one or more populations. Before testing the hypothesis, one must formulate a null hypothesis (H0) and an alternative hypothesis (HA). H0 is conservative and suggests that there is no correlation between the variables in the model. HA assumes that there is a connection between the variables. If we assume that the significance level is (α) = 0.05, will we then be able to reject the null hypothesis? What does this mean for your model?
+
+> What is the value of the constant? What does that mean?
+What is the equation for your linear model? Write the equation and mention what the constant and the regression coefficient are, as well as the relevance / areas of use of these values
+
 # Save the data for use in ArcGIS
 
 You will save your dataset as a .CSV file for the next exercise. For that, you can simply use the `write.csv()` function as follow:
@@ -128,21 +142,30 @@ You will save your dataset as a .CSV file for the next exercise. For that, you c
 write.csv(data, "PATH_TO_YOUR_FOLDER/data.csv")
 ```
 
-# Answer the following questions:
-
-1. What is your dependent and independent variable in your analysis? Justify the answer.
-2. What is the value of Pearson's r between your variables? What does that mean?
-3. What value does your R square have? What does that mean?
-4. Look at the scatter plot you made in point 2 and the res column in the dataset - are there any countries far away from the others? Which countries are these?
-5. What is the value of the intercept? What does that mean?
-6. What is the value of your regression coefficient? What does that mean?
-
 # Submit 
 
-- Use the document Submission template_exercise5.docx.
-- Enter two scatter charts - one showing only the scatter plot with colors (but not regression line) and one showing the regression line and the scatter plot (but not country codes). The regression line and the points should have different colors. Place the charts side by side. Remember to change the axis titles to Norwegian if you are writing in Norwegian (you can do this in Variable View by clicking Label for your variable).
-- Copy-paste tables showing the regression coefficients and R-square of Word (Step 5) - This will be in the summary of your **lm object**.
-- Insert small chart and table texts that tell what the chart / table shows. You should be brief, but precise, and include all the information needed to understand what the table / chart shows. An example for Figure 3 from Exercise 1 is shown below.
-- Answer the questions asked across this exercise.
+- Answer the questions on the document **Innleveringsmal_øving5_endringer.docx**.
+- Enter two scatter charts - one showing only the scatter plot with colors (but not regression line) and one showing the regression line and the scatter plot. The regression line and the points should have different colors. Place the charts side by side. Remember to change the axis titles to Norwegian if you are writing in Norwegian (you can do this in Variable View by clicking Label for your variable).
+- Insert small figure caption that tell what the figure shows. You should be brief, but precise, and include all the information needed to understand what the table / chart shows. An example for Figure 3 from Exercise 1 is shown below.
 - Convert Word file to one PDF document (with file name exercise 5_ <your_name> .pdf) and upload to Black Board. Remember! Maximum 2 pages.
-- Up to 15 points are given for this exercise if submitted on time. There is no tests related to this specific exercise, but a test for LM5 where test questions from the practice tests are repeated.
+- Up to 15 points are given for this exercise if submitted on time. 10 total points are given for the questions and 5 points for the plots. There is no tests related to this specific exercise, but a test for LM4 where test questions from the practice tests are repeated.
+
+# Rubric
+
+```{r, echo = FALSE}
+rubrik <- data.frame(Points = c("2 points", "1 points", "1 points","1 points", "2 points",
+                                "2 points", "2 points", "2 points", "2 points"),
+                     
+                     Criteria = c("The two scatterplot are included in the hand-in",
+                                  "In the secund scatterplot, the regression line and the points have different colors",
+                                  "The figure captions describe well what the figures shows",
+                                  "Format pdf and as one file (max 3 pages), include your name and consistent use of language",
+                                  "Question 1",
+                                  "Question 2",
+                                  "Question 3",
+                                  "Question 4",
+                                  "Question 5"))
+                     
+                  
+knitr::kable(rubrik)
+```
